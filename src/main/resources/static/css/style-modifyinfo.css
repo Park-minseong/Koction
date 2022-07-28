@@ -1,0 +1,172 @@
+@charset "UTF-8";
+.box {
+    width: 1100px;
+    margin-top: 100px;
+    border-bottom: 2px solid rgba(68, 51, 34, .3);
+}
+
+.box2 {
+    width: 1100px;
+    margin-bottom: 100px;
+    border-bottom: 1px solid rgba(68, 51, 34, .3);
+}
+
+h1 {
+    margin-left: 50px;
+}
+
+h2,h3,h4,h5, h6 {
+    margin-left: 100px;
+}
+
+h4,h5{
+    margin-left: 140px;
+}
+
+h2 {
+    border-bottom: 1px solid rgba(68, 51, 34, .3);
+    width: 780px;
+}
+
+
+
+
+#main-title-header {
+    width: 1000px;
+    background: #f8f8f8;
+    font-size: 12px;
+    margin: 30px 55px;
+    border: 1px solid #D6D6D6;
+}
+
+#main-title-header p:nth-child(1){
+    padding-top: 20px;
+    padding-left: 40px;
+}
+
+
+#main-title-header p:nth-child(2){
+    padding-bottom: 10px;
+    padding-left: 40px;
+}
+
+.register-form fieldset{
+    color: rgb(63, 63, 63);
+    font-family: 'Noto Sans KR';
+    font-size: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 550px;
+    height: 550px;
+    border: 1px solid rgb(18, 100, 100);;
+    border-radius: 10px;
+    margin: 20px auto 15%;
+    padding: 20px 60px;
+    justify-content: space-between;
+    align-content: flex-start;
+}
+.register-form fieldset legend{
+  float: none;
+  width: 240px;
+  text-align: center;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.register-form fieldset ul{
+    width: 100%;
+    list-style-type: none;
+
+}
+
+.register-form fieldset ul li{
+    width: 100%;
+    display: inline-flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.register-form fieldset ul li label{
+    text-align: end;
+    width: 90px;
+    margin-right: 20px;
+}
+
+.register-form fieldset ul input{
+    color: rgb(63, 63, 63);
+    width: 245px;
+    height: 30px;
+    padding: 6px 10px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-sizing: border-box;
+    resize: none;
+    font-size: 12px;
+}
+.register-form input[type='button']{
+    height: 30px;
+    border-color: rgb(18, 88, 88);
+    background: rgb(18, 100, 100);
+    color: white;
+    border-radius: 4px;
+    padding: 0%;
+    font-size: 12px;
+    margin-left: 5px;
+    box-shadow:none;
+
+}
+.register-form #reg-input-id{
+    width: 245px;
+}
+.register-form #reg-input-id-btn{
+    width: 60px;
+}
+.register-form #reg-input-pwchk{
+    width: 155px;
+    
+}
+.register-form #reg-input-telchk{
+    width: 155px;
+    
+}
+/*input 타입 number의 화살표 없애기*/
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+/**/
+.register-form #reg-input-telchk-btn{
+    width: 85px;
+}
+.register-form #reg-input-add{
+    width: 180px;
+}
+.register-form #reg-input-add-btn{
+    width: 60px;
+}
+#go-back-btn{
+    width: 88px;
+    background: rgb(245, 245, 245);
+    color: rgb(63, 63, 63);
+    border-color: rgb(220, 220, 220);
+}
+#regist-sybmit-btn{
+    width: 88px;
+    margin-left: 6px;
+    border-color: rgb(18, 88, 88);
+    background: rgb(18, 100, 100);
+    color: white;
+    border-radius: 4px;
+    padding: 0%;
+    font-size: 12px;
+    margin-left: 5px;
+}   
+main .title{
+    margin-top: 30px;
+    color: rgb(57, 57, 57);
+    text-align: center;   
+    font-size: 35px;
+}

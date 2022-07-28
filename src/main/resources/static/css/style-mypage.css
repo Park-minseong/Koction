@@ -1,0 +1,86 @@
+@charset "UTF-8";
+
+main>div>.title{
+    margin-top: 30px;
+    color: rgb(57, 57, 57);
+    text-align: center;   
+    font-size: 35px;
+}
+.box2 {
+    width: 100%;
+    margin-top: 50px;
+}
+.container .col{
+    padding: 8px 0;
+    font-size:30px;
+}
+
+
+main article{
+    position: relative;
+    width: 95%;
+    margin: 30px auto 50px;
+    background-color: rgb(251, 251, 251);
+    border: 2px solid rgb(235, 235, 235);
+    border-radius: 10px;
+}
+h3 {
+    margin-left: 5%;
+    margin-right: 5%;
+    /* margin-right: 5%; */
+}
+.container {
+    width: 100%;
+    margin-left: 20%; 
+    margin-right: 20%;
+    margin-bottom: 3%; 
+}
+.mypage-info {
+    margin-top: 30px;
+    width: 80%;
+}
+.buy-box {
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-bottom: 3%;
+    margin-top: 3%;
+}
+
+.sell-box {
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-bottom: 3%;
+    margin-top: 3%;
+}
+
+h3 {
+    border-bottom: 1px solid rgba(68, 51, 34, .3);
+    width: 90%;
+    margin-bottom: 20px;
+}
+
+table {
+    border-top: 1px solid #111 !important;
+}
+.btn {
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    border: 0.5px solid rgba(57, 57, 57,0.5);
+}
+.btn:hover, .btn:focus {
+    font-weight:bold;
+    color: rgb(18, 100, 100);
+}
+#btn_bid{
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    border: 0.5px solid rgba(57, 57, 57,0.5);
+}
+#btn_bid:hover, #btn_bid:focus {
+    font-weight:bold;
+    color: rgb(18, 100, 100);
+}
+
+img {
+    border-radius: 10px;
+}

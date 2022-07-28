@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+	<head>
+		<meta charset="UTF-8">
+	    <title>카테고리 선택</title>
+		<th:block layout:fragment="css">
+	  		<link rel="stylesheet" th:href="@{/css/Ca_Se_In.css}">
+	  	</th:block>
+	</head>
+
+<body>
+      <header></header>
+    <main layout:fragment="content">
+        <div class="title">
+            상품 검색
+        </div>
+        <!-- 검색 버튼 영역 -->
+        <hr>
+        <div id="searchArea" style="text-align: center;">
+            <div id="searchBar">
+            <input type="hidden" name="page" value="">
+                <svg xmlns="http://www.w3.org/2000/svg" style=" color: rgba(17,100,100,1);" width="24" height="24"
+                    fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg>
+                    <select class="form-select se_select" name="searchCondition">
+                        <option value="all" th:selected= "${searchCondition eq 'all'}" selected>전체</option>
+						<option value="title" th:selected= "${searchCondition eq 'title'}">제목</option>
+						<option value="seller" th:selected= "${searchCondition eq 'seller'}">판매자</option>
+						<option value="price" th:selected= "${searchCondition eq 'price'}">가격</option>
+                    </select>
+                <input type="search">
+                <a href="Search.html">
+                    <button id="sc_btn" type="submit">Search</button>
+                </a>
+                <!--<input type="text" name="searchKeyword" th:value="${searchKeyword}">
+                    <button id="sc_btn" type="button">Search</button>-->
+            </div>
+        </div>
+        <hr>
+
+        <!-- 카테고리 선택 영역 -->
+
+        <div id="ca_list">
+            <div id="ca_div" th:each="category: ${category}">
+                <a id="ca_a" href="Search.html" th:href="#"><img id="ca_img" src="images/ca1.svg" alt="디지털, 가전"
+                 th:src="'/images/ca' + ${category.categoryIdx} + '.svg''" th:alt="${category.categoryNm}"
+                  th:text="${category.categoryNm}">카테고리</a>
+            </div>
+            <div id="ca_div">
+                <a id="ca_a" href="#"><img id="ca_img" src="images/ca2.svg" alt="가구, 인테리어">가구/인테리어</a>
+            </div>
+            <div id="ca_div">
+                <a id="ca_a" href="#"><img id="ca_img" src="images/ca3.svg" alt="유아용품">유아용품</a>
+            </div>
+            <div id="ca_div">
+                <a id="ca_a" href="#"><img id="ca_img" src="images/ca4.svg" alt="스포츠, 레저">스포츠/레저</a>
+            </div>
+            <div id="ca_div">
+                <a id="ca_a" href="#"><img id="ca_img" src="images/ca5.svg" alt="여성잡화">여성잡화</a>
+            </div>
+            <div id="ca_div">
+                <a id="ca_a" href="#"><img id="ca_img" src="images/ca6.svg" alt="여성의류">여성의류</a>
+            </div>
+            <div id="ca_div">
+                <a id="ca_a" href="#"><img id="ca_img" src="images/ca7.svg" alt="게임, 취미">게임/취미</a>
+            </div>
+            <div id="ca_div">
+                <a id="ca_a" href="#"><img id="ca_img" src="images/ca8.svg" alt="뷰티, 미용">뷰티/미용</a>
+            </div>
+            <div id="ca_div">
+                <a id="ca_a" href="#"><img id="ca_img" src="images/ca9.svg" alt="반려동물용품">반려동물용품</a>
+            </div>
+            <div id="ca_div">
+                <a id="ca_a" href="#"><img id="ca_img" src="images/ca10.svg" alt="생활, 가공식품">생활/가공식품</a>
+            </div>
+            <div id="ca_div">
+                <a id="ca_a" href="#"><img id="ca_img" src="images/ca11.svg" alt="남성패션, 잡화">남성패션/잡화</a>
+            </div>
+            <div id="ca_div">
+                <a id="ca_a" href="#"><img id="ca_img" src="images/ca12.svg" alt="도서, 음반, 티켓">도서/음반/티켓</a>
+            </div>
+        </div>
+    </main>
+ <!--footer-->
+ <footer></footer>
+
+</body>
+
+</html>

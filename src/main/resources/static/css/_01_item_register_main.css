@@ -1,0 +1,149 @@
+/* 시멘틱 태그 */
+main {
+    width: 1200px;
+
+}
+
+#pageTitle {
+    text-align: center;
+    font-size: 35px;
+    margin-top: 30px;
+    color: rgb(57,57,57);
+}
+
+.invisibleDiv {
+    width: 1200px;
+    height: 40px;
+
+    display: flex;
+    justify-content: flex-end;
+}
+
+.newItem {
+    width: 120px;
+    height: 35px;
+    background-color: rgb(18,100,100);
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+}
+
+.newItem:hover {
+    transform: scale(1.05);
+}
+
+.table_header {
+    width: 1198px;
+    height: 80px;
+    padding: 16px;
+    font-weight: bold;
+}
+
+div.detail {
+    display: flex;
+    height: 200px;
+}
+
+div.imageArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+}
+div.imageArea img{
+    border: 2px solid lightgray;
+    width: 180px;
+    height: 180px;
+}
+
+
+div.textArea {
+    padding: 20px;
+    justify-content: center;
+    width: 500px;
+}
+
+table img {
+    width: 50px;
+    height: 50px;
+}
+
+table img.expand_bar {
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+}
+
+table {
+    text-align: center;
+    width: 1180px;
+}
+
+th {
+    height: 80px;    
+}
+
+td {
+    width: 80px;
+    height: 50px;
+
+}
+
+td.last {
+    width: 115px;
+
+}
+
+.narrow {
+    width: 50px;
+}
+
+.less_wide {
+    width: 150px;
+}
+
+.wide {
+    width: 250px;
+}
+
+.sold {
+    color: navy;
+}
+
+.ongoing {
+    color: tomato;
+}
+
+.not_sold {
+    color: gray;
+}
+
+div.rebidding {
+    margin-left: 13px;
+    background-color: gray;
+    color: whitesmoke;
+    width: 40px;
+    height: 20px;
+    font-size: 12px;
+    border-radius: 3px;
+    padding-top: 3px;
+}
+
+.newItem a:visited {
+    text-decoration: none;
+    color: white;
+}
+
+.newItem a:hover {
+    text-decoration: none;
+    color: white;
+}
+.newItem a:link {
+    text-decoration: none;
+    color: white;
+}
+.newItem a:active {
+    text-decoration: none;
+    color: white;
+}

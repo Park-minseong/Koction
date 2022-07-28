@@ -1,0 +1,107 @@
+@charset "UTF-8";
+a {
+    text-decoration: none;
+}
+body {
+    font-family: "나눔고딕", NanumGothic, "맑은고딕", MalgunGothic, "Apple SD Gothic Neo", sans-serif;
+    color: #432;
+}
+main>.title{
+    margin-top: 30px;
+    color: rgb(57, 57, 57);
+    text-align: center;   
+    font-size: 35px;
+}
+main article{
+    position: relative;
+    width: 95%;
+    margin: 30px auto 50px;
+    background-color: rgb(251, 251, 251);
+    border: 2px solid rgb(235, 235, 235);
+    border-radius: 10px;
+}
+
+
+.box1,.box2,.box3,.box4,.box5, .koction-grade{
+    margin-top: 50px;
+}
+.koction-grade{
+    margin-bottom: 50px;
+}
+
+/* h2,h3,h4,h5, h6 {
+    margin-left: 3%;
+} */
+
+h2,h3,h4, h6 {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+h4,h5{
+    margin: auto 12%;
+}
+table {
+    width: 62%;
+    margin-left: 15%;
+    margin-right: 15%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h3 {
+    border-bottom: 1px solid rgba(68, 51, 34, .3);
+    width: 90%;
+    margin-bottom: 20px;
+}
+
+.box {
+    border-bottom: 2px solid rgba(68, 51, 34, .3);
+}
+/* 
+.koction-grade>h3,h5{
+    margin:0 auto;
+} */
+
+/* .koction-grade img {
+    margin: 0px 0px;
+} */
+/* #vip {
+    margin-left: 8.8%;
+}
+#gold {
+    margin-left: 0%;
+}
+#silver {
+    margin-left: -0.75%;
+}
+#normal {
+    margin-left: 13%;
+} */
+
+table {
+    margin-top: 30px;
+    border-top: 1px solid #111 !important;
+    border-collapse: collapse;
+}
+
+table th{
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+table td {
+    border-bottom: 1px solid #ddd;
+}
+
+#koction-grade-table {
+    width: 60%;
+   
+}
+
+/* #koction-grade-table td {
+    border-bottom: 1px solid #ddd;
+} */
+
+/*마이페이지 footer*/
+

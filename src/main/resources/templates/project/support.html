@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>콕션</title>
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" href="/css/style_support.css">
+    </th:block>
+    <!--스크립트-->
+    <th:block layout:fragment="script">
+        <script>
+            $(function(){
+                //고객센터 버튼동작
+                $('.hide-article').hide(0,function(){});
+                $(".faq-article").show();
+                $(".menu-bar .nav-link").on("click",function(e){
+                e.preventDefault();
+                $('.hide-article').hide(0,function(){
+                        $('.menu-bar .nav-link').removeClass('active');
+                })
+                    $(this).addClass('active');          
+                $('.'+$(this).attr('id')).show(0,function(){});
+                });
+                
+            });
+        </script>
+    </th:block>
+</head>
+<body>
+    <!--header-->
+  
+    <!--mian-->
+    <main layout:fragment="content">
+        <div class="title">
+        고객센터
+        </div>
+        <!--메뉴 부분-->     
+        <section class="menu-bar">
+            <ul class="nav nav-Warning nav-justified">
+                <li class="nav-item">
+                <a class="nav-link active" id="faq-article" href="#">F A Q</a>
+                </li>
+                <img src="/images/bar.png"  alt="막대">
+                <li class="nav-item">
+                <a class="nav-link" id="qna-article" href="#">1:1문의</a>
+                </li>
+                <img src="/images/bar.png" alt="막대">
+                <li class="nav-item">
+                <a class="nav-link" id="notice-article" href="#">공지사항</a>
+                </li>
+            </ul>
+        </section>
+        <!--내용 부분-->   
+        <section>
+            <!--고객센터-->
+            <article class="faq-article hide-article">
+                <div class="search">
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-success" type="submit">Search</button>
+                    </form>
+                </div>
+                <div class="accordion" id="accordionFAQ">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-faq" aria-expanded="true" aria-controls="collapseOne-faq">
+                                아이디와 비밀번호를 잊어버렸어요.
+                            </button>
+                        </h2>
+                        <div id="collapseOne-faq" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+                            <div class="accordion-body">
+                                <p>콕션 홈 우측 상단&nbsp;<strong>[로그인]</strong> &gt;&nbsp;<strong>[아이디/</strong><strong>비밀번호 찾기]</strong>를 클릭하시고,<br>해당 메뉴를 선택하신 후&nbsp;인증 절차를 거쳐 단계별 요청 정보를 입력하여 확인하시기 바랍니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo-faq" aria-expanded="false" aria-controls="collapseTwo-faq">
+                                회원 정보를 변경하고 싶어요.
+                            </button>
+                        </h2>
+                        <div id="collapseTwo-faq" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+                            <div class="accordion-body">
+                                <p>콕션 홈페이지 로그인 상태에서 우측 상단의 [나의경매]를 클릭하신 후,<br>
+                                    <strong>[나의정보수정]</strong>에서 변경하실 수 있습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree-faq" aria-expanded="false" aria-controls="collapseThree-faq">
+                                회원 탈퇴 신청은 어떻게 하나요?
+                            </button>
+                        </h2>
+                        <div id="collapseThree-faq" class="accordion-collapse collapse" aria-labelledby="headingThree">
+                            <div class="accordion-body">
+                                <font color="#000000">
+                                    <span style="COLOR: #ff0000"><strong>[나의경매&gt; 나의정보수정&gt; 회원탈퇴하기] </strong>
+                                    </span>버튼 클릭 후 신청하실 수 있습니다.<br>
+                                    탈퇴 신청시에는 콕션 약관에 따라 처리되오니 신중히 결정하여 주시기 바랍니다.<br>
+                                    <br>
+                                    <strong>[개인정보관리]</strong><br>
+                                    <strong>거래내역이 없는 경우</strong>
+                                    탈퇴일로부터 6개월 이후 모든 개인정보 삭제. 단 ip는 영구 보관.<br>
+                                    <strong>거래내역이 있는 경우</strong>
+                                    : 개인정보(이름, 거래정보, 결제정보, 신용도) 탈퇴일로부터 5년간 보관.<br>
+                                    <br>
+                                    <strong>[이머니잔액 환불]<br></strong>
+                                    탈퇴신청 후 2일이내(토,일,공휴일 제외) 고객님의 은행계좌로 송금됩니다.<br>
+                                    <br>
+                                    <strong>[재가입 및 아이디 사용]</strong>
+                                    <br>
+                                    <span style="COLOR: #ff0000">
+                                        <strong>탈퇴 후 6개월 이후 재가입이 가능합니다.</strong>
+                                    </span>
+                                    (단 사이트제한 상태에서 탈퇴한 경우 제외.)<br>
+                                    탈퇴 전 사용하였던 아이디는 다시 사용하실 수 없습니다.<br>
+                                    <br>
+                                    <strong>[탈퇴가 불가한 경우]<br><span style="COLOR: #ff0000">진행중인 물품</span></strong>
+                                    (판매/구매/입찰)이 있는 경우 탈퇴신청이 불가능합니다.<br>
+                                    <br>
+                                </font> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour-faq" aria-expanded="false" aria-controls="collapseFour-faq">
+                                입찰(구매)을 취소 할 수 있나요?
+                            </button>
+                        </h2>
+                        <div id="collapseFour-faq" class="accordion-collapse collapse" aria-labelledby="headingFour">
+                            <div class="accordion-body">
+                                콕션 사이트는 입찰 취소가 <span style="COLOR: #ff0000"><strong>불가</strong></span>합니다.<br>감사합니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <nav aria-label="Page navigation qna">
+                    <ul class="pagination pagination-sm justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#1">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#2">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#3">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    </ul>
+                </nav>
+            </article>
+            <!--1:1문의-->
+            <article class="qna-article hide-article">
+                <div class="search">
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-success" type="submit">Search</button>
+                    </form>
+                </div>
+                <button type="button" class="btn btn-success" id="write-btn">문의하기</button>
+                <div class="accordion" id="accordionQNA">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-qna" aria-expanded="true" aria-controls="collapseOne-qna">
+                                <span class="qnaTitle">내 문의내역1</span><span class="qnaDate">2022.06.02</span>
+                            </button>
+                        </h2>
+                        <div id="collapseOne-qna" class="accordion-collapse collapse" aria-labelledby="headingOne">
+                            <div class="accordion-body">
+                                1:1 문의 답변
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo-qna" aria-expanded="false" aria-controls="collapseTwo-qna">
+                                <span class="qnaTitle">내 문의내역2</span><span class="qnaDate">2022.05.02</span>
+                            </button>
+                        </h2>
+                        <div id="collapseTwo-qna" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+                            <div class="accordion-body">
+                            1:1 문의 답변
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree-qna" aria-expanded="false" aria-controls="collapseThree-qna">
+                                <span class="qnaTitle">내 문의내역3</span><span class="qnaDate">2022.04.02</span>
+                            </button>
+                        </h2>
+                        <div id="collapseThree-qna" class="accordion-collapse collapse" aria-labelledby="headingThree">
+                            <div class="accordion-body">
+                                1:1 문의 답변
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour-qna" aria-expanded="false" aria-controls="collapseFour-qna">
+                                <span class="qnaTitle">내 문의내역4</span><span class="qnaDate">2022.03.02</span>
+                            </button>
+                        </h2>
+                        <div id="collapseFour-qna" class="accordion-collapse collapse" aria-labelledby="headingFour">
+                            <div class="accordion-body">
+                                1:1 문의 답변
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFive">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive-qna" aria-expanded="false" aria-controls="collapseFive-qna">
+                                <span class="qnaTitle">내 문의내역5</span><span class="qnaDate">2022.02.02</span>
+                            </button>
+                        </h2>
+                        <div id="collapseFive-qna" class="accordion-collapse collapse" aria-labelledby="headingFive">
+                            <div class="accordion-body">
+                                1:1 문의 답변
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <nav aria-label="Page navigation FAQ">
+                    <ul class="pagination pagination-sm justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#1">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#2">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#3">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    </ul>
+                </nav>
+            </article>
+            <!--공지사항-->
+            <article class="notice-article hide-article">
+                <div class="search">
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-success" type="submit">Search</button>
+                    </form>
+                </div>
+                <table class="table notice-table">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="notice-type">분류</th>
+                        <th scope="col" class="notice-title">제목</th>
+                        <th scope="col" class="notice-view">조회수</th>
+                        <th scope="col" class="notice-date">작성일</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="notice-type" scope="row">공지사항</td>
+                        <td class="notice-title"><a href="#">서버 점검 및 사이트 접속 불가 안내</a></td>
+                        <td>934</td>
+                        <td>22.06.24</td>
+                    </tr>
+                    <tr>
+                        <td class="notice-type" scope="row">공지사항</td>
+                        <td class="notice-title"><a href="#">7월 휴무 안내</a></td>
+                        <td>3421</td>
+                        <td>22.06.23</td>
+                    </tr>
+                    <tr>
+                        <td class="notice-type" scope="row">이벤트</td>
+                        <td class="notice-title"><a href="#">콕션과 함께하는 출석 이벤트 안내</a> </td>
+                        <td>6785</td>
+                        <td>22.05.29</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation FAQ">
+                    <ul class="pagination pagination-sm justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#1">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#2">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#3">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    </ul>
+                </nav>
+            </article>
+            <article class="ad-article hide-article">
+
+            </article>
+        </section>  
+    </main>
+    <!--footer-->
+
+  </body>
+</html>

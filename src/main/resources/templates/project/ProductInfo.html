@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+<head>
+	<meta charset="UTF-8">
+	<title>상품 상세정보</title>
+
+	<th:block layout:fragment="css">
+		<link rel="stylesheet" th:href="@{/css/Ca_Se_In.css}">
+		<link rel="stylesheet" th:href="@{/css/style_home.css}">
+	</th:block>
+
+	<th:block layout:fragment="script">
+		<script>
+			/* 종현님 모달창 값 덤프 */
+			/*input일때는 value로 받아오고 <p id="key"></p>, td는 텍스트*/
+			$(function () {
+				$("#bid-price-won").text($("#bid-price").text());
+				$("#price-won").text($("#price").text());
+				var strPrice = $("#price-won").text().replace(',', '');
+				var $price = parseInt(strPrice);
+				var $total = 0;
+				total();
+				function total() {
+					$total = $price + ($price * 0.1);
+					$("#total").text(String($total).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + '원' + ' (구매 수수료 포함)');
+				}
+			});
+
+			/* Date이용 남은시간 */
+			var $ex_time = $(".ex_time");
+			/* var $end_time = new Date($(".end_time")); */
+			var $end_time = new Date("June 30, 2022, 21:30:00");
+			var now = new Date();
+
+			setInterval(function () {
+				var today = new Date().getTime();
+				var gap = $end_time - today;
+				var day = (Math.ceil(gap / (1000 * 60 * 60 * 24))) - 1;
+				var hour = Math.ceil((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+				var min = Math.ceil((gap % (1000 * 60 * 60)) / (1000 * 60));
+				var sec = Math.ceil((gap % (1000 * 60)) / 1000);
+
+				if (day >= 2) {
+					$ex_time.text("남은시간 : " + day + "일 " + hour + "시간 " + min + "분");
+				} else {
+					$ex_time.text("남은시간 : " + hour + "시간 " + min + "분 " + sec + "초");
+				}
+			}, 1000);
+		</script>
+	</th:block>
+</head>
+
+<body>
+	<main layout:fragment="content">
+		<!-- 카테고리/상품명 -->
+		<div id="pro_name">
+			<!-- <p>카테고리 : 디지털/가전 - 핸드폰</p> -->
+			<h1><strong>아이폰 14 - 256gb</strong></h1>
+		</div>
+		<hr>
+		<!-- 상품사진, 정보 부분의 묶음 -->
+		<div id="pro_main">
+			<!-- 상품사진 캐러셀 부분 -->
+			<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+				<div class="carousel-indicators">
+					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+						class="active" aria-current="true" aria-label="Slide 1"></button>
+					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+						aria-label="Slide 2"></button>
+					<!--                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button> -->
+				</div>
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<img th:src="@{/images/product01_1.jpg}" class="d-block" alt="아이폰14_1">
+					</div>
+					<div class="carousel-item">
+						<img th:src="@{/images/product01_2.jpg}" class="d-block" alt="아이폰14_2">
+					</div>
+				</div>
+				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
+			</div>
+
+			<!-- 상품 상세정보 부분 -->
+			<div id="pro_Info">
+				<table class="table table-hover">
+					<caption>현재가 &nbsp; &nbsp; &nbsp; &nbsp;
+						<span id="price">850,000원</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<p class="ex_time"></p>
+					</caption>
+					<tr>
+						<th>물품번호</th>
+						<td>6015</td>
+					</tr>
+					<tr>
+						<th>경매기간</th>
+						<td class="end_time">2022/06/30 21:30</td>
+					</tr>
+					<tr>
+						<th>시작가</th>
+						<td>150,000원</td>
+					</tr>
+					<tr>
+						<th>입찰단위</th>
+						<td id="bid-price">50,000원</td>
+					</tr>
+					<tr>
+						<th>즉시구매</th>
+						<td>1,500,000원</td>
+					</tr>
+					<tr>
+						<th>입찰방식</th>
+						<td>비공개</td>
+					</tr>
+					<tr>
+						<th style="border-bottom: 2px solid rgb(100,100,100);">입찰 수</th>
+						<td style="border-bottom: 2px solid rgb(100,100,100);">2</td>
+					</tr>
+					<tr>
+						<th>배송방법</th>
+						<td>택배</td>
+					</tr>
+					<tr>
+						<th>판매자 ID</th>
+						<td>bitcamp</td>
+					</tr>
+					<tr>
+						<th>판매등급</th>
+						<td>없음</td>
+					</tr>
+				</table>
+				<!-- 입찰 및 찜하기 버튼 -->
+				<div id="pro_btn">
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#intro">
+						입찰하기
+					</button>
+					<button type="button" class="btn btn-primary">
+						찜하기
+					</button>
+
+					<!--모달 영역-->
+					<div class="modal fade" id="intro">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title">
+										입찰하기
+									</h4>
+								</div>
+								<div class="modal-body">
+									<div class="table-responsive">
+										<table class="table table-striped align-middle text-center">
+											<tr>
+												<th>판매자</th>
+												<td>bitcamp</td>
+											</tr>
+											<tr>
+												<th>기간</th>
+												<td>~2022/06/30 21:30</td>
+											</tr>
+											<tr>
+												<th>배송방법</th>
+												<td>
+													<div class="form-check form-check-inline">
+														<input class="form-check-input" type="radio"
+															name="flexRadioDefault1" id="flexRadioDefault1">
+														<label class="form-check-label" for="flexRadioDefault1">
+															택배
+														</label>
+													</div>
+													<div class="form-check form-check-inline">
+														<input class="form-check-input" type="radio"
+															name="flexRadioDefault1" id="flexRadioDefault2">
+														<label class="form-check-label" for="flexRadioDefault2">
+															직거래
+														</label>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<th>입찰방법</th>
+												<td>
+													<div class="form-check form-check-inline">
+														<input class="form-check-input" type="radio"
+															name="flexRadioDefault2" id="flexRadioDefault3">
+														<label class="form-check-label" for="flexRadioDefault3">
+															즉시구매
+														</label>
+													</div>
+													<div class="form-check form-check-inline">
+														<input class="form-check-input" type="radio"
+															name="flexRadioDefault2" id="flexRadioDefault4">
+														<label class="form-check-label" for="flexRadioDefault4">
+															입찰
+														</label>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<th>입찰단위</th>
+												<td id="bid-price-won"></td>
+											</tr>
+											<tr>
+												<th>현재가</th>
+												<td id="price-won"></td>
+											</tr>
+											<tr>
+												<th>입찰금액</th>
+												<td>
+													<input id="price" type="text" placeholder="희망 입찰가격">
+												</td>
+											</tr>
+											<tr>
+												<th>총 구매금액</th>
+												<td>
+													<p id="total"></p>
+												</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+										입찰하기
+									</button>
+									<button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+										닫기
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 모달 끝 -->
+				</div>
+			</div>
+		</div>
+		<!-- 내비게이션 탭 -->
+		<div id="pro_nav">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="nav-tab" data-bs-toggle="tab" data-bs-target="#home"
+						type="button" role="tab" aria-controls="home" aria-selected="true">물품정보</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="nav-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+						role="tab" aria-controls="profile" aria-selected="false">물품문의</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="nav-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+						role="tab" aria-controls="contact" aria-selected="false">배송/반품</button>
+				</li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					<!-- -----상품내용------- -->
+					<div class="ContentSection_content_section__Hkpff">
+						<p class=""></p>
+						<p class=""></p>
+						<figure class="ContentSection_image__cEovs"><img alt="아이폰14 프로 예상 렌더링"
+								src="https://d8gageze1i5x5.cloudfront.net/phones/contents/spec-iphone14/c_1.png">
+							<figcaption><strong>아이폰14 프로</strong></figcaption>
+						</figure>
+						<p class=""></p>
+						<h3 class="tw-mt-16">목차</h3>
+						<nav class="ContentSection_nav__DDf0B">
+							<ol type="1" class="">
+								<li><a href="#content-1">1. 아이폰14 디자인</a></li>
+							</ol>
+							<ol type="1" class="">
+								<li><a href="#content-2">2. 아이폰14 색상</a></li>
+							</ol>
+							<ol type="1" class="">
+								<li><a href="#content-3">3. 아이폰14 스펙</a>
+									<ol type="a" class="">
+										<li><a href="#content-4">a. 아이폰14 프로 화면 크기</a></li>
+									</ol>
+									<ol type="a" class="">
+										<li><a href="#content-5">b. 8G 램 탑재</a></li>
+									</ol>
+									<ol type="a" class="">
+										<li><a href="#content-6">c. 전면 카메라 성능 개선</a></li>
+									</ol>
+									<ol type="a" class="">
+										<li><a href="#content-7">d. 8K 동영상 녹화 지원</a></li>
+									</ol>
+									<ol type="a" class="">
+										<li><a href="#content-8">e. A16 바이오닉 프로세서 탑재</a></li>
+									</ol>
+								</li>
+						</nav>
+						<p class=""></p>
+						<hr>
+						<p class=""></p>
+						<h2 id="content-1" class=""><strong>◼ 아이폰14 디자인</strong></h2>
+						<p class="">새롭게 출시되는 아이폰 다자인 중 가장 관심도 높은 부분은 역시 M자 탈모라고 불리는 노치 디스플레이인데요.<br> 상단의 노치 디자인과 카메라 범프가
+							<!-- --> <mark class="ContentSection_highlight-blue_background__os74I"><strong>아이폰14 디자인에서는
+									개선</strong></mark>
+						</p>
+						<p class=""></p>
+						<figure class="ContentSection_image__cEovs"><img alt="아이폰14 프로 예상 렌더링"
+								src="https://d8gageze1i5x5.cloudfront.net/phones/contents/spec-iphone14/c_2.png">
+						</figure>
+
+					</div>
+				</div>
+				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+					<!-- 상품문의 -->
+					<div id="ask">
+						<table class="table table-sm table-hover">
+							<tr>
+								<th>번호</th>
+								<th>문의유형</th>
+								<th>제목</th>
+								<th>등록자</th>
+								<th>등록일</th>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>상품문의</td>
+								<td>상품 상태 문의드립니다.</td>
+								<td>bitcamp1</td>
+								<td>2022/06/17</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>상품문의</td>
+								<td>비공개 문의 입니다.</td>
+								<td>bitcamp2</td>
+								<td>2022/06/18</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>배송문의</td>
+								<td>제주도 배송 문의</td>
+								<td>bitcamp3</td>
+								<td>2022/06/18</td>
+							</tr>
+						</table>
+						<div id="ask_Modal">
+							<!-- 상품문의 모달버튼 -->
+							<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+								data-bs-target="#staticBackdrop">
+								문의하기
+							</button>
+
+							<!-- 상품문의 모달창 -->
+							<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+								data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+								aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="staticBackdropLabel">문의하기</h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal"
+												aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<table>
+												<tr>
+													<th>물품번호</th>
+													<td>6015</td>
+												</tr>
+												<tr>
+													<th>문의유형</th>
+													<td>
+														<div class="ask_type">
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" type="radio"
+																	name="inlineRadioOptions1" id="inlineRadio1">
+																<label class="form-check-label"
+																	for="inlineRadio1">상품</label>
+															</div>
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" type="radio"
+																	name="inlineRadioOptions1" id="inlineRadio2">
+																<label class="form-check-label"
+																	for="inlineRadio2">배송</label>
+															</div>
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" type="radio"
+																	name="inlineRadioOptions1" id="inlineRadio3">
+																<label class="form-check-label"
+																	for="inlineRadio3">기타</label>
+															</div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<th>문의형식</th>
+													<td>
+														<div class="ask_ap">
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" type="radio"
+																	name="inlineRadioOptions2" id="inlineRadio4">
+																<label class="form-check-label"
+																	for="inlineRadio4">공개</label>
+															</div>
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" type="radio"
+																	name="inlineRadioOptions2" id="inlineRadio5">
+																<label class="form-check-label"
+																	for="inlineRadio5">비공개</label>
+															</div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<th>제목</th>
+													<td>
+														<input type="text" class="ask_title" placeholder=" 제목을 입력하세요"
+															maxlength="50">
+													</td>
+												</tr>
+												<tr>
+													<th>작성자</th>
+													<td>admin</td>
+												</tr>
+												<tr>
+													<th>내용</th>
+													<td>
+														<textarea rows="8" class="ask_def"
+															placeholder=" 규정에 위반되는 경우 고지없이 삭제 될 수 있습니다."></textarea>
+													</td>
+												</tr>
+												<tr>
+													<th>답변완료 알림</th>
+													<td>
+														<label>
+															<input type="checkbox" value="Y">문자&nbsp;&nbsp;&nbsp;
+														</label>
+														<input type="text" maxlength="13" placeholder=" 000-000-0000">
+														<br>
+														<label>
+															<input type="checkbox">이메일
+														</label>
+														<input type="text" maxlength="30"
+															placeholder=" koction@koction.co.kr">
+													</td>
+												</tr>
+											</table>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-primary">등록</button>
+											<button type="button" class="btn btn-secondary"
+												data-bs-dismiss="modal">취소</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 상품문의 끝 -->
+				</div>
+				<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+					<!-- 배송/반품 -->
+
+					<p class="loudspeaker mt10">전자상거래등에서 소비자보호에 관한 법률에 의한 반품규정이 판매자가 지정한 반품 조건보다 우선합니다.</p>
+
+					<div class="tableDefault mt40">
+						<table>
+							<colgroup>
+								<col>
+								<col>
+							</colgroup>
+							<caption>배송 안내</caption>
+							<tbody>
+								<tr>
+									<th class="fs14i">배송지역</th>
+									<td>전국※제주권 및 도서산간 지역은 배송비가 추가될 수 있습니다.</td>
+								</tr>
+								<tr>
+									<th class="fs14i">배송방법</th>
+									<td>택배(파손주의물품), 착불[구매자] [착불4,000원]</td>
+								</tr>
+								<tr>
+									<th class="fs14i">반품기간</th>
+									<td>수령일로 부터 7일 이내에 반품을 신청 하실 수 있습니다.</td>
+								</tr>
+								<tr>
+									<th class="fs14i">반품비용</th>
+									<td>원인제공자 부담을 원칙으로 합니다.</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<dl class="mt40 lineH24">
+						<dt class="bul-blue mb10">반품시 주의사항 </dt>
+						<dd class="pl25 lineH24">아래 각호의 경우에는 반품이 되지 않습니다.</dd>
+						<dd class="pl25 lineH24">1) 소비자의 책임 있는 사유로 상품 등이 멸실 / 훼손된 경우(단지 확인을 위한 포장 훼손 제외)</dd>
+						<dd class="pl25 lineH24">2) 소비자의 사용 / 소비에 의해 상품 등의 가치가 현저히 감소한 경우</dd>
+						<dd class="pl25 lineH24">3) 시간의 경과에 의해 재판매가 곤란할 정도로 상품 등의 가치가 현저히 감소한 경우</dd>
+						<dd class="pl25 lineH24">4) 복제가 가능한 상품 등의 포장을 훼손한 경우</dd>
+						<dd class="pl25 lineH24">5) 판매 / 생산방식의 특성상, 반품 시 판매자 에게 회복할 수 없는 손해가 발생하는 경우(주문접수 후 개별생산, 맞춤 제작
+							등)</dd>
+						<dd class="pl25 textUnderline mt10"><a href="#" onclick="faqSearch('전자상거래에서 소비자')"><strong>※
+									전자상거래 등에서의 소비자보호에 관한 법률 알아보기</strong></a></dd>
+					</dl>
+
+					<dl class="mt40 lineH24">
+						<dt class="bul-blue mb10">파손물품 반품시 주의사항 </dt>
+						<dd class="pl25 lineH24">물품 수령시 택배기사와 함께 물품의 파손여부를 확인하신 후,</dd>
+						<dd class="pl25 lineH24">반품 신청시 파손이미지를 등록해 주시면 안전하고 신속하게 환불처리를 해드리고 있습니다. </dd>
+					</dl>
+					<!-- 배송/반품 -->
+				</div>
+			</div>
+		</div>
+
+
+	</main>
+</body>
+
+</html>

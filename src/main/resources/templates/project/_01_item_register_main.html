@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/layout}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style_header_footer.css" />
+    <link rel="stylesheet" href="/css/_01_item_register_main.css" />
+
+    <title>상품등록 메인 페이지</title>
+  </head>
+  <!-------------------------------------------------------------------------------------->
+  <body>
+    <!--header-->
+    <header></header>
+
+    <main layout:fragment="content">
+      <div id="pageTitle">상품등록</div>
+      <hr />
+      <div class="invisibleDiv">
+        <div class="newItem" onclick="">
+          <a href="_02_myitem_register.html">+ 신규상품등록</a>
+        </div>
+      </div>
+      <div class="table_header">
+        <table>
+          <tr>
+            <td>이미지</td>
+            <td>상품명</td>
+            <td class="wide">제목</td>
+            <td>수량</td>
+            <td class="less_wide">시작가</td>
+            <td>경매방식</td>
+            <td class="wide">등록일</td>
+            <td>상태</td>
+            <td class="last"></td>
+          </tr>
+        </table>
+      </div>
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button
+              class="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseOne"
+              aria-expanded="true"
+              aria-controls="collapseOne"
+            >
+              <table>
+                <tr>
+                  <td>
+                    <a><img src="images/kanu.png" th:src="" /></a>
+                  </td>
+                  <td th:text="">커피</td>
+                  <td class="wide" id="name0" th:text="">
+                    먹다 남은 카누 팝니다!
+                  </td>
+                  <td th:text="">1</td>
+                  <td class="less_wide" th:text="">30,000원</td>
+                  <td th:text="">기한입찰</td>
+                  <td class="wide" th:text="">2022 / 05 / 26</td>
+                  <td class="sold" th:text="">판매완료</td>
+                  <td></td>
+                </tr>
+              </table>
+            </button>
+          </h2>
+          <div
+            id="collapseOne"
+            class="accordion-collapse collapse show"
+            aria-labelledby="headingOne"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+              <div class="detail">
+                <div class="imageArea">
+                  <img src="images/kanu.png" alt="" th:src="" />
+                </div>
+                <div class="textArea" th:text="">
+                  100개 들었는데 3개 먹어서 97개 남아있습니다
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo"
+              aria-expanded="false"
+              aria-controls="collapseTwo"
+            >
+              <table>
+                <tr>
+                  <td>
+                    <a><img src="images/maxim.png" th:src="" /></a>
+                  </td>
+                  <td th:text="">커피</td>
+                  <td class="wide" id="name1" th:text="">
+                    먹다 남은 맥심 팝니다!
+                  </td>
+                  <td th:text="">1</td>
+                  <td class="less_wide" th:text="">30,000</td>
+                  <td th:text="">기한입찰</td>
+                  <td class="wide" th:text="">2022 / 05 / 14</td>
+                  <td class="sold" th:text="">판매완료</td>
+                  <td></td>
+                </tr>
+              </table>
+            </button>
+          </h2>
+          <div
+            id="collapseTwo"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingTwo"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+              <div class="detail">
+                <div class="imageArea">
+                  <img src="images/maxim.png" alt="" th:src="" />
+                </div>
+                <div class="textArea" th:text="">
+                  100개 들었는데 3개 먹어서 97개 남아있습니다
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseThree"
+              aria-expanded="false"
+              aria-controls="collapsetdree"
+            >
+              <table>
+                <tr>
+                  <td>
+                    <a><img src="images/case.png" th:src="" /></a>
+                  </td>
+                  <td th:text="">케이스</td>
+                  <td class="wide" id="name2" th:text="">
+                    맥북에어m1 케이스 팝니다
+                  </td>
+                  <td th:text="">1</td>
+                  <td class="less_wide" th:text="">9,000</td>
+                  <td th:text="">기한입찰</td>
+                  <td class="wide" th:text="">2022 / 06 / 19</td>
+                  <td class="ongoing" th:text="">진행중</td>
+                  <td>
+                    <a href="_03_myitem_edit.html" th:src="">
+                      <div
+                        class="rebidding"
+                        type="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#intro"
+                      >
+                        수정
+                      </div>
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </button>
+          </h2>
+          <div
+            id="collapseThree"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingThree"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+              <div class="detail">
+                <div class="imageArea">
+                  <img src="images/case.png" alt="" th:src="" />
+                </div>
+                <div class="textArea" th:text="">
+                  맥북에어m1 케이스 팝니다! 미개봉품이라 상태 매우 양호합니다
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingFour">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseFour"
+              aria-expanded="false"
+              aria-controls="collapsetdree"
+            >
+              <table>
+                <tr>
+                  <td>
+                    <a><img src="images/iphone.jpeg" th:src="" /></a>
+                  </td>
+                  <td th:text="">스마트폰</td>
+                  <td class="wide" id="name3" th:text="">아이폰12 팝니다</td>
+                  <td th:text="">1</td>
+                  <td class="less_wide" th:text="">700,000</td>
+                  <td th:text="">기한입찰</td>
+                  <td class="wide" th:text="">2022 / 06 / 23</td>
+                  <td class="not_sold" th:text="">입찰종료</td>
+                  <td>
+                    <div
+                      class="rebidding"
+                      type="button"
+                      data-bs-toggle="modal"
+                      data-bs-target="#intro"
+                    >
+                      재입찰
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </button>
+          </h2>
+          <div
+            id="collapseFour"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingFour"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+              <div class="detail">
+                <div class="imageArea">
+                  <img src="images/iphone.jpeg" alt="" th:src="" />
+                </div>
+                <div class="textArea" th:text="">
+                  아이폰12 중고품 판매 의향 있읍니다. 약 1년 간 사용하였읍니다.
+                  구매 의향 있으신 분은 입찰에 참여해주시면 감사하겠읍니다.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    </main>
+    <!--footer-->
+    <footer></footer>
+
+    <!-- 재입찰 모달 -->
+    <div class="modal fade" id="intro">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">modal-title</h4>
+          </div>
+          <div class="modal-body">
+            <table id="modal_table">
+              <tr>
+                <td><strong>상품명</strong></td>
+                <td class="modal_table_input_right">
+                  <input type="text" value="스마트폰" />
+                </td>
+              </tr>
+              <tr>
+                <td><strong>카테고리</strong></td>
+                <td class="modal_table_input_right">
+                  <select id="user_path">
+                    <optgroup label="가전">
+                      <option value="tv" th:selected="">TV/영상가전</option>
+                      <option value="web" th:selected="">음향가전</option>
+                      <option value="pc" th:selected="">생활가전</option>
+                      <option value="pc" th:selected="">주방가전</option>
+                      <option value="pc" th:selected="">계절가전</option>
+                      <option value="pc" th:selected="">이미용가전</option>
+                      <option value="pc" th:selected="">건강가전</option>
+                    </optgroup>
+                    <optgroup label="디지털">
+                      <option value="fr" th:selected="">노트북/주변기기</option>
+                      <option value="cf" selected th:selected="">
+                        모바일/IT용품
+                      </option>
+                    </optgroup>
+                    <optgroup label="주방">
+                      <option value="tv" th:selected="">조리용품</option>
+                      <option value="web" th:selected="">그릇/홈세트</option>
+                      <option value="pc" th:selected="">밀폐/저장용품</option>
+                      <option value="pc" th:selected="">주방소모품</option>
+                      <option value="pc" th:selected="">컵/잔/텀블러</option>
+                    </optgroup>
+                    <optgroup label="생활">
+                      <option value="tv" th:selected="">
+                        가구/침구/홈데코
+                      </option>
+                      <option value="web" th:selected="">베이비&키즈</option>
+                      <option value="pc" th:selected="">제지류</option>
+                      <option value="pc" th:selected="">세탁/욕실/청소</option>
+                      <option value="pc" th:selected="">생활잡화</option>
+                      <option value="pc" th:selected="">오피스/문구</option>
+                      <option value="pc" th:selected="">반려용품</option>
+                    </optgroup>
+                    <optgroup label="뷰티/패션">
+                      <option value="tv">스킨케어</option>
+                      <option value="web">헤어/바디케어</option>
+                      <option value="pc">메이크업</option>
+                      <option value="pc">향수/캔들</option>
+                      <option value="pc">패션잡화</option>
+                    </optgroup>
+                    <optgroup label="생활">
+                      <option value="tv" th:selected="">
+                        가구/침구/홈데코
+                      </option>
+                      <option value="web" th:selected="">베이비&키즈</option>
+                      <option value="pc" th:selected="">제지류</option>
+                      <option value="pc" th:selected="">세탁/욕실/청소</option>
+                      <option value="pc" th:selected="">생활잡화</option>
+                      <option value="pc" th:selected="">오피스/문구</option>
+                      <option value="pc" th:selected="">반려용품</option>
+                    </optgroup>
+                    <option value="etc" th:selected="">기타</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>수량</strong></td>
+                <td class="modal_table_input_right">
+                  <input type="text" value="1" th:text="" />
+                </td>
+              </tr>
+              <tr>
+                <td><strong>시작가</strong></td>
+                <td class="modal_table_input_right">
+                  <input type="text" value="700,000" th:text="" />
+                </td>
+              </tr>
+              <tr>
+                <td><strong>즉시구매가</strong></td>
+                <td class="modal_table_input_right">
+                  <input type="text" value="800,000" th:text="" />
+                </td>
+              </tr>
+              <tr>
+                <td><strong>경매방식</strong></td>
+                <td class="modal_table_input_right">
+                  <select>
+                    <option selected th:selected="">기한입찰</option>
+                    <option th:selected="">xx입찰</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>경매기간</strong></td>
+                <td class="modal_table_input_right">
+                  <select>
+                    <option selected th:selected="">24시간</option>
+                    <option th:selected="">48시간</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>배송방식</strong></td>
+                <td class="modal_table_input_right">
+                  <select>
+                    <option selected th:selected="">택배배송</option>
+                    <option th:selected="">직거래</option>
+                  </select>
+                </td>
+              </tr>
+            </table>
+            <br />
+            <p><strong>상기 내용으로 재등록 하시겠습니까?</strong></p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              id="rebidding_on"
+              data-bs-dismiss="modal"
+              class="btn btn-primary"
+              style="background-color: rgb(18, 100, 100)"
+              onclick="rebiddingCompleted()"
+            >
+              재입찰
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+              style="background-color: lightgray"
+            >
+              닫기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Javascript 영역 -->
+    <script>
+      // const name = ['name0', 'name1', 'name2', 'name3', 'name4']
+
+      $(function () {
+        $(".rebidding").on("click", function () {
+          console.log($(this).parent());
+          $(".modal-title").text($("#name3").text());
+          // $(".modal-body").text($("table[3]").text())
+          // var lis = document.getElementsByTagName("table").getElementsByTagName("td")
+          // alert(lis[3].textContent)
+        });
+      });
+
+      // var lis = document.getElementsByTagName("table").document.getElementsByTagName("td")
+      // alert(lis[0].textcontent)
+
+      // 클래스 생성
+      class Item {
+        constructor(
+          image,
+          name,
+          title,
+          amount,
+          price,
+          bidType,
+          regiDate,
+          status,
+          rebidding
+        ) {
+          this.image = image;
+          this.name = name;
+          this.title = title;
+          this.amount = amount;
+          this.price = price;
+          this.bidType = bidType;
+          this.regiDate = regiDate;
+          this.status = status;
+          this.rebidding = rebidding;
+        }
+      }
+
+      var item1 = new Item(
+        "#",
+        "name",
+        "selling",
+        1,
+        1000,
+        "a",
+        "2022 / 06 / 18",
+        "ongoing"
+      );
+      $();
+
+      function rebiddingCompleted() {
+        alert("상품등록이 완료되었습니다.");
+      }
+    </script>
+  </body>
+</html>

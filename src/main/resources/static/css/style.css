@@ -1,0 +1,23 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+/*Header*/
+html{
+	 font-family: 'Noto Sans KR',"나눔고딕", NanumGothic, "맑은고딕", MalgunGothic, "Apple SD Gothic Neo", sans-serif;
+}
+body{
+	margin: 0 auto;
+	max-width:1200px;
+}
+#headerNavbar a {
+	color: rgb(30, 30, 30);
+	text-decoration: none;
+	font-size: 1.3rem;
+	font-weight: 600;
+}
+
+#headerUserbar a {
+	color: rgb(50, 50, 50);
+	text-decoration: none;
+	font-size: 1.17rem;
+	font-weight: 400;
+}

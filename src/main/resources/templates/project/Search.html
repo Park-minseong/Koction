@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+	<head>
+		<meta charset="UTF-8">
+	    <title>검색결과</title>
+	    <th:block layout:fragment="css">
+	  		<link rel="stylesheet" th:href="@{/css/Ca_Se_In.css}">
+	  	</th:block>
+	</head>
+
+<body>
+         <!--header-->
+    <header></header>
+    <main layout:fragment="content">
+        <div class="title">
+            상품 검색
+         </div>
+        <!-- 검색 버튼 영역 -->
+        <hr>
+        <div id="searchArea" style="text-align: center;">
+            <div id="searchBar">
+            <input type="hidden" name="page" value="">
+                <svg xmlns="http://www.w3.org/2000/svg" style=" color: rgba(17,100,100,1);" width="24" height="24"
+                    fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg>
+                    <select class="form-select se_select" name="searchCondition">
+                        <option value="all" th:selected= "${searchCondition eq 'all'}">전체</option>
+						<option value="title" th:selected= "${searchCondition eq 'title'}">제목</option>
+						<option value="seller" th:selected= "${searchCondition eq 'seller'}">판매자</option>
+						<option value="price" th:selected= "${searchCondition eq 'price'}">가격</option>
+                    </select>
+                <input type="text" name="searchKeyword" th:value="${searchKeyword}">
+                    <button id="sc_btn" type="button">Search</button>
+            </div>
+        </div>
+        <hr>
+        <!-- 검색 결과 영역 -->
+        <div id="se_num">
+            <svg xmlns="http://www.w3.org/2000/svg" style=" color: rgba(17,100,100,1);" width="24" height="24"
+                fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path
+                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+            </svg>
+            <pre>  검색결과  -  23건</pre>
+            <br><br>
+            <!-- <pre>           카테고리 : 디지털/가전  -  핸드폰</pre> -->
+        </div>
+        <!-- 검색 결과 상품 리스트 -->
+        <div id="se_List">
+            <div class="se_Info" id="se_Info">
+                <a href="ProductInfo.html" th:href="@{/}">
+                    <table id="se_Table">
+                        <thead>
+                            <tr class="tr_img">
+                                <th colspan="2"><img src="/images/product01_1.jpg"  id="se_im" alt="아이폰14_1" ></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2"> 상품명 : 아이폰 14 - 256gb</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">상품가격 : 850,000원</td>
+                            </tr>
+                            <tr>
+                                <td style="border-right: 1px solid rgb(140, 140, 140);">입찰 수 2</td>
+                                <td >조회 수 9</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" >판매자ID : bitcamp</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">남은시간 : 06일 21시간</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </a>
+            </div>
+
+            <div class="se_Info" id="se_Info">
+                <a href="#">
+                    <table id="se_Table">
+                        <thead>
+                            <tr>
+                                <th colspan="2"><img src="images/화장품.png" id="se_im" alt="화장품"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2"> 상품명 : 가히 링클 바운스 멀티밤</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">상품가격 : 46,500원</td>
+                            </tr>
+                            <tr>
+                                <td style="border-right: 1px solid rgb(140, 140, 140);">입찰 수 180</td>
+                                <td>조회 수 21,867</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">판매자ID : bitcamp</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">남은시간 : 18시간 02분</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </a>
+            </div>
+
+            <div class="se_Info" id="se_Info">
+                <a href="#">
+                    <table id="se_Table">
+                        <thead>
+                            <tr>
+                                <th colspan="2"><img src="images/운동화.png" id="se_im" alt="아이폰14_1"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2"> 상품명 : 휠라 꼬모 FS1SIB127</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">상품가격 : 25,000원</td>
+                            </tr>
+                            <tr>
+                                <td style="border-right: 1px solid rgb(140, 140, 140);">입찰 수 11</td>
+                                <td>조회 수 21,865</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">판매자ID : bitcamp</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">남은시간 : 24시간 55분</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </a>
+            </div>
+        </div>
+        <!-- 검색결과 창 하단 버튼 -->
+        <div id="page_btn">
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group me-2" role="group" aria-label="Second group">
+                    <div class="btn_page_side">
+                        <button type="button" class="btn btn-outline-secondary btn_page" style="border: 0;"><</button>
+                        <button type="button" class="btn btn-outline-secondary btn_page">1</button>
+                        <button type="button" class="btn btn-outline-secondary btn_page">2</button>
+                        <button type="button" class="btn btn-outline-secondary btn_page">3</button>
+                        <button type="button" class="btn btn-outline-secondary btn_page">4</button>
+                        <button type="button" class="btn btn-outline-secondary btn_page">5</button>
+                        <button type="button" class="btn btn-outline-secondary btn_page" style="border: 0;">></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+ <!--footer-->
+ <footer></footer>
+
+</body>
+
+</html>

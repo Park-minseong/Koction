@@ -1,0 +1,113 @@
+@charset "UTF-8";
+/* 공통 부분 */
+html{
+    font-family: 'NanumSquareRound';
+    font-size: 100%;
+}
+/* 헤더 부분 */
+header{
+    height: 130px;
+    padding: 0;
+}
+header .wrap{
+    display: flex;
+    width: 1200px;
+    margin: 0 auto;
+}
+.top-bg{
+    height: 30px;
+    border-top: 3px solid rgb(18,100,100);
+    background: rgb(245, 245, 245);
+
+}
+.top-navbar{
+    width: 1200px;
+    margin: 0 auto;
+}
+.top-navbar a, .top-navbar a:hover, .top-navbar a:focus{
+    font-size: 14px;
+    padding: 3px 0px 8px;
+    margin-left: 12px;
+    height: 23px;
+    font-weight: bold;
+    font-family: 'NanumSquareRound';
+    color: rgb(99, 99, 99);
+    text-decoration: none;
+}
+.logo{
+    width: 250px;
+}
+.logo img{
+    margin-top: 6px;
+    margin-left: 15px;
+    width: 90%;
+}
+header nav{
+    font-size: 1.5rem;
+    font-weight: 550;
+    font-family: 'NanumSquareRound';
+    width: 950px;
+    height: 100px;
+    padding-top: 55px;
+}
+.wrap .nav-link{
+    padding: 0;
+    margin: 4px 30px;
+    color: rgb(74, 74, 74);
+}
+.wrap .nav-link:hover, .wrap .nav-link:focus{
+    font-weight:bold;
+    color: rgb(18, 100, 100);
+}
+.nav img{
+    height:16px;
+    margin-top: 13px;
+}
+
+/* 메인 부분 */
+main{
+    width: 1200px;
+    margin: 15px auto 10px;
+    /* background: blue; */
+    /* height: 600px; */
+}
+
+/* 풋터 부분 */
+footer {
+    font-family: 'NanumSquareRound';
+    color: gray;
+    font-size: small;
+    border-top: 1px solid rgb(196, 196, 196);
+    display: block;
+    /* position: relative; */
+    /* transform: translateY(100%); */
+    /* position: fixed; */
+    bottom: 0; 
+    width: 1200px; /* 가로 사이즈를 브라우저에 가득 채움 */
+    margin: 0 auto;
+}
+footer p{
+    margin: 0;
+}
+.footer-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer1 {
+    width: 50%;
+}
+
+
+.footer2 {
+    width: 50%;
+    
+}
+.footer3{
+   
+}
+footer span {
+    margin-right: 100px;
+    float: right;
+}
+

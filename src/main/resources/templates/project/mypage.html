@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/style-mypage.css}" href="/css/style-mypage.css">
+    </th:block>
+
+    <th:block layout:fragment="script">
+        <script>
+            $(function(){
+                $("#checkall").on("click", function(){
+                    if($("#checkall").prop("checked")){
+                        $("input[name=chk]").prop("checked", true);
+                    } else {
+                        $("input[name=chk]").prop("checked", false);
+                    }
+                });
+    
+                $("#checkall2").on("click", function(){
+                    if($("#checkall2").prop("checked")){
+                        $("input[name=chk2]").prop("checked", true);
+                    } else {
+                        $("input[name=chk2]").prop("checked", false);
+                    }
+                });
+    
+                $("#checkall3").on("click", function(){
+                    if($("#checkall3").prop("checked")){
+                        $("input[name=chk3]").prop("checked", true);
+                    } else {
+                        $("input[name=chk3]").prop("checked", false);
+                    }
+                });
+    
+                window.onresize = function (event) {
+                    var innerWidth = window.innerWidth;
+    
+                    if(innerWidth < 992){
+                        $("#text_name1").text("등급");
+                        $("#text_name2").text("정보수정");
+                    } else {
+                        $("#text_name1").text("나의등급");
+                        $("#text_name2").text("회원정보수정");
+                    }
+                }
+                    
+            });
+        </script>
+    </th:block>
+<body>
+      <header></header>
+    <main layout:fragment="content">
+        <div>
+            <!-- <div class="box">
+                    <h1>나의 경매 / 마이페이지</h1>
+                </div> -->
+                <div class="title">
+                    나의 경매
+                </div>
+                <article>
+                <div class="box2">
+                    <h3>내 정보</h3>
+                </div>
+                <div class="mypage-info">
+                    <div class="container">
+                        <div class="row">
+                        <div class="col"><span style="font-size: 22px;">admin 님</span></div>
+                        <!--html 다른 페이지의 원하는 위치 이동 id값 이용-->
+                        <div class="col"><a class="btn btn-primary btn-light" href="/guide.html#grade" role="button" ><span id="text_name1">나의등급</span>
+                            <img id="vip" src="images/vip.png" th:src="@{/images/vip.png}" width=23px height=23px alt="vip"></a></div>
+                        <div class="col"><a class="btn btn-primary btn-light" href="/modifyInfo.html" role="button"><span id="text_name2">회원정보수정</span></a></div>
+                        <!-- 출금 href 설정해야함 -->
+                        <div class="col">
+                            <a class="btn btn-primary btn-light" href="#" role="button" id="text_name3"
+                            data-bs-toggle="modal" data-bs-target="#intro">출금</a>
+                        </div>
+                        </div>
+                    </div>
+                    <!--모달 영역 ajax 로 구현-->
+                    <form id="withdraw">
+                        <div class="modal fade" id="intro">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">
+                                            출금하기
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped align-middle text-center">
+                                                <tr>
+                                                    <th>이름</th>
+                                                    <th> <!-- MypageDTO 를 UserDTO로 변경 가능성 있음 -->
+                                                        <input type="text" name="mypageName" required>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th>금액</th>
+                                                    <td>
+                                                        <input type="number" name="mypageWithdrawPrice" placeholder="금액 입력">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>계좌번호</th>
+                                                    <td>
+                                                        <input type="text" name="mypageAccountNumber" placeholder="계좌 번호" value="">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary btn-light"type="submit">출금</button>
+                                        <a class="btn btn-primary btn-light" href="#" role="button" id="text_name3"
+                                        data-bs-dismiss="modal">닫기</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div>
+                    <h3>구매현황</h3>
+                    <div class="buy-box">
+                        <div class="table-responsive">
+                            <table class="table table-striped align-middle text-center table-hover">
+                                <tr>
+                                    <th>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="checkall2">
+                                            <label class="form-check-label" for="flexCheckDisabled">
+                                            </label>
+                                        </div>
+                                    </th>
+                                    <th nowrap>구분</th>
+                                    <th nowrap>물품번호</th>
+                                    <th nowrap>이미지</th>
+                                    <th nowrap>물품명</th>
+                                    <th nowrap>구매가격</th>
+                                    <th nowrap>구매정보</th>
+                                    <th nowrap>구매일</th>
+                                    <th nowrap>판매자</th>
+                                    <th nowrap>입급기한</th>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" name="chk2">
+                                        <label class="form-check-label">
+                                        </label>
+                                    </div>
+                                    </td>
+                                    <!--구매현황 구분 1번 해당 제품으로 이동 href 추가 필요-->
+                                    <td onClick="location.href='ProductInfo.html'">1</td>
+                                    <td nowrap>6015</td>
+                                    <td nowrap><img id="vip" src="images/product01_2.jpg" th:src="@{/imagegs/product01_2.jpg}" width=50px height=50px alt="vip"></td>
+                                    <td nowrap>아이폰</td>
+                                    <td nowrap>850,000원</td>
+                                    <td nowrap>핸드폰</td>
+                                    <td nowrap>2022/06/30</td>
+                                    <td nowrap>bitcamp</td>
+                                    <td nowrap>2022/07/02</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" name="chk2">
+                                        <label class="form-check-label">
+                                        </label>
+                                    </div>
+                                    </td>
+                                    <!--구매현황 구분 2번 해당 제품페이지로 이동 href 추가 필요-->
+                                    <td onClick="location.href='ProductInfo.html'">2</td>
+                                    <td nowrap>6016</td>
+                                    <td nowrap><img id="vip" src="images/maxim.png" th:src="@{/images/maxim.png}"width=50px height=50px alt="vip"></td>
+                                    <td nowrap>맥심</td>
+                                    <td nowrap>10,000원</td>
+                                    <td nowrap>커피</td>
+                                    <td nowrap>2022/06/15</td>
+                                    <td nowrap>Adam</td>
+                                    <td nowrap>2022/06/20</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3>판매현황</h3>
+                    <div class="sell-box">
+                        <div class="table-responsive">
+                            <table class="table table-striped align-middle text-center table-hover">
+                                <tr>
+                                    <th>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="checkall">
+                                            <label class="form-check-label" for="flexCheckDisabled">
+                                            </label>
+                                        </div>
+                                    </th>
+                                    <th nowrap>구분</th>
+                                    <th nowrap>물품번호</th>
+                                    <th nowrap>이미지</th>
+                                    <th nowrap>물품명</th>
+                                    <th nowrap>구매가격</th>
+                                    <th nowrap>구매정보</th>
+                                    <th nowrap>구매일</th>
+                                    <th nowrap>판매자</th>
+                                    <th nowrap>입급기한</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" name="chk">
+                                        <label class="form-check-label">
+                                        </label>
+                                    </div>
+                                    </td>
+                                    <!--판매현황 구분 1번 해당 제품 수정페이지로 이동 href 추가 필요-->
+                                    <td onClick="location.href='_03_myitem_edit.html'">1</td>
+                                    <td nowrap>1502</td>
+                                    <td><img id="vip" src="images/case.png" th:src="@{/images/case.png}" width=50px height=50px alt="vip"></td>
+                                    <td nowrap>케이스</td>
+                                    <td nowrap>9,000원</td>
+                                    <td nowrap>액세서리</td>
+                                    <td nowrap>2022/06/19</td>
+                                    <td nowrap>admin</td>
+                                    <td nowrap>2022/06/24</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" name="chk">
+                                        <label class="form-check-label">
+                                        </label>
+                                    </div>
+                                    </td>
+                                    <!--판매현황 구분 2번 해당 수정페이지로 이동 href 추가 필요-->
+                                    <td onClick="location.href='ProductInfo.html'">2</td>
+                                    <td nowrap>2900</td>
+                                    <td><img id="vip" src="images/headphone.png" th:src="@{/imagegs/headphone.png}" width=50px height=50px alt="vip"></td>
+                                    <td nowrap>헤드폰</td>
+                                    <td nowrap>77,000원</td>
+                                    <td nowrap>헤드폰</td>
+                                    <td nowrap>2022/06/12</td>
+                                    <td nowrap>admin</td>
+                                    <td nowrap>2022/06/16</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3>관심상품</h3>
+                    <div class="sell-box">
+                        <div class="table-responsive">
+                            <table class="table table-striped align-middle text-center table-hover">
+                                <tr>
+                                    <th>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="checkall3">
+                                            <label class="form-check-label" for="flexCheckDisabled">
+                                            </label>
+                                        </div>
+                                    </th>
+                                    <th nowrap>구분</th>
+                                    <th nowrap>물품번호</th>
+                                    <th nowrap>이미지</th>
+                                    <th nowrap>물품명</th>
+                                    <th nowrap>입찰가</th>
+                                    <th nowrap>제품정보</th>
+                                    <th nowrap>남은기간</th>
+                                    <th nowrap>판매자</th>
+                                    <th nowrap>현재가격</th>
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" name="chk3">
+                                        <label class="form-check-label">
+                                        </label>
+                                    </div>
+                                    </td>
+                                    <!--관심상품 구분 1번 해당 제품페이지로 이동 href 추가 필요-->
+                                    <td onClick="location.href='ProductInfo.html'">1</td>
+                                    <td nowrap>0011</td>
+                                    <td><img id="vip" src="images/kanu.png" th:src="@{/images/kanu.png}" width=50px height=50px alt="vip"></td>
+                                    <td nowrap>카누</td>
+                                    <td nowrap>1,000원</td>
+                                    <td nowrap>카누</td>
+                                    <td nowrap>2022/06/12</td>
+                                    <td nowrap>고기천</td>
+                                    <td nowrap>3,000원</td>
+                                </tr>
+                            </table>
+                        </div>
+                </div>
+            </div>
+        </article>
+    </main>
+    <footer></footer>
+</body>
+</html>
