@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 @Table(name="T_ORDER")
 @IdClass(OrderId.class)
-public class Orders {
+public class Order {
 	@Id
 	private int orderNo;
 	
