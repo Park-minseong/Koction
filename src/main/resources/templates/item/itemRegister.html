@@ -6,14 +6,177 @@
   layout:decorate="~{layouts/layout}"
 >
 <head>
-    <meta charset="UTF-8"> 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <th:block layout:fragment="css">
-    	<link rel="stylesheet" href="/css/_02_myitem_register.css">
-    </th:block>
+    <meta charset="UTF-8"/>
+    <!-- <link rel="stylesheet" href="css/ress.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/style_header_footer.css"/>
+    <link rel="stylesheet" href="css/_02_myitem_register.css"/>
+    <script src="js/bootstrap.bundle.min.js"></script> -->
+
     <th:block layout:fragment="script">
-        <script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      </th:block>
+      <th:block layout:fragment="css">
+        <link rel="stylesheet" />
+      </th:block>
+    <title>신규상품등록</title>
+
+</head>
+<body>
+    <!--header-->
+    <header>
+    </header>
+    <main>
+        <form action="" method="post" enctype="multipart/form-data">
+
+        <div id="pageTitle">신규상품등록</div>  
+        <hr/>
+        <!-- 상단 내용 입력 -->
+        <section class="top">
+            <!-- section -->
+            <!-- 1. 좌상단 이미지 -->
+            <article style="margin-left: 60px">
+                <!-- article -->
+                <div>
+                    <!-- div -->
+                    <div>
+                        <div class="section_upload">
+                            <!-- div>div -->
+                                <input type="file" id="fileUpload" accept='image/*' style="display: none" />
+                                <img id="previewImg" width="240px" height="240px" min-width="50%" style="border: 1px solid white" />
+                            <label for="fileUpload" style="margin-left: 75px;" ><img id="uploadIcon" src="images/file_upload.png" width="20px" height="20px" margin="3px" alt="사진 올리기"/>사진 업로드</label>
+
+                        </div>
+                        <div id="previewItems" style="border: 1px solid white" class="section_preview">
+                        </div>
+                    </div>
+                    <table>
+                        <tr>
+                            <td class="bar"><</td>
+                            <td class="selected">1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td class="bar">></td>
+                        </tr>
+                    </table>
+                </div>
+            </article>
+
+            <!-- 2. 우상단 정보 기입란 -->
+            <aside>
+                <!-- aside -->
+                <div>
+                    <!-- div -->
+                    <table style="margin: 10px; margin-left: 30px;">
+                        <tr>
+                            <td class="namecontent">제목</td>
+                            <td class="inputcontent"><input type="text" required/></td>
+                        </tr>
+                        <tr>
+                            <td class="namecontent">상품명</td>
+                            <td class="inputcontent"><input type="text" required/></td>
+                        </tr>
+                        <tr>
+                            <td class="namecontent">카테고리</td>
+                            <td class="inputcontent">
+                                <select id="user_path">
+                                    <optgroup label="가전">
+                                        <option value="tv">TV/영상가전</option>
+                                        <option value="web">음향가전</option>
+                                        <option value="pc">생활가전</option>
+                                        <option value="pc">주방가전</option>
+                                        <option value="pc">계절가전</option>
+                                        <option value="pc">이미용가전</option>
+                                        <option value="pc">건강가전</option>
+                                    </optgroup>
+                                    <optgroup label="디지털">
+                                        <option value="fr">노트북/주변기기</option>
+                                        <option value="cf">모바일/IT용품</option>
+                                    </optgroup>
+                                    <optgroup label="주방">
+                                        <option value="tv">조리용품</option>
+                                        <option value="web">그릇/홈세트</option>
+                                        <option value="pc">밀폐/저장용품</option>
+                                        <option value="pc">주방소모품</option>
+                                        <option value="pc">컵/잔/텀블러</option>
+                                    </optgroup>
+                                    <optgroup label="생활">
+                                        <option value="tv">가구/침구/홈데코</option>
+                                        <option value="web">베이비&키즈</option>
+                                        <option value="pc">제지류</option>
+                                        <option value="pc">세탁/욕실/청소</option>
+                                        <option value="pc">생활잡화</option>
+                                        <option value="pc">오피스/문구</option>
+                                        <option value="pc">반려용품</option>
+                                    </optgroup>
+                                    <optgroup label="뷰티/패션">
+                                        <option value="tv">스킨케어</option>
+                                        <option value="web">헤어/바디케어</option>
+                                        <option value="pc">메이크업</option>
+                                        <option value="pc">향수/캔들</option>
+                                        <option value="pc">패션잡화</option>
+                                    </optgroup>
+                                    <optgroup label="생활">
+                                        <option value="tv">가구/침구/홈데코</option>
+                                        <option value="web">베이비&키즈</option>
+                                        <option value="pc">제지류</option>
+                                        <option value="pc">세탁/욕실/청소</option>
+                                        <option value="pc">생활잡화</option>
+                                        <option value="pc">오피스/문구</option>
+                                        <option value="pc">반려용품</option>
+                                    </optgroup>
+                                    <option value="etc">기타</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="namecontent">수량</td>
+                            <td class="inputcontent"><input type="text" required/></td>
+                        </tr>
+                        <tr>
+                            <td class="namecontent">시작가</td>
+                            <td class="inputcontent"><input type="text" maxlength="10" onkeyup="inputNumberFormat(this);" required/></td>
+                        </tr>
+                        <tr>
+                            <td class="namecontent">즉시 구매가</td>
+                            <td class="inputcontent"><input type="text" maxlength="10" onkeyup="inputNumberFormat(this);"  required/></td>
+                        </tr>
+                        <tr>
+                            <td class="namecontent">경매방식</td>
+                            <td class="inputcontent">
+                                <div>
+                                    <button class="opt1">기한입찰</button>
+                                    <div></div>
+                                    <button class="opt2">xx입찰</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="namecontent">경매기간</td>
+                            <td class="inputcontent">
+                                <div>
+                                    <button class="opt3">24시간</button>
+                                    <div></div>
+                                    <button class="opt4">48시간</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="namecontent">배송방식</td>
+                            <td class="inputcontent">
+                                <div>
+                                    <button class="opt5">택배배송</button>
+                                    <div></div>
+                                    <button class="opt6">직거래</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </aside>
+
+            <script>
 
                 // 자바스크립트 영역
 
@@ -42,7 +205,7 @@
 
                 // switch
 
-                let opt_switch1 = true
+                let opt_switch1 = true;
 
                 $(".opt1").click(function () {
                     opt_switch1 = true
@@ -69,7 +232,7 @@
                     $(".opt1").css("color", "black")
                 }}
 
-                let opt_switch2 = true
+                let opt_switch2 = true;
 
                     $(".opt3").click(function () {
                         opt_switch2 = true
@@ -164,169 +327,6 @@
 
             </script>
 
-    </th:block>
-
-    <title>신규상품등록</title>
-
-</head>
-<body>
-    <!--header-->
-    <header>
-    </header>
-    <main layout:fragment="content">
-      <form action="" method="post" enctype="multipart/form-data">
-        <div id="pageTitle">신규상품등록</div>
-        <hr>
-        <!-- 상단 내용 입력 -->
-        <section class="top">
-            <!-- section -->
-            <!-- 1. 좌상단 이미지 -->
-            <article style="margin-left: 60px">
-                <!-- article -->
-                <div>
-                    <!-- div -->
-                    <div>
-                        <div class="section_upload">
-                            <!-- div>div -->
-                                <input type="file" id="fileUpload" accept='image/*' style="display: none" >
-                                <img id="previewImg" width="240px" height="240px" min-width="50%" style="border: 1px solid white" >
-                            
-                            <label for="fileUpload" style="margin-left: 75px;" ><img id="uploadIcon" src="images/file_upload.png" width="20px" height="20px" margin="3px" alt="사진 올리기">사진 업로드</label>
-
-                        </div>
-                            <div id="previewItems" style="border: 1px solid white" class="section_preview">
-                        </div>
-                    </div>
-                    <table>
-                        <tr>
-                            <td class="bar"><</td>
-                            <td class="selected">1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td class="bar">></td>
-                        </tr>
-                    </table>
-                </div>
-            </article>
-
-            <!-- 2. 우상단 정보 기입란 -->
-            <aside>
-                <!-- aside -->
-                <div>
-                    <!-- div -->
-                    
-                    <table style="margin: 10px; margin-left: 30px;">
-                        <tr>
-                            <td class="namecontent">제목</td>
-                            <td class="inputcontent"><input type="text" name="" required></td>
-                        </tr>
-                        <tr>
-                            <td class="namecontent">상품명</td>
-                            <td class="inputcontent"><input type="text" name="" required></td>
-                        </tr>
-                        <tr>
-                            <td class="namecontent">카테고리</td>
-                            <td class="inputcontent">
-                                <select id="user_path">
-                                    <optgroup label="가전">
-                                        <option value="tv">TV/영상가전</option>
-                                        <option value="web">음향가전</option>
-                                        <option value="pc">생활가전</option>
-                                        <option value="pc">주방가전</option>
-                                        <option value="pc">계절가전</option>
-                                        <option value="pc">이미용가전</option>
-                                        <option value="pc">건강가전</option>
-                                    </optgroup>
-                                    <optgroup label="디지털">
-                                        <option value="fr">노트북/주변기기</option>
-                                        <option value="cf">모바일/IT용품</option>
-                                    </optgroup>
-                                    <optgroup label="주방">
-                                        <option value="tv">조리용품</option>
-                                        <option value="web">그릇/홈세트</option>
-                                        <option value="pc">밀폐/저장용품</option>
-                                        <option value="pc">주방소모품</option>
-                                        <option value="pc">컵/잔/텀블러</option>
-                                    </optgroup>
-                                    <optgroup label="생활">
-                                        <option value="tv">가구/침구/홈데코</option>
-                                        <option value="web">베이비&키즈</option>
-                                        <option value="pc">제지류</option>
-                                        <option value="pc">세탁/욕실/청소</option>
-                                        <option value="pc">생활잡화</option>
-                                        <option value="pc">오피스/문구</option>
-                                        <option value="pc">반려용품</option>
-                                    </optgroup>
-                                    <optgroup label="뷰티/패션">
-                                        <option value="tv">스킨케어</option>
-                                        <option value="web">헤어/바디케어</option>
-                                        <option value="pc">메이크업</option>
-                                        <option value="pc">향수/캔들</option>
-                                        <option value="pc">패션잡화</option>
-                                    </optgroup>
-                                    <optgroup label="생활">
-                                        <option value="tv">가구/침구/홈데코</option>
-                                        <option value="web">베이비&키즈</option>
-                                        <option value="pc">제지류</option>
-                                        <option value="pc">세탁/욕실/청소</option>
-                                        <option value="pc">생활잡화</option>
-                                        <option value="pc">오피스/문구</option>
-                                        <option value="pc">반려용품</option>
-                                    </optgroup>
-                                    <option value="etc">기타</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="namecontent">수량</td>
-                            <td class="inputcontent"><input type="text" name="" required></td>
-                        </tr>
-                        <tr>
-                            <td class="namecontent">시작가</td>
-                            <td class="inputcontent"><input type="text" name="" maxlength="10" onkeyup="inputNumberFormat(this);" required></td>
-                        </tr>
-                        <tr>
-                            <td class="namecontent">즉시 구매가</td>
-                            <td class="inputcontent"><input type="text" name="" maxlength="10" onkeyup="inputNumberFormat(this);"  required></td>
-                        </tr>
-                        <tr>
-                            <td class="namecontent">경매방식</td>
-                            <td class="inputcontent">
-                                <div>
-                                    <button class="opt1">기한입찰</button>
-                                    <div></div>
-                                    <button class="opt2">xx입찰</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="namecontent">경매기간</td>
-                            <td class="inputcontent">
-                                <div>
-                                    <button class="opt3">24시간</button>
-                                    <div></div>
-                                    <button class="opt4">48시간</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="namecontent">배송방식</td>
-                            <td class="inputcontent">
-                                <div>
-                                    <button class="opt5">택배배송</button>
-                                    <div></div>
-                                    <button class="opt6">직거래</button>
-                                </div>
-                            </td>
-                            
-                        </tr>
-                    </table>
-                
-                </div>
-            </aside>
-
-        
 
         </section>
 
@@ -359,52 +359,52 @@
                 </a>
                 
             </div>
-            <br>
-            <br>
+            <br/>
+            <br/>
 
             <!-- 재입찰 모달 -->
             <div class="modal fade" id="intro">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" th:text="">아이폰 12 팝니다!!</h4>
+                            <h4 class="modal-title">아이폰 12 팝니다!!</h4>
                         </div>
                         <div class="modal-body">
                             <table id="modal_table">
                                 <tr>
                                     <td><strong>상품명</strong></td>
-                                    <td th:text="">스마트폰</td>
+                                    <td>스마트폰</td>
                                 </tr>
                                 <tr>
                                     <td><strong>카테고리</strong></td>
-                                    <td th:text="">디지털 > 모바일/IT용품</td>
+                                    <td>디지털 > 모바일/IT용품</td>
                                 </tr>
                                 <tr>
                                     <td><strong>수량</strong></td>
-                                    <td th:text="">1</td>
+                                    <td>1</td>
                                 </tr>
                                 <tr>
                                     <td><strong>시작가</strong></td>
-                                    <td th:text="">700,000원</td>
+                                    <td>700,000원</td>
                                 </tr>
                                 <tr>
                                     <td><strong>즉시구매가</strong></td>
-                                    <td th:text="">800,000원</tdth:text="">
+                                    <td>800,000원</td>
                                 </tr>
                                 <tr>
                                     <td><strong>경매방식</strong></td>
-                                    <td th:text="">기한입찰</td>
+                                    <td>기한입찰</td>
                                 </tr>
                                 <tr>
                                     <td><strong>경매기간</strong></td>
-                                    <td th:text="">24시간</td>
+                                    <td>24시간</td>
                                 </tr>
                                 <tr>
                                     <td><strong>배송방식</strong></td>
-                                    <td th:text="">택배배송</td>
+                                    <td>택배배송</td>
                                 </tr>
                             </table>
-                            <br>
+                            <br/>
                             <p style="color: rgb(18, 100, 100); text-align: center;"><strong>상기 정보로 등록하시겠습니까?</strong></p>
                         </div>
                         <div class="modal-footer">
@@ -427,5 +427,6 @@
 </body>
     <!--footer-->
     <footer>
-    </footer>
+
+</footer>
 </html>
