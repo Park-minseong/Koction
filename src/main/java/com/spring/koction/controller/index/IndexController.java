@@ -32,7 +32,7 @@ public class IndexController {
 	
 	@RequestMapping("/item")
 	public String item() {
-		return "/item/itemRegister";
+		return "/item/itemRegisterList";
 	}
 	
 }
