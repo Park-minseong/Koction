@@ -14,8 +14,7 @@
 	</settings>
 	
 	<typeAliases>
-		<!-- <typeAlias type="com.spring.myshop.dto.BoardDTO" alias="board"></typeAlias>
-		<typeAlias type="com.spring.myshop.dto.UserDTO" alias="user"></typeAlias>
-		<typeAlias type="com.spring.myshop.dto.BoardFileDTO" alias="boardFile"></typeAlias> -->
+		<typeAlias type="com.spring.koction.entity.Item" alias="item"></typeAlias>
+		
 	</typeAliases>
 </configuration>

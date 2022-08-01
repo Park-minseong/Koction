@@ -22,7 +22,7 @@ public class FileUtils {
 		List<ItemFile> fileList = new ArrayList<ItemFile>();
 		
 		//서버의 루트 경로 가져오기
-		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		String rootPath = request.getServletContext().getRealPath("/");
 		
 		String attachPath = "/upload/";
 		
@@ -49,7 +49,7 @@ public class FileUtils {
 					
 					itemFile.setItem(item);
 					//화면에 표출할 때 사용
-					itemFile.setItemfileOrgNM(multipartFile.getOriginalFilename());
+					itemFile.setItemfileOrgNm(multipartFile.getOriginalFilename());
 					
 					//고유한 파일명 생성
 					//실제 서버에 저장되는 파일명

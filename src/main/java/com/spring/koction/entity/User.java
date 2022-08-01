@@ -14,7 +14,7 @@ import lombok.Data;
 @Table(name="T_USER")
 public class User {
 	@Id
-	private int userId;
+	private String userId;
 	
 	@Column(nullable = false)
 	private String userPw;
