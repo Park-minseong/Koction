@@ -21,6 +21,9 @@ public class Item {
 	private int itemNo;
 	
 	@Column(nullable = false)
+	private String itemTitle;
+	
+	@Column(nullable = false)
 	private String itemNm;
 	
 	@Column(nullable = false)
