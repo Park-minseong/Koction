@@ -34,10 +34,10 @@ public class Itemq {
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name="T_ITEM")
+	@JoinColumn(name="ITEM_NO")
 	private Item item;
 	
 	@ManyToOne
-	@JoinColumn(name="T_USER")
+	@JoinColumn(name="USER_ID")
 	private User user;
 }
