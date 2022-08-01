@@ -6,20 +6,18 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/item")
 public class ItemController {
 	
-	//로그인 페이지 이동
-	@GetMapping("/login")
-	public ModelAndView login() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/user/login.html");
-		return mv;
+	//내 아이템 조회 /item/myItem
+	@GetMapping("/user/myItem")
+	public String myItem() {
+		return "myItem";
 	}
 	
 	
 	
-	//회원가입 페이지 이동
+	// 신규상품등록 페이지 이동 /item/register
 	@GetMapping("/join")
 	public ModelAndView join() {
 		ModelAndView mv = new ModelAndView();
