@@ -34,6 +34,6 @@ public class ItemThumb {
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name="ITEM_NO")
+	@JoinColumn(name="T_ITEM")
 	private Item item;
 }
