@@ -1,19 +1,19 @@
-package com.spring.koction.controller.user;
+package com.spring.koction.controller.index;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class MenuController {
+public class IndexController {
 
 	@RequestMapping("/guide")
 	public String guide() {
-		return "/project/guide";
+		return "/user/guide";
 	}
 	
 	@RequestMapping("/category")
 	public String category() {
-		return "/project/Category";
+		return "/item/Category";
 	}
 	
 	/*
@@ -22,17 +22,17 @@ public class MenuController {
 	
 	@RequestMapping("/support")
 	public String surport() {
-		return "/project/support";
+		return "/item/support";
 	}
 	
 	@RequestMapping("/mypage")
 	public String mypage() {
-		return "/project/mypage";
+		return "/user/mypage";
 	}
 	
 	@RequestMapping("/item")
 	public String item() {
-		return "/project/_02_myitem_register";
+		return "/item/itemRegister";
 	}
 	
 }

@@ -7,19 +7,25 @@
 >
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/style_header_footer.css" />
-    <link rel="stylesheet" href="/css/_01_item_register_main.css" />
+    <!-- <link rel="stylesheet" href="css/ress.min.css" />
+      <link rel="stylesheet" href="css/bootstrap.min.css" />
+      <script src="js/bootstrap.bundle.min.js"></script>
+      <link rel="stylesheet" href="css/style_header_footer.css" />
+    <link rel="stylesheet" href="css/_01_item_register_main.css" /> -->
+    <th:block layout:fragment="script">
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </th:block>
+    <th:block layout:fragment="css">
+      <link rel="stylesheet" />
+    </th:block>
 
     <title>상품등록 메인 페이지</title>
   </head>
-  <!-------------------------------------------------------------------------------------->
   <body>
     <!--header-->
     <header></header>
 
-    <main layout:fragment="content">
+    <main>
       <div id="pageTitle">상품등록</div>
       <hr />
       <div class="invisibleDiv">
@@ -56,17 +62,15 @@
               <table>
                 <tr>
                   <td>
-                    <a><img src="images/kanu.png" th:src="" /></a>
+                    <a><img src="images/kanu.png" /></a>
                   </td>
-                  <td th:text="">커피</td>
-                  <td class="wide" id="name0" th:text="">
-                    먹다 남은 카누 팝니다!
-                  </td>
-                  <td th:text="">1</td>
-                  <td class="less_wide" th:text="">30,000원</td>
-                  <td th:text="">기한입찰</td>
-                  <td class="wide" th:text="">2022 / 05 / 26</td>
-                  <td class="sold" th:text="">판매완료</td>
+                  <td>커피</td>
+                  <td class="wide" id="name0">먹다 남은 카누 팝니다!</td>
+                  <td>1</td>
+                  <td class="less_wide">30,000원</td>
+                  <td>기한입찰</td>
+                  <td class="wide">2022 / 05 / 26</td>
+                  <td class="sold">판매완료</td>
                   <td></td>
                 </tr>
               </table>
@@ -81,9 +85,9 @@
             <div class="accordion-body">
               <div class="detail">
                 <div class="imageArea">
-                  <img src="images/kanu.png" alt="" th:src="" />
+                  <img src="images/kanu.png" alt="" />
                 </div>
-                <div class="textArea" th:text="">
+                <div class="textArea">
                   100개 들었는데 3개 먹어서 97개 남아있습니다
                 </div>
               </div>
@@ -103,17 +107,15 @@
               <table>
                 <tr>
                   <td>
-                    <a><img src="images/maxim.png" th:src="" /></a>
+                    <a><img src="images/maxim.png" /></a>
                   </td>
-                  <td th:text="">커피</td>
-                  <td class="wide" id="name1" th:text="">
-                    먹다 남은 맥심 팝니다!
-                  </td>
-                  <td th:text="">1</td>
-                  <td class="less_wide" th:text="">30,000</td>
-                  <td th:text="">기한입찰</td>
-                  <td class="wide" th:text="">2022 / 05 / 14</td>
-                  <td class="sold" th:text="">판매완료</td>
+                  <td>커피</td>
+                  <td class="wide" id="name1">먹다 남은 맥심 팝니다!</td>
+                  <td>1</td>
+                  <td class="less_wide">30,000</td>
+                  <td>기한입찰</td>
+                  <td class="wide">2022 / 05 / 14</td>
+                  <td class="sold">판매완료</td>
                   <td></td>
                 </tr>
               </table>
@@ -128,9 +130,9 @@
             <div class="accordion-body">
               <div class="detail">
                 <div class="imageArea">
-                  <img src="images/maxim.png" alt="" th:src="" />
+                  <img src="images/maxim.png" alt="" />
                 </div>
-                <div class="textArea" th:text="">
+                <div class="textArea">
                   100개 들었는데 3개 먹어서 97개 남아있습니다
                 </div>
               </div>
@@ -150,19 +152,17 @@
               <table>
                 <tr>
                   <td>
-                    <a><img src="images/case.png" th:src="" /></a>
+                    <a><img src="images/case.png" /></a>
                   </td>
-                  <td th:text="">케이스</td>
-                  <td class="wide" id="name2" th:text="">
-                    맥북에어m1 케이스 팝니다
-                  </td>
-                  <td th:text="">1</td>
-                  <td class="less_wide" th:text="">9,000</td>
-                  <td th:text="">기한입찰</td>
-                  <td class="wide" th:text="">2022 / 06 / 19</td>
-                  <td class="ongoing" th:text="">진행중</td>
+                  <td>케이스</td>
+                  <td class="wide" id="name2">맥북에어m1 케이스 팝니다</td>
+                  <td>1</td>
+                  <td class="less_wide">9,000</td>
+                  <td>기한입찰</td>
+                  <td class="wide">2022 / 06 / 19</td>
+                  <td class="ongoing">진행중</td>
                   <td>
-                    <a href="_03_myitem_edit.html" th:src="">
+                    <a href="_03_myitem_edit.html">
                       <div
                         class="rebidding"
                         type="button"
@@ -186,9 +186,9 @@
             <div class="accordion-body">
               <div class="detail">
                 <div class="imageArea">
-                  <img src="images/case.png" alt="" th:src="" />
+                  <img src="images/case.png" alt="" />
                 </div>
-                <div class="textArea" th:text="">
+                <div class="textArea">
                   맥북에어m1 케이스 팝니다! 미개봉품이라 상태 매우 양호합니다
                 </div>
               </div>
@@ -208,15 +208,15 @@
               <table>
                 <tr>
                   <td>
-                    <a><img src="images/iphone.jpeg" th:src="" /></a>
+                    <a><img src="images/iphone.jpeg" /></a>
                   </td>
-                  <td th:text="">스마트폰</td>
-                  <td class="wide" id="name3" th:text="">아이폰12 팝니다</td>
-                  <td th:text="">1</td>
-                  <td class="less_wide" th:text="">700,000</td>
-                  <td th:text="">기한입찰</td>
-                  <td class="wide" th:text="">2022 / 06 / 23</td>
-                  <td class="not_sold" th:text="">입찰종료</td>
+                  <td>스마트폰</td>
+                  <td class="wide" id="name3">아이폰12 팝니다</td>
+                  <td>1</td>
+                  <td class="less_wide">700,000</td>
+                  <td>기한입찰</td>
+                  <td class="wide">2022 / 06 / 23</td>
+                  <td class="not_sold">입찰종료</td>
                   <td>
                     <div
                       class="rebidding"
@@ -240,9 +240,9 @@
             <div class="accordion-body">
               <div class="detail">
                 <div class="imageArea">
-                  <img src="images/iphone.jpeg" alt="" th:src="" />
+                  <img src="images/iphone.jpeg" alt="" />
                 </div>
-                <div class="textArea" th:text="">
+                <div class="textArea">
                   아이폰12 중고품 판매 의향 있읍니다. 약 1년 간 사용하였읍니다.
                   구매 의향 있으신 분은 입찰에 참여해주시면 감사하겠읍니다.
                 </div>
@@ -276,37 +276,33 @@
                 <td class="modal_table_input_right">
                   <select id="user_path">
                     <optgroup label="가전">
-                      <option value="tv" th:selected="">TV/영상가전</option>
-                      <option value="web" th:selected="">음향가전</option>
-                      <option value="pc" th:selected="">생활가전</option>
-                      <option value="pc" th:selected="">주방가전</option>
-                      <option value="pc" th:selected="">계절가전</option>
-                      <option value="pc" th:selected="">이미용가전</option>
-                      <option value="pc" th:selected="">건강가전</option>
+                      <option value="tv">TV/영상가전</option>
+                      <option value="web">음향가전</option>
+                      <option value="pc">생활가전</option>
+                      <option value="pc">주방가전</option>
+                      <option value="pc">계절가전</option>
+                      <option value="pc">이미용가전</option>
+                      <option value="pc">건강가전</option>
                     </optgroup>
                     <optgroup label="디지털">
-                      <option value="fr" th:selected="">노트북/주변기기</option>
-                      <option value="cf" selected th:selected="">
-                        모바일/IT용품
-                      </option>
+                      <option value="fr">노트북/주변기기</option>
+                      <option value="cf" selected>모바일/IT용품</option>
                     </optgroup>
                     <optgroup label="주방">
-                      <option value="tv" th:selected="">조리용품</option>
-                      <option value="web" th:selected="">그릇/홈세트</option>
-                      <option value="pc" th:selected="">밀폐/저장용품</option>
-                      <option value="pc" th:selected="">주방소모품</option>
-                      <option value="pc" th:selected="">컵/잔/텀블러</option>
+                      <option value="tv">조리용품</option>
+                      <option value="web">그릇/홈세트</option>
+                      <option value="pc">밀폐/저장용품</option>
+                      <option value="pc">주방소모품</option>
+                      <option value="pc">컵/잔/텀블러</option>
                     </optgroup>
                     <optgroup label="생활">
-                      <option value="tv" th:selected="">
-                        가구/침구/홈데코
-                      </option>
-                      <option value="web" th:selected="">베이비&키즈</option>
-                      <option value="pc" th:selected="">제지류</option>
-                      <option value="pc" th:selected="">세탁/욕실/청소</option>
-                      <option value="pc" th:selected="">생활잡화</option>
-                      <option value="pc" th:selected="">오피스/문구</option>
-                      <option value="pc" th:selected="">반려용품</option>
+                      <option value="tv">가구/침구/홈데코</option>
+                      <option value="web">베이비&키즈</option>
+                      <option value="pc">제지류</option>
+                      <option value="pc">세탁/욕실/청소</option>
+                      <option value="pc">생활잡화</option>
+                      <option value="pc">오피스/문구</option>
+                      <option value="pc">반려용품</option>
                     </optgroup>
                     <optgroup label="뷰티/패션">
                       <option value="tv">스킨케어</option>
@@ -316,44 +312,42 @@
                       <option value="pc">패션잡화</option>
                     </optgroup>
                     <optgroup label="생활">
-                      <option value="tv" th:selected="">
-                        가구/침구/홈데코
-                      </option>
-                      <option value="web" th:selected="">베이비&키즈</option>
-                      <option value="pc" th:selected="">제지류</option>
-                      <option value="pc" th:selected="">세탁/욕실/청소</option>
-                      <option value="pc" th:selected="">생활잡화</option>
-                      <option value="pc" th:selected="">오피스/문구</option>
-                      <option value="pc" th:selected="">반려용품</option>
+                      <option value="tv">가구/침구/홈데코</option>
+                      <option value="web">베이비&키즈</option>
+                      <option value="pc">제지류</option>
+                      <option value="pc">세탁/욕실/청소</option>
+                      <option value="pc">생활잡화</option>
+                      <option value="pc">오피스/문구</option>
+                      <option value="pc">반려용품</option>
                     </optgroup>
-                    <option value="etc" th:selected="">기타</option>
+                    <option value="etc">기타</option>
                   </select>
                 </td>
               </tr>
               <tr>
                 <td><strong>수량</strong></td>
                 <td class="modal_table_input_right">
-                  <input type="text" value="1" th:text="" />
+                  <input type="text" value="1" />
                 </td>
               </tr>
               <tr>
                 <td><strong>시작가</strong></td>
                 <td class="modal_table_input_right">
-                  <input type="text" value="700,000" th:text="" />
+                  <input type="text" value="700,000" />
                 </td>
               </tr>
               <tr>
                 <td><strong>즉시구매가</strong></td>
                 <td class="modal_table_input_right">
-                  <input type="text" value="800,000" th:text="" />
+                  <input type="text" value="800,000" />
                 </td>
               </tr>
               <tr>
                 <td><strong>경매방식</strong></td>
                 <td class="modal_table_input_right">
                   <select>
-                    <option selected th:selected="">기한입찰</option>
-                    <option th:selected="">xx입찰</option>
+                    <option selected>기한입찰</option>
+                    <option>xx입찰</option>
                   </select>
                 </td>
               </tr>
@@ -361,8 +355,8 @@
                 <td><strong>경매기간</strong></td>
                 <td class="modal_table_input_right">
                   <select>
-                    <option selected th:selected="">24시간</option>
-                    <option th:selected="">48시간</option>
+                    <option selected>24시간</option>
+                    <option>48시간</option>
                   </select>
                 </td>
               </tr>
@@ -370,8 +364,8 @@
                 <td><strong>배송방식</strong></td>
                 <td class="modal_table_input_right">
                   <select>
-                    <option selected th:selected="">택배배송</option>
-                    <option th:selected="">직거래</option>
+                    <option selected>택배배송</option>
+                    <option>직거래</option>
                   </select>
                 </td>
               </tr>
