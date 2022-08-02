@@ -37,8 +37,8 @@ public class User {
 	@Column(nullable = false)
 	private String userEmail;
 	
-	@Column(nullable = false ,columnDefinition = "char(1) default 'Y'")
-	private char userYn;
+	@Column(nullable = false ,columnDefinition = "char(1)")
+	private char userYn='Y';
 	
 	@Column(columnDefinition = "varchar(45) default 'USER'")
 	private String role;
