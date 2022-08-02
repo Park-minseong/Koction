@@ -19,7 +19,7 @@ public class ItemFile {
 	private int itemfileNo;
 	
 	@Column(nullable = false)
-	private String itemfileOrgNM;
+	private String itemfileOrgNm;
 	
 	@Column(nullable = false)
 	private String itemfileNm;
@@ -29,6 +29,6 @@ public class ItemFile {
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name="T_ITEM")
+	@JoinColumn(name="ITEM_NO")
 	private Item item;
 }

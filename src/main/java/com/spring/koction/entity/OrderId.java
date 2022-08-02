@@ -7,5 +7,5 @@ import lombok.Data;
 @Data
 public class OrderId implements Serializable {
 	private int orderNo;
-	private int item;
+	private String item;
 }

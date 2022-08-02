@@ -1,6 +1,10 @@
 package com.spring.koction.service.item;
 
+
 import com.spring.koction.entity.ItemFile;
+import java.util.List;
+
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -12,14 +16,15 @@ public interface ItemService {
 
 	Page<Item> getItemList(Item item, Pageable pageable);
 
-	int registerItem(Item item);
-
 	Item getMyItem(int itemNo);
 
 	void updateItem(Item item);
 
-	void registerItemFileList(List<ItemFile> fileList);
-
 	List<ItemFile> getItemFileList(int itemNo);
+
+	int regitserItem(Item item);
+
+	void registerItemFile(List<ItemFile> fileList);
+
 
 }
