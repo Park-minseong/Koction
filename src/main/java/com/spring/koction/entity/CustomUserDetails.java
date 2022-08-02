@@ -1,4 +1,4 @@
-package com.spring.koction.service.user.Impl;
+package com.spring.koction.entity;
 
 
 import java.util.ArrayList;
@@ -8,8 +8,6 @@ import java.util.Map;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import com.spring.koction.entity.User;
 
 import lombok.Data;
 
