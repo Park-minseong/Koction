@@ -1,12 +1,7 @@
 package com.spring.koction.service.item.Impl;
 
 
-import com.spring.koction.entity.ItemFile;
-import com.spring.koction.repository.ItemRepository;
-import com.spring.koction.repository.ItemqRepository;
-=======
 import java.util.List;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,14 +13,14 @@ import com.spring.koction.entity.ItemFile;
 import com.spring.koction.mapper.ItemMapper;
 import com.spring.koction.repository.ItemFileRepository;
 import com.spring.koction.repository.ItemRepository;
+import com.spring.koction.repository.ItemqRepository;
 import com.spring.koction.service.item.ItemService;
-
-import java.util.List;
 
 @Service
 public class ItemServiceImpl implements ItemService{
-  @Autowired
+	@Autowired
 	ItemRepository itemRepository;
+	
 	@Autowired
 	ItemqRepository itemqRepository;
 
@@ -41,7 +36,6 @@ public class ItemServiceImpl implements ItemService{
 		return null;
 	}
 
-	@Override
 
 
 	@Override
@@ -58,6 +52,8 @@ public class ItemServiceImpl implements ItemService{
 	public List<ItemFile> getItemFileList(int itemNo) {
 		return null;
 
+	}
+	@Override
 	public int regitserItem(Item item) {
 		int itemNo = itemMapper.getNextItemNo();
 		item.setItemNo(itemNo);
