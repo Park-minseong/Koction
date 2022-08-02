@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.spring.koction.entity.CustomUserDetails;
 import com.spring.koction.entity.User;
 import com.spring.koction.repository.UserRepository;
 
@@ -19,12 +20,12 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
 		User user = userRepository.findByUserId(userId);
-//		if(user == null) {
+		if(user == null) {
 			return null;
-//		}else {
-//			//시큐리티 세션 정보가 등록됨
-//			return new CustomUserDetails(user);
-//		}
+		}else {
+			//시큐리티 세션 정보가 등록됨
+			return new CustomUserDetails(user);
+		}
 	}
 	
 }
