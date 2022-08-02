@@ -1,5 +1,6 @@
 package com.spring.koction.service.item.Impl;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,25 +13,46 @@ import com.spring.koction.entity.ItemFile;
 import com.spring.koction.mapper.ItemMapper;
 import com.spring.koction.repository.ItemFileRepository;
 import com.spring.koction.repository.ItemRepository;
+import com.spring.koction.repository.ItemqRepository;
 import com.spring.koction.service.item.ItemService;
 
 @Service
 public class ItemServiceImpl implements ItemService{
-	
-	@Autowired
-	ItemMapper itemMapper;
-	
 	@Autowired
 	ItemRepository itemRepository;
 	
 	@Autowired
+	ItemqRepository itemqRepository;
+
+	@Autowired
+	ItemMapper itemMapper;
+	
+	@Autowired
 	ItemFileRepository itemFileRepository;
+
 
 	@Override
 	public Page<Item> getItemList(Item item, Pageable pageable) {
 		return null;
 	}
 
+
+
+	@Override
+	public Item getMyItem(int itemNo) {
+		return itemRepository.findById(itemNo).get();
+	}
+
+	@Override
+	public void updateItem(Item item) {
+		itemRepository.save(item);
+	}
+
+	@Override
+	public List<ItemFile> getItemFileList(int itemNo) {
+		return null;
+
+	}
 	@Override
 	public int regitserItem(Item item) {
 		int itemNo = itemMapper.getNextItemNo();
@@ -47,6 +69,7 @@ public class ItemServiceImpl implements ItemService{
 			itemFileRepository.save(itemFile);
 		}
 		
+
 	}
 
 }
