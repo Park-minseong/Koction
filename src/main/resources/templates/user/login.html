@@ -49,6 +49,36 @@
 	                }       
 	            });
 	        });
+	        
+	        $(function(){
+				$("#btnLogin").on("click", function(){
+					$.ajax({
+						url: '/user/login',
+						type: 'post',
+						data: $("#loginForm").serialize(),
+						success: function(obj){
+							// 1.아이디 체크
+								if(obj === 'idFail') {
+									alert("존재하지 않는 아이디입니다.");
+									return;
+								} else if(obj === 'pwFail'){
+									// 2.비밀번호 체크
+									alert("비밀번호가 틀렸습니다.")
+									return;
+								}
+							
+						
+							location.href = "/";
+							
+						},
+						error: function(e){
+							console.log(e);
+							
+						}
+					});
+				});
+			});
+			
 	    </script>
     </th:block>
 </head>
@@ -59,7 +89,7 @@
             <div class="top-navbar">
                 <div class="nav justify-content-end">
                     <a class="nav-link" href="login.html">로그인</a>
-                    <a class="nav-link" href="register.html">회원가입</a>
+                    <a class="nav-link" href="join.html">회원가입</a>
                 </div>
             </div>
     
@@ -69,16 +99,16 @@
     <main>
          <!--내용 부분-->   
         <section>
-            <a href="index.html"><img class="login-logo" src="/images/main_logo.png" alt="로고"></a>
-            <form action="index_login.html" class="login-form" name="login-form">
+            <a href="/"><img class="login-logo" src="/images/main_logo.png" alt="로고"></a>
+            <form action="/user/loginProc" class="login-form" name="login-form" method="post">
                 <fieldset>
                     <div class="login-info">
                         <ul>
                             <li>
-                                <input type="text" id="input-id" value="아이디">
+                                <input type="text" id="input-id" name="userId" value="아이디">
                             </li>
                             <li>
-                                <input type="password" id="input-pw" value="********">
+                                <input type="password" id="input-pw" name="userPw" value="********">
                             </li>
                         </ul>
                     </div>
@@ -90,7 +120,7 @@
                           
                           </div>
                     </div>
-                    <a href="register.html" id="link-register">회원가입</a>
+                    <a href="/user/join" id="link-register">회원가입</a>
                     <a href="#" id="link-findinfo">계정정보를 잊으셨나요?</a>
                     <button type="button" class="btn btn-success" id="login-byNaver">네이버로 시작하기</button>
                     <button type="button" class="btn btn-warning" id="login-byKakao">카카오로 시작하기</button>

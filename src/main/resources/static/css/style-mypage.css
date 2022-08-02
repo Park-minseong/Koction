@@ -12,9 +12,18 @@ main>div>.title{
 }
 .container .col{
     padding: 8px 0;
+    margin-right: 10px;
     font-size:30px;
 }
 
+.pwUpdateTable tr, th{
+	margin:10px;
+	padding:10px;
+}
+
+.modal-header {
+	flex-direction: row-reverse;
+}
 
 main article{
     position: relative;

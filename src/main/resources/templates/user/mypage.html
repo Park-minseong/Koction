@@ -1,6 +1,7 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="ko"
 	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{layouts/layout}">
 <head>
@@ -52,15 +53,89 @@
                 }
                     
             });
+            
+            $(document).ready(function() {
+	$("#openBtn").click(function() {
+
+
+		/*if(!confirm("계속 진행하시겠습니까?")) {
+			return;
+		}*/
+
+		//위에 방식처럼 동작하게끔 confirmModal 를 만들고 싶습니다. 
+		if(!confirmModal("계속 진행하시겠습니까?")) {
+			return;
+		}
+
+		alert("완료하였습니다.");
+	});
+});
+
+
+function confirmModal(text, title) {
+	
+	var result = false;
+	
+	if(title === "undefined")
+		title = "알림";
+	
+	$(".modal-title").text(title);
+	$(".modal-body").text(text);
+	
+	modalConfirm(function(confirm){
+		if(confirm){
+			result = true;
+			console.log("confirm : true");
+		}else{
+			result = false;
+			console.log("confirm : false");
+		}
+	});
+	
+
+	return result;	
+}
+
+var modalConfirm = function (callback){
+	
+	$("#myModal").modal("show");
+
+	
+	$("#confirm-cancle").on("click", function(){
+		callback(false);
+		$("#confirmModal").modal('hide');
+	});
+};
+
+ $(function(){
+				$("#confirm-ok").on("click", function(){
+					$.ajax({
+						url: '/mypage',v
+						type: 'post',
+						data: $("#loginForm").serialize(),
+						success: function(obj){
+								if(obj === 'pwFail'){
+									alert("비밀번호가 틀렸습니다.")
+									return;
+								}
+						},
+						error: function(e){
+							console.log(e);
+							
+						}
+					});
+				});
+
+$(function(){    $("#confirm-cancle").click(function(){        $('div.modal').modal({remote : 'layer.html'});    })})
+
+
+
         </script>
     </th:block>
 <body>
       <header></header>
     <main layout:fragment="content">
         <div>
-            <!-- <div class="box">
-                    <h1>나의 경매 / 마이페이지</h1>
-                </div> -->
                 <div class="title">
                     나의 경매
                 </div>
@@ -71,18 +146,68 @@
                 <div class="mypage-info">
                     <div class="container">
                         <div class="row">
-                        <div class="col"><span style="font-size: 22px;">admin 님</span></div>
+                        <div class="col"><span style="font-size: 22px;">
+                      	<div sec:authorize="isAuthenticated()" th:remove="tag">
+						<li>
+							<a sec:authentication="principal.userNm">님</a>
+						</li>
+                      	</div>
+                        </span></div>
                         <!--html 다른 페이지의 원하는 위치 이동 id값 이용-->
-                        <div class="col"><a class="btn btn-primary btn-light" href="/guide.html#grade" role="button" ><span id="text_name1">나의등급</span>
+                        <div class="col"><a class="btn btn-primary btn-light" href="/guide#grade" role="button" ><span id="text_name1">나의등급</span>
                             <img id="vip" src="images/vip.png" th:src="@{/images/vip.png}" width=23px height=23px alt="vip"></a></div>
-                        <div class="col"><a class="btn btn-primary btn-light" href="/modifyInfo.html" role="button"><span id="text_name2">회원정보수정</span></a></div>
-                        <!-- 출금 href 설정해야함 -->
+                       <div class="col">
+                            <a class="btn btn-primary btn-light" href="#" role="button" id="text_name4"
+                            data-bs-toggle="modal" data-bs-target="#myModal">비밀번호 변경</a>
+                        </div>
+                       
+                        <div class="col"><a class="btn btn-primary btn-light" href="/user/modifyInfo" role="button"><span id="text_name3">회원정보수정</span></a></div>
+                    
                         <div class="col">
-                            <a class="btn btn-primary btn-light" href="#" role="button" id="text_name3"
+                            <a class="btn btn-primary btn-light" href="#" role="button" id="text_name4"
                             data-bs-toggle="modal" data-bs-target="#intro">출금</a>
                         </div>
                         </div>
                     </div>
+                    
+					<div class="modal fade" id="myModal" role="dialog">
+						<div class="modal-dialog">
+					
+							<div class="modal-content" style="padding: 30px 30px 10px 30px;">
+								<h3 class="modal-header" style="display:contents;">비밀번호 변경</h3>
+								<div class="modal-body">
+									<table class="pwUpdateTable">
+                                                <tr>
+                                                    <th>현재 비밀번호</th>
+                                                    <th> 
+                                                        <input type="text" name="mypageName" required>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th>신규 비밀번호</th>
+                                                    <td>
+                                                        <input type="number" name="mypageWithdrawPrice">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>비밀번호 확인</th>
+                                                    <td>
+                                                        <input type="text" name="mypageAccountNumber">
+                                                    </td>
+                                                </tr>
+                                            </table>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal" id="confirm-ok" style="background-color: rgb(18, 100, 100); color:white;">변경</button>
+									<button type="button" href="#" class="btn btn-default" data-dismiss="modal" id="confirm-cancle">취소</button>
+								</div>
+							</div>
+					
+						</div>
+					</div>
+					
+					</div>
+                    
                     <!--모달 영역 ajax 로 구현-->
                     <form id="withdraw">
                         <div class="modal fade" id="intro">
