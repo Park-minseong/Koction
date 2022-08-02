@@ -23,12 +23,10 @@ public class SecurityConfig {
 		//authorizeHttpRequests로 요청에 대한 권한을 설정할 수 있다.
 		http.authorizeRequests().antMatchers("/**").permitAll()
 		                            .antMatchers("/user/**").permitAll()
-		                            .antMatchers("/board/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
-		                            .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+		                            .antMatchers("/item/**").access("hasAnyRole('USER')")
 		                            .antMatchers("/css/**").permitAll()
 		                            .antMatchers("/js/**").permitAll()
 		                            .antMatchers("/images/**").permitAll()
-		                            .antMatchers("/upload/**").permitAll()
 		                            .anyRequest().authenticated();
         //로그인 로그아웃 처리              
 		http.formLogin()

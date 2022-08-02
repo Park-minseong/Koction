@@ -29,6 +29,6 @@ public class ItemFile {
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name="T_ITEM")
+	@JoinColumn(name="ITEM_NO")
 	private Item item;
 }
