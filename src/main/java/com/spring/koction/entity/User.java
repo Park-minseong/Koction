@@ -31,8 +31,8 @@ public class User {
 	@Column(nullable = false, columnDefinition = "varchar(1000)")
 	private String userAddress;
 	
-	//@Column(columnDefinition = "varchar(1000)")
-	//private String userAddressDef;
+	@Column(columnDefinition = "varchar(1000)")
+	private String userAddressDef;
 	
 	@Column(nullable = false)
 	private String userEmail;
