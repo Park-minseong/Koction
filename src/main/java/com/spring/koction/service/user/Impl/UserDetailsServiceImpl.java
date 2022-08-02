@@ -19,12 +19,12 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
 		User user = userRepository.findByUserId(userId);
-//		if(user == null) {
+		if(user == null) {
 			return null;
-//		}else {
-//			//시큐리티 세션 정보가 등록됨
-//			return new CustomUserDetails(user);
-//		}
+		}else {
+			//시큐리티 세션 정보가 등록됨
+			return new CustomUserDetails(user);
+		}
 	}
 	
 }
