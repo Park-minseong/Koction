@@ -13,6 +13,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepository userRepository;
 
+
 	@Override
 	public User idCheck(String userId) {
 		// TODO Auto-generated method stub
@@ -27,6 +28,18 @@ public class UserServiceImpl implements UserService {
 	public void join(User user) {
 		// TODO Auto-generated method stub
 		userRepository.save(user);
+	}
+
+	@Override
+	public User findLoginUser(String userId) {
+		// TODO Auto-generated method stub
+		return userRepository.findByUserId(userId);
+	}
+
+	@Override
+	public void updateInfo(User user) {
+		userRepository.save(user);
+		
 	}
 	
 
