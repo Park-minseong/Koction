@@ -9,8 +9,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.spring.koction.entity.Item;
+import com.spring.koction.entity.ItemCategory;
 import com.spring.koction.entity.ItemFile;
 import com.spring.koction.mapper.ItemMapper;
+import com.spring.koction.repository.ItemCategoryRepository;
 import com.spring.koction.repository.ItemFileRepository;
 import com.spring.koction.repository.ItemRepository;
 import com.spring.koction.repository.ItemqRepository;
@@ -29,6 +31,9 @@ public class ItemServiceImpl implements ItemService{
 	
 	@Autowired
 	ItemFileRepository itemFileRepository;
+	
+	@Autowired
+	ItemCategoryRepository itemCategoryRepository;
 
 
 	@Override
@@ -68,8 +73,21 @@ public class ItemServiceImpl implements ItemService{
 			itemFile.setItemfileNo(itemFileRepository.selectNextItemNoByItemItemNo(itemFile.getItem().getItemNo()));
 			itemFileRepository.save(itemFile);
 		}
-		
 
+	}
+
+	@Override
+	public List<Item> findCategory(int categoryNo) {
+		// TODO Auto-generated method stub
+		return itemRepository.findByItemCategoryCategoryNo(categoryNo);
+	}
+
+
+
+	@Override
+	public List<ItemCategory> findCategory() {
+		// TODO Auto-generated method stub
+		return itemCategoryRepository.findAll();
 	}
 
 }

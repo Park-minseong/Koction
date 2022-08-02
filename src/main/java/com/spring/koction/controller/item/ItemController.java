@@ -70,4 +70,12 @@ public class ItemController {
 		httpServletResponse.sendRedirect("/item/myItem");
 	}
 
+	@GetMapping("/search")
+	public ModelAndView searchView() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/item/Search.html");
+		
+		
+		return mv;
+	}
 }
