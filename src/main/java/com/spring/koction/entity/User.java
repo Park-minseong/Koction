@@ -7,11 +7,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicInsert;
+
 import lombok.Data;
 
 @Entity
 @Data
 @Table(name="T_USER")
+@DynamicInsert
 public class User {
 	@Id
 	private String userId;
@@ -28,13 +31,16 @@ public class User {
 	@Column(nullable = false, columnDefinition = "varchar(1000)")
 	private String userAddress;
 	
+	@Column(columnDefinition = "varchar(1000)")
+	private String userAddressDef;
+	
 	@Column(nullable = false)
 	private String userEmail;
 	
-	@Column(nullable = false ,columnDefinition = "char(1) default 'Y'")
-	private char userYn;
+	@Column(nullable = false ,columnDefinition = "char(1)")
+	private char userYn='Y';
 	
-	@Column(nullable = false ,columnDefinition = "varchar(45) default 'USER'")
+	@Column(columnDefinition = "varchar(45) default 'USER'")
 	private String role;
 	
 	@ManyToOne

@@ -4,21 +4,30 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import lombok.Data;
 
 @Entity
 @Table(name="T_ITEM")
 @Data
+@DynamicInsert
+@DynamicUpdate
 public class Item {
 	@Id
 	private int itemNo;
+	
+	@Column(nullable = false)
+	private String itemTitle;
 	
 	@Column(nullable = false)
 	private String itemNm;
@@ -48,8 +57,8 @@ public class Item {
 	@Column(nullable = false, columnDefinition = "varchar(1000)")
 	private String itemContent;
 	
-	@Column(nullable = false, columnDefinition = "char(1) default 'Y'")
-	private char itemYn;
+	@Column(nullable = false, columnDefinition = "char(1)")
+	private char itemYn ='Y';
 	
 	@ManyToOne
 	@JoinColumn(name="CATEGORY_NO")

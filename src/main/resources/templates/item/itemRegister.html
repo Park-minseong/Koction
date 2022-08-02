@@ -15,9 +15,29 @@
 
     <th:block layout:fragment="script">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+        	$(function(){
+				$("#itemStPrice").keyup(function(){
+					$("#itemBidUnit").val(
+						($("#itemStPrice").val()/20)<1000 ? 1000 : Math.round(($("#itemStPrice").val()/20)/1000)*1000
+						);
+				})
+			})
+			const onClickInsert = () =>{
+			
+				$("#modal_itemNm").text($("input[name=itemNm]").val());
+				$("#modal_category").text($("select[name=itemCategory] option:selected").text());
+				$("#modal_stPrice").text($("input[name=itemStPrice]").val());
+				$("#modal_nbPrice").text($("input[name=itemNbPrice]").val());
+				$("#modal_term").text($("input[name=term]:checked").parent().text());
+				   
+
+				
+			}
+        </script>
       </th:block>
       <th:block layout:fragment="css">
-        <link rel="stylesheet" href="css/_02_myitem_register.css"/>
+        <link rel="stylesheet" href="/css/_02_myitem_register.css"/>
       </th:block>
     <title>신규상품등록</title>
 
@@ -27,7 +47,7 @@
     <header>
     </header>
     <main layout:fragment="content">
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="/item/registerItem" method="post" enctype="multipart/form-data">
 
         <div id="pageTitle">신규상품등록</div>  
         <hr/>
@@ -42,10 +62,9 @@
                     <div>
                         <div class="section_upload">
                             <!-- div>div -->
-                                <input type="file" id="fileUpload" accept='image/*' style="display: none" />
+                                <input type="file" id="fileUpload" name="uploadFiles" accept='image/*' style="display: none" multiple="multiple" />
                                 <img id="previewImg" width="240px" height="240px" min-width="50%" style="border: 1px solid white" />
-                            <label for="fileUpload" style="margin-left: 75px;" ><img id="uploadIcon" src="images/file_upload.png" width="20px" height="20px" margin="3px" alt="사진 올리기"/>사진 업로드</label>
-
+                            <label for="fileUpload" style="margin-left: 75px;" ><img id="uploadIcon" src="/images/file_upload.png" width="20px" height="20px" margin="3px" alt="사진 올리기"/>사진 업로드</label>
                         </div>
                         <div id="previewItems" style="border: 1px solid white" class="section_preview">
                         </div>
@@ -71,105 +90,59 @@
                     <table style="margin: 10px; margin-left: 30px;">
                         <tr>
                             <td class="namecontent">제목</td>
-                            <td class="inputcontent"><input type="text" required/></td>
+                            <td class="inputcontent"><input type="text" name="itemTitle" required/></td>
                         </tr>
                         <tr>
                             <td class="namecontent">상품명</td>
-                            <td class="inputcontent"><input type="text" required/></td>
+                            <td class="inputcontent"><input type="text" name="itemNm" required/></td>
                         </tr>
                         <tr>
                             <td class="namecontent">카테고리</td>
                             <td class="inputcontent">
-                                <select id="user_path">
-                                    <optgroup label="가전">
-                                        <option value="tv">TV/영상가전</option>
-                                        <option value="web">음향가전</option>
-                                        <option value="pc">생활가전</option>
-                                        <option value="pc">주방가전</option>
-                                        <option value="pc">계절가전</option>
-                                        <option value="pc">이미용가전</option>
-                                        <option value="pc">건강가전</option>
-                                    </optgroup>
-                                    <optgroup label="디지털">
-                                        <option value="fr">노트북/주변기기</option>
-                                        <option value="cf">모바일/IT용품</option>
-                                    </optgroup>
-                                    <optgroup label="주방">
-                                        <option value="tv">조리용품</option>
-                                        <option value="web">그릇/홈세트</option>
-                                        <option value="pc">밀폐/저장용품</option>
-                                        <option value="pc">주방소모품</option>
-                                        <option value="pc">컵/잔/텀블러</option>
-                                    </optgroup>
-                                    <optgroup label="생활">
-                                        <option value="tv">가구/침구/홈데코</option>
-                                        <option value="web">베이비&키즈</option>
-                                        <option value="pc">제지류</option>
-                                        <option value="pc">세탁/욕실/청소</option>
-                                        <option value="pc">생활잡화</option>
-                                        <option value="pc">오피스/문구</option>
-                                        <option value="pc">반려용품</option>
-                                    </optgroup>
-                                    <optgroup label="뷰티/패션">
-                                        <option value="tv">스킨케어</option>
-                                        <option value="web">헤어/바디케어</option>
-                                        <option value="pc">메이크업</option>
-                                        <option value="pc">향수/캔들</option>
-                                        <option value="pc">패션잡화</option>
-                                    </optgroup>
-                                    <optgroup label="생활">
-                                        <option value="tv">가구/침구/홈데코</option>
-                                        <option value="web">베이비&키즈</option>
-                                        <option value="pc">제지류</option>
-                                        <option value="pc">세탁/욕실/청소</option>
-                                        <option value="pc">생활잡화</option>
-                                        <option value="pc">오피스/문구</option>
-                                        <option value="pc">반려용품</option>
-                                    </optgroup>
-                                    <option value="etc">기타</option>
+                                <select id="user_path" name="itemCategory">
+                                    <option value="1">디지털/가전</option>
+                                    <option value="2">가구/인테리어</option>
+                                    <option value="3">유아용품</option>
+                                    <option value="4">스포츠/레저</option>
+                                    <option value="5">여성잡화</option>
+                                    <option value="6">여성의류</option>
+                                    <option value="7">게임/취미</option>
+									<option value="8">뷰티/미용</option>
+									<option value="9">반려동물용품</option>
+									<option value="10">생활/가공식품</option>
+									<option value="11">남성패션/잡화</option>
+									<option value="12">도서/음반/티켓</option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <td class="namecontent">수량</td>
-                            <td class="inputcontent"><input type="text" required/></td>
+                            <td class="namecontent">시작가</td>
+                            <td class="inputcontent"><input type="text" id="itemStPrice" name="itemStPrice" maxlength="10" required/></td>
                         </tr>
                         <tr>
-                            <td class="namecontent">시작가</td>
-                            <td class="inputcontent"><input type="text" maxlength="10" onkeyup="inputNumberFormat(this);" required/></td>
+                        	<td class="namecontent">입찰 단위</td>
+                        	<td class="inputcontent"><input type="text" id="itemBidUnit" name="itemBidUnit" maxlength="10" required/></td>
                         </tr>
                         <tr>
                             <td class="namecontent">즉시 구매가</td>
-                            <td class="inputcontent"><input type="text" maxlength="10" onkeyup="inputNumberFormat(this);"  required/></td>
-                        </tr>
-                        <tr>
-                            <td class="namecontent">경매방식</td>
-                            <td class="inputcontent">
-                                <div>
-                                    <button class="opt1">기한입찰</button>
-                                    <div></div>
-                                    <button class="opt2">xx입찰</button>
-                                </div>
-                            </td>
+                            <td class="inputcontent"><input type="text" name="itemNbPrice" maxlength="10"  required/></td>
                         </tr>
                         <tr>
                             <td class="namecontent">경매기간</td>
                             <td class="inputcontent">
-                                <div>
-                                    <button class="opt3">24시간</button>
-                                    <div></div>
-                                    <button class="opt4">48시간</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="namecontent">배송방식</td>
-                            <td class="inputcontent">
-                                <div>
-                                    <button class="opt5">택배배송</button>
-                                    <div></div>
-                                    <button class="opt6">직거래</button>
-                                </div>
+								<div>
+									<label>
+										<input type="radio" name="term" value="1">24시간
+									</label>
+									<div></div>
+									<label>
+										<input type="radio" name="term" value="2" checked>48시간
+									</label>
+									<div></div>
+									<label>
+										<input type="radio" name="term" value="7">7일
+									</label>
+								</div>
                             </td>
                         </tr>
                     </table>
@@ -205,45 +178,20 @@
 
                 // switch
 
-                let opt_switch1 = true;
-
-                $(".opt1").click(function () {
-                    opt_switch1 = true
-                    toggleSwitch1()
-                    console.log(opt_switch1)
-                })
-
-                $(".opt2").click(function () {
-                    opt_switch1 = false
-                    toggleSwitch1()
-                    console.log(opt_switch1)
-                })
-
-                function toggleSwitch1() {
-                if(opt_switch1 == true) {
-                    $(".opt1").css("background", "rgb(17, 100, 100)")
-                    $(".opt1").css("color", "white")
-                    $(".opt2").css("background", "lightgray")
-                    $(".opt2").css("color", "black")
-                } else if (opt_switch1 == false) {
-                    $(".opt2").css("background", "rgb(17, 100, 100)")
-                    $(".opt2").css("color", "white")
-                    $(".opt1").css("background", "lightgray")
-                    $(".opt1").css("color", "black")
-                }}
-
                 let opt_switch2 = true;
 
                     $(".opt3").click(function () {
-                        opt_switch2 = true
-                        toggleSwitch2()
-                        console.log(opt_switch2)
+                        opt_switch2 = true;
+                        toggleSwitch2();
+                        console.log(opt_switch2);
+                        $("#term").val(1);
                     })
 
                     $(".opt4").click(function () {
-                        opt_switch2 = false
-                        toggleSwitch2()
-                        console.log(opt_switch2)
+                        opt_switch2 = false;
+                        toggleSwitch2();
+                        console.log(opt_switch2);
+                        $("#term").val(2);
                     })
 
                     function toggleSwitch2() {
@@ -259,71 +207,47 @@
                         $(".opt3").css("color", "black")
                     }}
 
-                    let opt_switch3 = true
-
-                        $(".opt5").click(function () {
-                            opt_switch3 = true
-                            toggleSwitch3()
-                            console.log(opt_switch3)
-                        })
-
-                        $(".opt6").click(function () {
-                            opt_switch3 = false
-                            toggleSwitch3()
-                            console.log(opt_switch3)
-                        })
-
-                        function toggleSwitch3() {
-                        if(opt_switch3 == true) {
-                            $(".opt5").css("background", "rgb(17, 100, 100)")
-                            $(".opt5").css("color", "white")
-                            $(".opt6").css("background", "lightgray")
-                            $(".opt6").css("color", "black")
-                        } else if (opt_switch3 == false) {
-                            $(".opt6").css("background", "rgb(17, 100, 100)")
-                            $(".opt6").css("color", "white")
-                            $(".opt5").css("background", "lightgray")
-                            $(".opt5").css("color", "black")
-                        }}
+                    
 
                 // 파일 업로드
                 const fileInput = document.getElementById("fileUpload");
 
                 const handleFiles = (e) => {
-                const selectedFile = [...fileInput.files];
-                // 객체 선언
-                const fileReader = new FileReader();
+						const selectedFile = [...fileInput.files];
+						// 객체 선언
+						const fileReader = new FileReader();
 
-                fileReader.readAsDataURL(selectedFile[0]);
+						fileReader.readAsDataURL(selectedFile[0]);
+						
 
-                // 미니뷰에 사진 추가
-                fileReader.onload = function () {
-                    // console.log(fileReader, 'hi~');
-                    // console.log(document.getElementById("previewImg").src, 'prev');
-                    if (document.getElementById("previewImg").src) {
-                        const previewImagesHolder = document.getElementById("previewItems")
-                        const prevImage = document.createElement("img");
-                        prevImage.src = fileReader.result;
-                        const prevImageDiv = document.createElement("div");
-                        prevImageDiv.className = 'miniview';
-                        prevImageDiv.append(prevImage);
-                        previewImagesHolder.append(prevImageDiv)
-                    }
-                    document.getElementById("previewImg").src = fileReader.result;
-                };
-                };
+						// 미니뷰에 사진 추가
+						fileReader.onload = function () {
+							// console.log(fileReader, 'hi~');
+							// console.log(document.getElementById("previewImg").src, 'prev');
+							if (document.getElementById("previewImg").src) {
+								const previewImagesHolder = document.getElementById("previewItems")
+								const prevImage = document.createElement("img");
+								prevImage.src = fileReader.result;
+								const prevImageDiv = document.createElement("div");
+								prevImageDiv.className = 'miniview';
+								prevImageDiv.append(prevImage);
+								previewImagesHolder.append(prevImageDiv)
+							}
+							document.getElementById("previewImg").src = fileReader.result;
+						};
+					};
 
-                fileInput.addEventListener("change", handleFiles);
+					fileInput.addEventListener("change", handleFiles);
 
-                // .html?key1=value1&key2=value2&
-                // submit
+					// .html?key1=value1&key2=value2&
+					// submit
 
-                function saveTemp () {
-                    alert("작성중인 내용이 마이페이지에 저장되었습니다.")
-                }
-                function registerCompleted() {
-                    alert("상품등록이 완료되었습니다.")
-                }
+					function saveTemp() {
+						alert("작성중인 내용이 마이페이지에 저장되었습니다.")
+					}
+					function registerCompleted() {
+						alert("상품등록이 완료되었습니다.")
+					}
 
             </script>
 
@@ -339,7 +263,7 @@
                 <div></div>
                 <div></div>
                 <div>
-                    <textarea name="" id="" cols="30" rows="10">
+                    <textarea name="itemContent" id="" cols="30" rows="10">
 
                     </textarea>
                 </div>
@@ -352,7 +276,7 @@
                 <!-- 투명박스 -->
                 <div></div>
                 <!-- 제출/임시저장/취소 버튼 -->
-                <input class="rebidding blue" value="등록" type="submit" data-bs-toggle="modal" data-bs-target="#intro"></input>
+                <input class="rebidding blue" value="등록" type="button" data-bs-toggle="modal" data-bs-target="#intro" onClick="onClickInsert()"></input>
                 <input value="임시저장" onclick="saveTemp()"></input>
                 <a href="_01_item_register_main.html">
                     <input value="취소" type="reset"></input>
@@ -373,23 +297,19 @@
                             <table id="modal_table">
                                 <tr>
                                     <td><strong>상품명</strong></td>
-                                    <td>스마트폰</td>
+                                    <td id="modal_itemNm"></td>
                                 </tr>
                                 <tr>
                                     <td><strong>카테고리</strong></td>
-                                    <td>디지털 > 모바일/IT용품</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>수량</strong></td>
-                                    <td>1</td>
+                                    <td id="modal_category"></td>
                                 </tr>
                                 <tr>
                                     <td><strong>시작가</strong></td>
-                                    <td>700,000원</td>
+                                    <td id="modal_stPrice"></td>
                                 </tr>
                                 <tr>
                                     <td><strong>즉시구매가</strong></td>
-                                    <td>800,000원</td>
+                                    <td id="modal_nbPrice"></td>
                                 </tr>
                                 <tr>
                                     <td><strong>경매방식</strong></td>
@@ -397,11 +317,11 @@
                                 </tr>
                                 <tr>
                                     <td><strong>경매기간</strong></td>
-                                    <td>24시간</td>
+                                    <td id="modal_term"></td>
                                 </tr>
                                 <tr>
                                     <td><strong>배송방식</strong></td>
-                                    <td>택배배송</td>
+                                    <td>택배배송/직거래</td>
                                 </tr>
                             </table>
                             <br/>
@@ -409,8 +329,8 @@
                         </div>
                         <div class="modal-footer">
                             <!-- button이나 div에는 href 속성을 넣을 수 없기 때문에 a태그로 감싸줘야 함 -->
-                            <a href="_01_item_register_main.html" onclick="registerCompleted()">
-                                <button type="button" id="rebidding_on" data-bs-dismiss="modal" class="btn btn-primary" style="background-color: rgb(18,100,100)">
+                            <a href="#" onclick="registerCompleted()">
+                                <button type="submit" id="rebidding_on" data-bs-dismiss="modal" class="btn btn-primary" style="background-color: rgb(18,100,100)">
                                 등록
                                 </button>
                             </a>

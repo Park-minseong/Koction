@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/dtd/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.koction.mapper.ItemMapper">
+	<select id="getNextItemNo" resultType="int">
+	<![CDATA[
+		SELECT IFNULL(MAX(ITEM_NO), 0) + 1
+			FROM T_ITEM
+	]]>
+	</select>
+	
+	<update id="updateItemNo" parameterType="int">
+	<![CDATA[
+		UPDATE T_ITEM
+		SET ITEM_NO = ITEM_NO -1
+		WHERE ITEM_NO > #{itemNo}
+	]]>
+	</update>
+	
+</mapper>
