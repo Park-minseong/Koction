@@ -57,7 +57,7 @@ public class ItemController {
 		itemService.registerItemFile(fileList);
 		
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/item/itemRegister.html");
+		mv.setViewName("redirect:/item/myItem");
 		return mv;
 	}
 	

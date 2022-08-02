@@ -54,7 +54,7 @@ public class IndexController {
 	
 	@RequestMapping("/item")
 	public String item() {
-		return "/item/itemRegisterList";
+		return "/item/myItem";
 	}
 	
 }
