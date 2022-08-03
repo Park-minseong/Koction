@@ -77,7 +77,6 @@ public class ItemController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/item/Search.html");
 		
-		
 		return mv;
 	}
 }
