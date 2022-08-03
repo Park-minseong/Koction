@@ -1,4 +1,4 @@
-<!--<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko"
 	  xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
@@ -15,120 +15,44 @@
 
     <th:block layout:fragment="script">
         <script>
-            $(function(){
-                $("#checkall").on("click", function(){
-                    if($("#checkall").prop("checked")){
-                        $("input[name=chk]").prop("checked", true);
-                    } else {
-                        $("input[name=chk]").prop("checked", false);
-                    }
-                });
-    
-                $("#checkall2").on("click", function(){
-                    if($("#checkall2").prop("checked")){
-                        $("input[name=chk2]").prop("checked", true);
-                    } else {
-                        $("input[name=chk2]").prop("checked", false);
-                    }
-                });
-    
-                $("#checkall3").on("click", function(){
-                    if($("#checkall3").prop("checked")){
-                        $("input[name=chk3]").prop("checked", true);
-                    } else {
-                        $("input[name=chk3]").prop("checked", false);
-                    }
-                });
-    
-                window.onresize = function (event) {
-                    var innerWidth = window.innerWidth;
-    
-                    if(innerWidth < 992){
-                        $("#text_name1").text("등급");
-                        $("#text_name2").text("정보수정");
-                    } else {
-                        $("#text_name1").text("나의등급");
-                        $("#text_name2").text("회원정보수정");
-                    }
+        $(function(){
+            $("#checkall").on("click", function(){
+                if($("#checkall").prop("checked")){
+                    $("input[name=chk]").prop("checked", true);
+                } else {
+                    $("input[name=chk]").prop("checked", false);
                 }
-                    
             });
-            
-            $(document).ready(function() {
-	$("#openBtn").click(function() {
 
+            $("#checkall2").on("click", function(){
+                if($("#checkall2").prop("checked")){
+                    $("input[name=chk2]").prop("checked", true);
+                } else {
+                    $("input[name=chk2]").prop("checked", false);
+                }
+            });
 
-		/*if(!confirm("계속 진행하시겠습니까?")) {
-			return;
-		}*/
+            $("#checkall3").on("click", function(){
+                if($("#checkall3").prop("checked")){
+                    $("input[name=chk3]").prop("checked", true);
+                } else {
+                    $("input[name=chk3]").prop("checked", false);
+                }
+            });
 
-		//위에 방식처럼 동작하게끔 confirmModal 를 만들고 싶습니다. 
-		if(!confirmModal("계속 진행하시겠습니까?")) {
-			return;
-		}
+            window.onresize = function (event) {
+                var innerWidth = window.innerWidth;
 
-		alert("완료하였습니다.");
-	});
-});
-
-
-function confirmModal(text, title) {
-	
-	var result = false;
-	
-	if(title === "undefined")
-		title = "알림";
-	
-	$(".modal-title").text(title);
-	$(".modal-body").text(text);
-	
-	modalConfirm(function(confirm){
-		if(confirm){
-			result = true;
-			console.log("confirm : true");
-		}else{
-			result = false;
-			console.log("confirm : false");
-		}
-	});
-	
-
-	return result;	
-}
-
-var modalConfirm = function (callback){
-	
-	$("#myModal").modal("show");
-
-	
-	$("#confirm-cancle").on("click", function(){
-		callback(false);
-		$("#confirmModal").modal('hide');
-	});
-};
-
- $(function(){
-				$("#confirm-ok").on("click", function(){
-					$.ajax({
-						url: '/mypage',v
-						type: 'post',
-						data: $("#loginForm").serialize(),
-						success: function(obj){
-								if(obj === 'pwFail'){
-									alert("비밀번호가 틀렸습니다.")
-									return;
-								}
-						},
-						error: function(e){
-							console.log(e);
-							
-						}
-					});
-				});
-
-$(function(){    $("#confirm-cancle").click(function(){        $('div.modal').modal({remote : 'layer.html'});    })})
-
-
+                if(innerWidth < 992){
+                    $("#text_name1").text("등급");
+                    $("#text_name2").text("정보수정");
+                } else {
+                    $("#text_name1").text("나의등급");
+                    $("#text_name2").text("회원정보수정");
+                }
+            }
+                
+        });
 
         </script>
     </th:block>
@@ -148,9 +72,9 @@ $(function(){    $("#confirm-cancle").click(function(){        $('di
                         <div class="row">
                         <div class="col"><span style="font-size: 22px;">
                       	<div sec:authorize="isAuthenticated()" th:remove="tag">
-						<li>
-							<a sec:authentication="principal.userNm">님</a>
-						</li>
+						
+							<a sec:authentication="principal.username"></a>
+						
                       	</div>
                         </span></div>
                         <!--html 다른 페이지의 원하는 위치 이동 id값 이용-->
@@ -176,31 +100,35 @@ $(function(){    $("#confirm-cancle").click(function(){        $('di
 							<div class="modal-content" style="padding: 30px 30px 10px 30px;">
 								<h3 class="modal-header" style="display:contents;">비밀번호 변경</h3>
 								<div class="modal-body">
+									<form id="formChangePw">
 									<table class="pwUpdateTable">
                                                 <tr>
                                                     <th>현재 비밀번호</th>
-                                                    <th> 
-                                                        <input type="text" name="mypageName" required>
-                                                    </th>
+                                                    <td> 
+                                                        <input type="password" name="mypageName">
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th>신규 비밀번호</th>
                                                     <td>
-                                                        <input type="number" name="mypageWithdrawPrice">
+                                                        <input type="password" name="mypageWithdrawPrice">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>비밀번호 확인</th>
                                                     <td>
-                                                        <input type="text" name="mypageAccountNumber">
+                                                        <input type="password" name="mypageAccountNumber">
                                                     </td>
                                                 </tr>
                                             </table>
+									
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal" id="confirm-ok" style="background-color: rgb(18, 100, 100); color:white;">변경</button>
-									<button type="button" href="#" class="btn btn-default" data-dismiss="modal" id="confirm-cancle">취소</button>
+									<button type="button" onClick="submit()" class="btn btn-default" data-dismiss="modal" id="confirm-ok" style="background-color: rgb(18, 100, 100); color:white;">변경</button>
+									<button type="button" onClick="reset()" class="btn btn-default" data-bs-dismiss="modal" id="confirm-cancle">취소</button>
+									
 								</div>
+								</form>
 							</div>
 					
 						</div>

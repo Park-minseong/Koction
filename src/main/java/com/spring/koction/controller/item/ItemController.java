@@ -6,12 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.spring.koction.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,19 +26,16 @@ public class ItemController {
 	ItemService itemService;
 	Item user;
 	//내 아이템 조회 /item/myItem
-	@GetMapping("/myItem")
-//	public ModelAndView getMyItemList(Item item, String userId) {
-		public ModelAndView getMyItemList(@AuthenticationPrincipal CustomUserDetail customUserDetail) {
+	@GetMapping("")
+	public ModelAndView myItem(Item item) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("item/myItem.html");
-		List<Item> myItemList = itemService.getMyItemList(userId);
-		mv.addObject("item", item);
-		mv.addObject("myItemList", myItemList);
-
+		List<Item> myItemList = itemService.getMyItemList();
+		mv.addObject("itemList", myItemList);
 		return mv;
-//	public String myItem() {
-//		return "myItem";
 	}
+
+
 
 
 	@GetMapping("/registerItem")
@@ -80,4 +72,12 @@ public class ItemController {
 		httpServletResponse.sendRedirect("/item/myItem");
 	}
 
+	@GetMapping("/search")
+	public ModelAndView searchView() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/item/Search.html");
+		
+		
+		return mv;
+	}
 }

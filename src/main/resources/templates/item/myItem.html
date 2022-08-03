@@ -49,40 +49,68 @@
         </table>
       </div>
       <!-- 아코디언 시작 -->
-      <!-- <div th:each="item : ${itemList}" class="accordion" id="accordionExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
+      <div class="accordion" id="accordionExample">
+        <div th:each="item : ${itemList}" class="accordion-item">
+          <h2 class="accordion-header" th:id="'heading_'+${item.itemNo}">
             <button
               class="accordion-button"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseOne"
-              aria-expanded="true"
-              aria-controls="collapseOne"
-            > -->
-      <table>
-        <tr th:each="item : ${itemList}">
-          <td>
-            <a><img src="/images/kanu.png" /></a>
-          </td>
-          <td th:text="${item.itemNm}">커피</td>
-          <td th:text="${item.itemTitle}" class="wide" id="name0">
-            먹다 남은 카누 팝니다!
-          </td>
-          <td>1</td>
-          <td th:text="${item.itemStPrice}" class="less_wide">30,000원</td>
-          <td>기한입찰</td>
-          <td th:text="${item.itemRegdate}" class="wide">2022 / 05 / 26</td>
-          <td class="sold">판매완료</td>
-          <td></td>
-        </tr>
-      </table>
-      <!-- </button>
+              th:data-bs-target="'#collapse'+${item.itemNo}"
+              aria-expanded="false"
+              th:aria-controls="'collapse'+${item.itemNo}"
+            >
+              <table>
+                <tr>
+                  <!-- <tr th:each="item : ${itemList}"> -->
+                  <td>
+                    <a
+                      ><img
+                        src="/images/kanu.png"
+                        th:if="${itemList ne null}"
+                        th:id="${item.itemNo}"
+                        th:href="${item.itemNm}"
+                    /></a>
+                  </td>
+                  <td th:text="${item.itemNm}">커피</td>
+                  <td th:text="${item.itemTitle}" class="wide" id="name0">
+                    먹다 남은 카누 팝니다!
+                  </td>
+                  <td>1</td>
+                  <td th:text="${item.itemStPrice}" class="less_wide">
+                    30,000원
+                  </td>
+                  <td>기한입찰</td>
+                  <td
+                    th:text="${#temporals.format(item.itemRegdate, 'yyyy-MM-dd HH:mm')}"
+                    class="wide"
+                  >
+                    2022 / 05 / 26
+                  </td>
+                  <!-- <th:block
+                    th:if="${item.itemYn == 'Y' || item.itemYn.equals('Y')}"
+                  >
+                    <td class="sold">판매완료</td>
+                  </th:block>
+                  <th:block
+                    th:if="${item.itemYn == 'N' || item.itemYn.equals('N')}"
+                  >
+                    <td class="sold">판매종료</td>
+                  </th:block> -->
+                  <td class="sold" th:if="${item.itemYn == 'Y'}">판매완료</td>
+                  <td class="sold" th:unless="${item.itemYn == 'N'}">
+                    판매종료
+                  </td>
+
+                  <td></td>
+                </tr>
+              </table>
+            </button>
           </h2>
           <div
-            id="collapseOne"
-            class="accordion-collapse collapse show"
-            aria-labelledby="headingOne"
+            th:id="'collapse'+${item.itemNo}"
+            class="accordion-collapse collapse"
+            th:aria-labelledby="'heading_'+${item.itemNo}"
             data-bs-parent="#accordionExample"
           >
             <div class="accordion-body">
@@ -97,7 +125,7 @@
             </div>
           </div>
         </div>
-      </div> -->
+      </div>
       <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     </main>
     <!--footer-->

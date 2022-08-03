@@ -1,15 +1,22 @@
 package com.spring.koction.controller.user;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.koction.entity.CustomUserDetails;
 import com.spring.koction.entity.User;
 import com.spring.koction.service.user.UserService;
 
@@ -99,9 +106,26 @@ public class UserController {
 	
 	//회원정보수정
 	@GetMapping("/modifyInfo")
-	public ModelAndView modifyInfo() {
+	public ModelAndView modifyInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
 		ModelAndView mv = new ModelAndView();
+		
+		User user = userService.findLoginUser(customUserDetails.getUsername());
 		mv.setViewName("/user/modifyInfo.html");
+		mv.addObject("loginUser", user);
 		return mv;
 	}
+	
+	@PostMapping("/modifyInfo")
+	public void modifyInfo(User user, HttpServletResponse response, @AuthenticationPrincipal CustomUserDetails customUserDetails) throws IOException {
+		user.setUserPw(customUserDetails.getPassword());
+		user.setRole(customUserDetails.getUser().getRole());
+		System.out.println(user.getRole());
+		userService.updateInfo(user);
+		
+		
+		response.sendRedirect("/user/mypage");
+		
+	}
+	
+	
 }

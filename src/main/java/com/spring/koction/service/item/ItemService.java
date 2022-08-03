@@ -7,13 +7,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.spring.koction.entity.Item;
+import com.spring.koction.entity.ItemCategory;
 import com.spring.koction.entity.ItemFile;
 
 public interface ItemService {
 
 	Page<Item> getItemList(Item item, Pageable pageable);
 
-	List<Item> getMyItemList(String userId);
+	List<Item> getMyItemList();
 
 	void updateItem(Item item);
 
@@ -22,6 +23,10 @@ public interface ItemService {
 	int registerItem(Item item);
 
 	void registerItemFile(List<ItemFile> fileList);
+
+	List<Item> findCategory(int categoryNo);
+
+	List<ItemCategory> findCategory();
 
 
 }

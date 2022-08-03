@@ -56,8 +56,8 @@ h2 {
     font-size: 14px;
     display: flex;
     flex-wrap: wrap;
-    width: 600px;
-    height: 550px;
+    width: 650px;
+    height: 600px;
     border: 1px solid rgb(18, 100, 100);;
     border-radius: 10px;
     margin: 20px auto 15%;
@@ -137,6 +137,21 @@ input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+#reg-input-bank {
+	margin-left: 10px;
+	width: 177px;
+}
+
+#searchCondition {
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	height: 30px;
+	width: auto;
+}
+#userTel{
+	width:140px;
+}
+
 /**/
 .register-form #reg-input-telchk-btn{
     width: 85px;
@@ -152,6 +167,7 @@ input[type="number"]::-webkit-inner-spin-button {
     background: rgb(245, 245, 245);
     color: rgb(63, 63, 63);
     border-color: rgb(220, 220, 220);
+    margin-top: 30px;
 }
 #regist-sybmit-btn{
     width: 88px;
@@ -162,7 +178,9 @@ input[type="number"]::-webkit-inner-spin-button {
     border-radius: 4px;
     padding: 0%;
     font-size: 12px;
-    margin-left: 5px;
+    margin-right: 140px;
+    margin-top: 30px;
+    
 }   
 main .title{
     margin-top: 30px;
@@ -170,3 +188,4 @@ main .title{
     text-align: center;   
     font-size: 35px;
 }
+
