@@ -10,24 +10,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이페이지</title>
     <th:block layout:fragment="css">
-        <link rel="stylesheet" th:href="@{/css/style-mypage.css}" href="/css/style-mypage.css">
+        <link rel="stylesheet" href="/css/style-mypage.css">
+        <style>
+        #formChangePw input{
+       	 	border: 1px solid gray;
+       	 	border-radius: 3px;
+        }
+        </style>
     </th:block>
 
     <th:block layout:fragment="script">
         <script>
-        
-        const newPw = () => {
-			/*<![CDATA[*/
-			const userPw = /*[[${#authentication.principal.password}]]*/;
-			/*]]>*/
-				if ($("user_presentPw").val()== userPw) {
-					submit();
-					
-				} else {
-					alert("비밀번호가 틀렸습니다.");
-					return;
+        //비밀번호 변경 시 현재 비밀번호 일치하는지 확인
+        function newPw(){
+			$.ajax({
+				url: '/user/checkPw',
+				type: 'post',
+				data: $("#formChangePw").serialize(),
+				success: function(obj){
+							if(obj == true){
+								if(confirm("비밀번호를 변경하시겠습니까?")){
+									$("#formChangePw").submit();
+								}else{
+									return;
+								}
+							} else {
+								alert("비밀번호가 틀렸습니다.");
+							  	$("#user_presentPw").focus();
+							  	return;
+							}
+						},
+				error: e =>{
+					console.log(e);
 				}
-			}
+			})
+		};
+
         
         //비밀번호 유효성 검사
 		function validatePassword(character) {
@@ -48,7 +66,15 @@
         
         
         $(function(){
-            $("#checkall").on("click", function(){
+	
+			//비밀번호 변경 엔터로 서브밋
+			$("#formChangePw").keydown(function(e){
+				if(e.keyCode==13)
+				 newPw();
+			});
+			//끝
+	
+			$("#checkall").on("click", function(){
                 if($("#checkall").prop("checked")){
                     $("input[name=chk]").prop("checked", true);
                 } else {
@@ -132,40 +158,36 @@
 							<div class="modal-content" style="padding: 30px 30px 10px 30px;">
 								<h3 class="modal-header" style="display:contents;">비밀번호 변경</h3>
 								<div class="modal-body">
-									<form id="formChangePw" action="/user/mypage">
-									<table class="pwUpdateTable">
-                                                <tr>
-                                                    <th>현재 비밀번호</th>
-                                                    <td> 
-                                                        <input type="password" id="user_presentPw">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>신규 비밀번호</th>
-                                                    <td>
-                                                        <input type="password" name="userPw">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>비밀번호 확인</th>
-                                                    <td>
-                                                        <input type="password" id="user_pwChk">
-                                                    </td>
-                                                </tr>
-                                            </table>
-									
+									<form id="formChangePw" action="/user/changePw" method="post">
+										<input type="hidden" name="userId" th:value="${#authentication.principal.username}" />
+										<table class="pwUpdateTable">
+											<tr>
+												<th>현재 비밀번호</th>
+												<td>
+													<input type="password" name="userPresentPw" id="user_presentPw">
+												</td>
+											</tr>
+											<tr>
+												<th>신규 비밀번호</th>
+												<td>
+													<input type="password" name="userPw">
+												</td>
+											</tr>
+											<tr>
+												<th>비밀번호 확인</th>
+												<td>
+													<input type="password" id="user_pwChk">
+												</td>
+											</tr>
+										</table>
+										<div class="modal-footer">
+											<button type="button" onclick="newPw()" class="btn btn-default" data-dismiss="modal" id="confirm-ok" style="background-color: rgb(18, 100, 100); color:white;">변경</button>
+											<button type="button" onclick="reset()" class="btn btn-default" data-bs-dismiss="modal" id="confirm-cancle">취소</button>
+										</div>
+									</form>
 								</div>
-								<div class="modal-footer">
-									<button type="button" onClick="newPw()" class="btn btn-default" data-dismiss="modal" id="confirm-ok" style="background-color: rgb(18, 100, 100); color:white;">변경</button>
-									<button type="button" onClick="reset()" class="btn btn-default" data-bs-dismiss="modal" id="confirm-cancle">취소</button>
-									
-								</div>
-								</form>
 							</div>
-					
 						</div>
-					</div>
-					
 					</div>
                     
                     <!--모달 영역 ajax 로 구현-->
