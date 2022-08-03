@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.spring.koction.entity.Item;
 import com.spring.koction.entity.ItemCategory;
+import com.spring.koction.entity.ItemFile;
 import com.spring.koction.service.item.ItemService;
 
 
@@ -33,8 +34,14 @@ public class IndexController {
 	
 	@RequestMapping("/item/search/{categoryNo}")
 	public String category(@PathVariable int categoryNo, Model model) {
-		List<Item> category = itemService.findCategory(categoryNo);
-		model.addAttribute("itemlist", category);
+		List<Item> itemList = itemService.findCategory(categoryNo);
+		System.out.println(itemList);
+		for(Item item:itemList) {
+			item.setItemFile(itemService.findItemFilesByItemNo(item.getItemNo()).get(0));
+			//System.out.println(itemService.findItemFilesByItemNo(item.getItemNo()).t);
+		}
+		
+		model.addAttribute("itemList1", itemList);
 		return "/item/Search";
 	}
 	

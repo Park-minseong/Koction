@@ -90,4 +90,14 @@ public class ItemServiceImpl implements ItemService{
 		return itemCategoryRepository.findAll();
 	}
 
+
+
+	@Override
+	public List<ItemFile> findItemFilesByItemNo(int itemNo) {
+		return itemFileRepository.findByItemItemNo(itemNo);
+	}
+
+
+
+
 }

@@ -28,5 +28,7 @@ public interface ItemService {
 
 	List<ItemCategory> findCategory();
 
+	List<ItemFile> findItemFilesByItemNo(int itemNo);
+
 
 }
