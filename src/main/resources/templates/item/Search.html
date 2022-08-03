@@ -6,6 +6,9 @@
 	<head>
 		<meta charset="UTF-8">
 	    <title>검색결과</title>
+	    		<th:block layout:fragment="script">
+				
+				</th:block>
 	    <th:block layout:fragment="css">
 	  		<link rel="stylesheet" th:href="@{/css/Ca_Se_In.css}">
 	  	</th:block>
@@ -52,7 +55,7 @@
         </div>
         <!-- 검색 결과 상품 리스트 -->
         <div id="se_List">
-            <div class="se_Info" id="se_Info">
+            <!--<div class="se_Info" id="se_Info">
                 <a href="ProductInfo.html" th:href="@{/}">
                     <table id="se_Table">
                         <thead>
@@ -80,37 +83,40 @@
                         </tbody>
                     </table>
                 </a>
-            </div>
+            </div>-->
 
-            <div class="se_Info" id="se_Info">
-                <a href="#">
+            <div class="se_Info" id="se_Info" th:each="itemList : ${itemList1}">
+                <a href="/">
                     <table id="se_Table">
                         <thead>
                             <tr>
-                                <th colspan="2"><img src="images/화장품.png" id="se_im" alt="화장품"></th>
+                            	<div th:if="${itemList.itemFile ne null}"  th:remove="tag">
+                                	<th colspan="2"><img style="width: 330px; height: 220px;" th:src="@{/upload/} + ${itemList.itemFile.itemfileNm}" id="se_im" alt="화장품"></th>
+                           		</div>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td colspan="2"> 상품명 : 가히 링클 바운스 멀티밤</td>
+                                <td colspan="2" th:text="'상품명 : ' + ${itemList.itemTitle}"></td>
                             </tr>
                             <tr>
-                                <td colspan="2">상품가격 : 46,500원</td>
+                                <td colspan="2">상품가격 : 000,000원</td>
                             </tr>
                             <tr>
-                                <td style="border-right: 1px solid rgb(140, 140, 140);">입찰 수 180</td>
-                                <td>조회 수 21,867</td>
+                                <td style="border-right: 1px solid rgb(140, 140, 140);" th:text="'입찰 수 : ' + ${#numbers.formatInteger(itemList.itemBidCnt, 0, 'COMMA')}"></td>
+                                <td th:text="'조회 수 : ' + ${#numbers.formatInteger(itemList.itemCnt, 0, 'COMMA')}"></td>
                             </tr>
                             <tr>
-                                <td colspan="2">판매자ID : bitcamp</td>
+                                <td colspan="2" th:text="'판매자 : ' + ${itemList.user.userId}">판매자 : ㅕㅑㅠㅕㅠ</td>
                             </tr>
                             <tr>
-                                <td colspan="2">남은시간 : 18시간 02분</td>
+                                <td colspan="2" class="ex_time"  th:text = "'종료시간 : ' + ${#temporals.format(itemList.itemEnddate, 'MM월dd일 HH:mm')}"></td>
                             </tr>
                         </tbody>
                     </table>
                 </a>
             </div>
+        </div>
 
         <!-- 검색결과 창 하단 버튼 -->
         <div id="page_btn">
