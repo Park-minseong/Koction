@@ -64,12 +64,8 @@
                 <tr>
                   <!-- <tr th:each="item : ${itemList}"> -->
                   <td>
-                    <a
-                      ><img
-                        src="/images/kanu.png"
-                        th:if="${itemList ne null}"
-                        th:id="${item.itemNo}"
-                        th:href="${item.itemNm}"
+                    <a th:if="${itemList ne null}" th:id="${item.itemNo}"
+                      ><img src="/images/kanu.png"
                     /></a>
                   </td>
                   <td th:text="${item.itemNm}">커피</td>
