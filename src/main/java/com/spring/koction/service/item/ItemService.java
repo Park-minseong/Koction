@@ -13,13 +13,13 @@ public interface ItemService {
 
 	Page<Item> getItemList(Item item, Pageable pageable);
 
-	Item getMyItem(int itemNo);
+	List<Item> getMyItemList(String userId);
 
 	void updateItem(Item item);
 
 	List<ItemFile> getItemFileList(int itemNo);
 
-	int regitserItem(Item item);
+	int registerItem(Item item);
 
 	void registerItemFile(List<ItemFile> fileList);
 

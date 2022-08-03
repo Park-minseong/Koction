@@ -6,7 +6,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.spring.koction.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,12 +29,17 @@ import com.spring.koction.service.item.ItemService;
 public class ItemController {
 	@Autowired
 	ItemService itemService;
-	
+	Item user;
 	//내 아이템 조회 /item/myItem
 	@GetMapping("/myItem")
-	public ModelAndView getMyItem(Item item) {
+//	public ModelAndView getMyItemList(Item item, String userId) {
+		public ModelAndView getMyItemList(@AuthenticationPrincipal CustomUserDetail customUserDetail) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("item/myItem.html");
+		List<Item> myItemList = itemService.getMyItemList(userId);
+		mv.addObject("item", item);
+		mv.addObject("myItemList", myItemList);
+
 		return mv;
 //	public String myItem() {
 //		return "myItem";
@@ -46,7 +56,7 @@ public class ItemController {
 	@PostMapping("/registerItem")
 	public ModelAndView registerItem(Item item, int term, HttpServletRequest request, MultipartHttpServletRequest multipartServletRequest) throws IOException {
 		item.setItemEnddate(item.getItemRegdate().plusDays(term));
-		int itemNo = itemService.regitserItem(item);//글등록 및 글 번호 반환
+		int itemNo = itemService.registerItem(item);//글등록 및 글 번호 반환
 		
 		FileUtils fileUtils = new FileUtils();
 		List<ItemFile> fileList = fileUtils.parseFileInfo(itemNo, request, multipartServletRequest);
