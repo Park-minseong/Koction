@@ -1,5 +1,6 @@
 package com.spring.koction.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,13 +9,21 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.spring.koction.oauth.Oauth2UserService;
+
 @Configuration
 //security의 filterchain을 구현하기 위해 선언
 @EnableWebSecurity
 public class SecurityConfig {
+	@Autowired
+	private Oauth2UserService oauth2UserService;
+	
+	
+	
+	
 	//비밀번호 암호화 인코더 추가
 	@Bean
-	PasswordEncoder passwordEncoder(){
+	public static PasswordEncoder passwordEncoder(){
 		return new BCryptPasswordEncoder();
 	}
 	
@@ -39,7 +48,17 @@ public class SecurityConfig {
 			//다음 요청이 들어오면 시큐리티가 낚아채서 로그인처리함
 			.loginProcessingUrl("/user/loginProc")
 			//로그인 성공 시 이동할 페이지 지정
-			.defaultSuccessUrl("/");
+			.defaultSuccessUrl("/")
+			//OAuth 기반 로그인 설정
+			.and()
+			.oauth2Login()
+			.loginPage("/user/login")
+			//토큰 발행 후 처리
+			//토큰이 발행되면 사용자 정보를 받아서 사용할 수 있는데 사용자 정보를 웹사이트에 맞도록 수정하는 작업 필요
+			.userInfoEndpoint()
+			//사용자 정보를 웹사이트에 맞도록 수정해주는 service 클래스 등록
+			.userService(oauth2UserService);
+			
 		
 		http.logout()
 			.invalidateHttpSession(true)
