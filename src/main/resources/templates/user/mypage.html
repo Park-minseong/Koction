@@ -15,6 +15,38 @@
 
     <th:block layout:fragment="script">
         <script>
+        
+        const newPw = () => {
+			/*<![CDATA[*/
+			const userPw = /*[[${#authentication.principal.password}]]*/;
+			/*]]>*/
+				if ($("user_presentPw").val()== userPw) {
+					submit();
+					
+				} else {
+					alert("비밀번호가 틀렸습니다.");
+					return;
+				}
+			}
+        
+        //비밀번호 유효성 검사
+		function validatePassword(character) {
+			return /^[a-zA-Z0-9!@#$%^*+=-]{8,16}$/.test(character);
+		}
+		
+		$("#user_Pw").on("focusout", function() {
+			if(!validatePassword($("#user_Pw").val())) {
+				alert("숫자와 영문자를 조합한 8자리 이상 16자리 미만으로 정하세요.");
+				pwValidation = false;
+				setTimeout(function(){ 
+					$("#user_Pw").focus();
+					}, 10);
+			} else {
+				pwValidation = true;
+			}
+		});
+        
+        
         $(function(){
             $("#checkall").on("click", function(){
                 if($("#checkall").prop("checked")){
@@ -100,31 +132,31 @@
 							<div class="modal-content" style="padding: 30px 30px 10px 30px;">
 								<h3 class="modal-header" style="display:contents;">비밀번호 변경</h3>
 								<div class="modal-body">
-									<form id="formChangePw">
+									<form id="formChangePw" action="/user/mypage">
 									<table class="pwUpdateTable">
                                                 <tr>
                                                     <th>현재 비밀번호</th>
                                                     <td> 
-                                                        <input type="password" name="mypageName">
+                                                        <input type="password" id="user_presentPw">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>신규 비밀번호</th>
                                                     <td>
-                                                        <input type="password" name="mypageWithdrawPrice">
+                                                        <input type="password" name="userPw">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>비밀번호 확인</th>
                                                     <td>
-                                                        <input type="password" name="mypageAccountNumber">
+                                                        <input type="password" id="user_pwChk">
                                                     </td>
                                                 </tr>
                                             </table>
 									
 								</div>
 								<div class="modal-footer">
-									<button type="button" onClick="submit()" class="btn btn-default" data-dismiss="modal" id="confirm-ok" style="background-color: rgb(18, 100, 100); color:white;">변경</button>
+									<button type="button" onClick="newPw()" class="btn btn-default" data-dismiss="modal" id="confirm-ok" style="background-color: rgb(18, 100, 100); color:white;">변경</button>
 									<button type="button" onClick="reset()" class="btn btn-default" data-bs-dismiss="modal" id="confirm-cancle">취소</button>
 									
 								</div>
@@ -214,7 +246,7 @@
                                     </td>
                                     <!--구매현황 구분 1번 해당 제품으로 이동 href 추가 필요-->
                                     <td onClick="location.href='ProductInfo.html'">1</td>
-                                    <td nowrap>6015</td>
+                                    <td nowrap>1</td>
                                     <td nowrap><img id="vip" src="images/product01_2.jpg" th:src="@{/imagegs/product01_2.jpg}" width=50px height=50px alt="vip"></td>
                                     <td nowrap>아이폰</td>
                                     <td nowrap>850,000원</td>

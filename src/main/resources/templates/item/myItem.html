@@ -48,38 +48,65 @@
           </tr>
         </table>
       </div>
+      <!-- 아코디언 시작 -->
       <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
+        <div th:each="item : ${itemList}" class="accordion-item">
+          <h2 class="accordion-header" th:id="'heading_'+${item.itemNo}">
             <button
               class="accordion-button"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseOne"
-              aria-expanded="true"
-              aria-controls="collapseOne"
+              th:data-bs-target="'#collapse'+${item.itemNo}"
+              aria-expanded="false"
+              th:aria-controls="'collapse'+${item.itemNo}"
             >
               <table>
                 <tr>
+                  <!-- <tr th:each="item : ${itemList}"> -->
                   <td>
-                    <a><img src="/images/kanu.png" /></a>
+                    <a th:if="${itemList ne null}" th:id="${item.itemNo}"
+                      ><img src="/images/kanu.png"
+                    /></a>
                   </td>
-                  <td>커피</td>
-                  <td class="wide" id="name0">먹다 남은 카누 팝니다!</td>
+                  <td th:text="${item.itemNm}">커피</td>
+                  <td th:text="${item.itemTitle}" class="wide" id="name0">
+                    먹다 남은 카누 팝니다!
+                  </td>
                   <td>1</td>
-                  <td class="less_wide">30,000원</td>
+                  <td th:text="${item.itemStPrice}" class="less_wide">
+                    30,000원
+                  </td>
                   <td>기한입찰</td>
-                  <td class="wide">2022 / 05 / 26</td>
-                  <td class="sold">판매완료</td>
+                  <td
+                    th:text="${#temporals.format(item.itemRegdate, 'yyyy-MM-dd HH:mm')}"
+                    class="wide"
+                  >
+                    2022 / 05 / 26
+                  </td>
+                  <!-- <th:block
+                    th:if="${item.itemYn == 'Y' || item.itemYn.equals('Y')}"
+                  >
+                    <td class="sold">판매완료</td>
+                  </th:block>
+                  <th:block
+                    th:if="${item.itemYn == 'N' || item.itemYn.equals('N')}"
+                  >
+                    <td class="sold">판매종료</td>
+                  </th:block> -->
+                  <td class="sold" th:if="${item.itemYn == 'Y'}">판매완료</td>
+                  <td class="sold" th:unless="${item.itemYn == 'N'}">
+                    판매종료
+                  </td>
+
                   <td></td>
                 </tr>
               </table>
             </button>
           </h2>
           <div
-            id="collapseOne"
-            class="accordion-collapse collapse show"
-            aria-labelledby="headingOne"
+            th:id="'collapse'+${item.itemNo}"
+            class="accordion-collapse collapse"
+            th:aria-labelledby="'heading_'+${item.itemNo}"
             data-bs-parent="#accordionExample"
           >
             <div class="accordion-body">
@@ -87,164 +114,8 @@
                 <div class="imageArea">
                   <img src="/images/kanu.png" alt="" />
                 </div>
-                <div class="textArea">
+                <div th:text="${item.itemContent}" class="textArea">
                   100개 들었는데 3개 먹어서 97개 남아있습니다
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingTwo">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseTwo"
-              aria-expanded="false"
-              aria-controls="collapseTwo"
-            >
-              <table>
-                <tr>
-                  <td>
-                    <a><img src="/images/maxim.png" /></a>
-                  </td>
-                  <td>커피</td>
-                  <td class="wide" id="name1">먹다 남은 맥심 팝니다!</td>
-                  <td>1</td>
-                  <td class="less_wide">30,000</td>
-                  <td>기한입찰</td>
-                  <td class="wide">2022 / 05 / 14</td>
-                  <td class="sold">판매완료</td>
-                  <td></td>
-                </tr>
-              </table>
-            </button>
-          </h2>
-          <div
-            id="collapseTwo"
-            class="accordion-collapse collapse"
-            aria-labelledby="headingTwo"
-            data-bs-parent="#accordionExample"
-          >
-            <div class="accordion-body">
-              <div class="detail">
-                <div class="imageArea">
-                  <img src="/images/maxim.png" alt="" />
-                </div>
-                <div class="textArea">
-                  100개 들었는데 3개 먹어서 97개 남아있습니다
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingThree">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseThree"
-              aria-expanded="false"
-              aria-controls="collapsetdree"
-            >
-              <table>
-                <tr>
-                  <td>
-                    <a><img src="/images/case.png" /></a>
-                  </td>
-                  <td>케이스</td>
-                  <td class="wide" id="name2">맥북에어m1 케이스 팝니다</td>
-                  <td>1</td>
-                  <td class="less_wide">9,000</td>
-                  <td>기한입찰</td>
-                  <td class="wide">2022 / 06 / 19</td>
-                  <td class="ongoing">진행중</td>
-                  <td>
-                    <a href="_03_myitem_edit.html">
-                      <div
-                        class="rebidding"
-                        type="button"
-                        data-bs-toggle="modal"
-                        data-bs-target="#intro"
-                      >
-                        수정
-                      </div>
-                    </a>
-                  </td>
-                </tr>
-              </table>
-            </button>
-          </h2>
-          <div
-            id="collapseThree"
-            class="accordion-collapse collapse"
-            aria-labelledby="headingThree"
-            data-bs-parent="#accordionExample"
-          >
-            <div class="accordion-body">
-              <div class="detail">
-                <div class="imageArea">
-                  <img src="/images/case.png" alt="" />
-                </div>
-                <div class="textArea">
-                  맥북에어m1 케이스 팝니다! 미개봉품이라 상태 매우 양호합니다
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingFour">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseFour"
-              aria-expanded="false"
-              aria-controls="collapsetdree"
-            >
-              <table>
-                <tr>
-                  <td>
-                    <a><img src="/images/iphone.jpeg" /></a>
-                  </td>
-                  <td>스마트폰</td>
-                  <td class="wide" id="name3">아이폰12 팝니다</td>
-                  <td>1</td>
-                  <td class="less_wide">700,000</td>
-                  <td>기한입찰</td>
-                  <td class="wide">2022 / 06 / 23</td>
-                  <td class="not_sold">입찰종료</td>
-                  <td>
-                    <div
-                      class="rebidding"
-                      type="button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#intro"
-                    >
-                      재입찰
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </button>
-          </h2>
-          <div
-            id="collapseFour"
-            class="accordion-collapse collapse"
-            aria-labelledby="headingFour"
-            data-bs-parent="#accordionExample"
-          >
-            <div class="accordion-body">
-              <div class="detail">
-                <div class="imageArea">
-                  <img src="/images/iphone.jpeg" alt="" />
-                </div>
-                <div class="textArea">
-                  아이폰12 중고품 판매 의향 있읍니다. 약 1년 간 사용하였읍니다.
-                  구매 의향 있으신 분은 입찰에 참여해주시면 감사하겠읍니다.
                 </div>
               </div>
             </div>

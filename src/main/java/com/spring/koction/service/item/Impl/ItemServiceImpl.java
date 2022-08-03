@@ -41,11 +41,9 @@ public class ItemServiceImpl implements ItemService{
 		return null;
 	}
 
-
-
 	@Override
-	public Item getMyItem(int itemNo) {
-		return itemRepository.findById(itemNo).get();
+	public List<Item> getMyItemList( ) {
+		return itemRepository.findAll();
 	}
 
 	@Override
@@ -59,7 +57,7 @@ public class ItemServiceImpl implements ItemService{
 
 	}
 	@Override
-	public int regitserItem(Item item) {
+	public int registerItem(Item item) {
 		int itemNo = itemMapper.getNextItemNo();
 		item.setItemNo(itemNo);
 		itemRepository.save(item);
