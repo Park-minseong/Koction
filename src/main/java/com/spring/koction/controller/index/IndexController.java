@@ -24,7 +24,7 @@ public class IndexController {
 		return "/user/guide";
 	}
 	
-	@RequestMapping("/category")
+	@RequestMapping("item/category")
 	public String category(Model model) {
 		List<ItemCategory> category = itemService.findCategory();
 		model.addAttribute("category", category);
@@ -54,7 +54,7 @@ public class IndexController {
 		return "/item/support";
 	}
 	
-	@RequestMapping("/mypage")
+	@RequestMapping("/user/mypage")
 	public String mypage() {
 		return "/user/mypage";
 	}
