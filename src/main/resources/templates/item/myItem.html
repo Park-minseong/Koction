@@ -97,11 +97,11 @@
                   <td th:text="${item.itemTitle}" class="wide" id="name0">
                     등록된 상품이 없습니다.
                   </td>
-                  <td>수량</td>
+                  <td th:text="${item.itemCnt}">-</td>
                   <td th:text="${item.itemStPrice}" class="less_wide">
                     시작가
                   </td>
-                  <td>경매방식</td>
+                  <td>기한입찰</td>
                   <td
                     th:text="${#temporals.format(item.itemRegdate, 'yyyy-MM-dd HH:mm')}"
                     class="wide"
@@ -118,9 +118,9 @@
                   >
                     <td class="sold">판매종료</td>
                   </th:block> -->
-                  <td class="sold" th:if="${item.itemYn == 'Y'}">완료여부</td>
+                  <td class="sold" th:if="${item.itemYn == 'Y'}">판매완료</td>
                   <td class="sold" th:unless="${item.itemYn == 'N'}">
-                    완료여부
+                    입찰종료
                   </td>
 
                   <td></td>
