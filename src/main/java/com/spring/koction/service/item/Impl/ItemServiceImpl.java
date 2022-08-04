@@ -12,11 +12,14 @@ import org.springframework.stereotype.Service;
 import com.spring.koction.entity.Item;
 import com.spring.koction.entity.ItemCategory;
 import com.spring.koction.entity.ItemFile;
+import com.spring.koction.entity.Order;
+import com.spring.koction.entity.OrderId;
 import com.spring.koction.mapper.ItemMapper;
 import com.spring.koction.repository.ItemCategoryRepository;
 import com.spring.koction.repository.ItemFileRepository;
 import com.spring.koction.repository.ItemRepository;
 import com.spring.koction.repository.ItemqRepository;
+import com.spring.koction.repository.OrderRepository;
 import com.spring.koction.service.item.ItemService;
 
 @Service
@@ -34,7 +37,11 @@ public class ItemServiceImpl implements ItemService{
 	ItemFileRepository itemFileRepository;
 	
 	@Autowired
+	OrderRepository orderRepository;
+	
+	@Autowired
 	ItemCategoryRepository itemCategoryRepository;
+
 
 
 	@Override
@@ -42,11 +49,9 @@ public class ItemServiceImpl implements ItemService{
 		return null;
 	}
 
-
-
 	@Override
-	public Item getMyItem(int itemNo) {
-		return itemRepository.findById(itemNo).get();
+	public List<Item> getMyItemList( ) {
+		return itemRepository.findAll();
 	}
 
 	@Override
@@ -60,7 +65,7 @@ public class ItemServiceImpl implements ItemService{
 
 	}
 	@Override
-	public int regitserItem(Item item) {
+	public int registerItem(Item item) {
 		int itemNo = itemMapper.getNextItemNo();
 		item.setItemNo(itemNo);
 		itemRepository.save(item);
@@ -75,6 +80,13 @@ public class ItemServiceImpl implements ItemService{
 			itemFileRepository.save(itemFile);
 		}
 	}
+
+	@Override
+	public List<Order> findOrder(String username) {
+	
+		return orderRepository.findByUserUserId(username);
+	}
+
 
 	@Override
 	public List<Item> findCategory(int categoryNo) {
@@ -117,6 +129,5 @@ public class ItemServiceImpl implements ItemService{
 //		itemMapper.insertInquery(itemq);
 		itemqRepository.save(itemq);
 	}
-
 
 }
