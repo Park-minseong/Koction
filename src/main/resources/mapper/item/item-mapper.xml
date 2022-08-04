@@ -17,5 +17,4 @@
 		WHERE ITEM_NO > #{itemNo}
 	]]>
 	</update>
-	
 </mapper>

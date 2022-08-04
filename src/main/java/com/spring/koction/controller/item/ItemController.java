@@ -102,9 +102,9 @@ public class ItemController {
 		ModelAndView mv = new ModelAndView();
 		itemq.getItem().setItemNo(itemNo);
 
-		int itemq = itemService.
+
 //		System.out.println("itemNo////////////////////////"+itemNo);
-		System.out.println("itemq////////////////////////"+itemq.getItem().getItemNo());
+//		System.out.println("itemq////////////////////////"+itemq.getItem().getItemNo());
 //		System.out.println("itemq////////////////////////"+itemq);
 		itemService.insertInqury(itemq);
 //		System.out.println("itemNo////////////////////////"+itemNo);
