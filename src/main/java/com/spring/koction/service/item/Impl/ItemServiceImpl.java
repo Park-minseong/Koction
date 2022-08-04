@@ -4,7 +4,7 @@ package com.spring.koction.service.item.Impl;
 import java.util.List;
 
 
-
+import com.spring.koction.dto.ItemqDto;
 import com.spring.koction.entity.*;
 import com.spring.koction.entity.Itemq;
 
@@ -12,7 +12,6 @@ import com.spring.koction.entity.Itemq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 
@@ -147,12 +146,17 @@ public class ItemServiceImpl implements ItemService{
 		return itemRepository.findById(itemNo).get();
 	}
 
-	public List<Itemq> selectInquryList() {
-		return itemqRepository.findAll();
+//	public List<Itemq> selectInquryList(int itemNo) {
+////		return itemqRepository.findAll();
+//		return itemMapper.selectInquryList(itemNo);
+//	}
+	public List<ItemqDto> selectInquryList(int itemNo) {
+//		return itemqRepository.findAll();
+		return itemMapper.selectInquryList(itemNo);
 	}
 
 //	@Override
-//	public int insertInquryList(Itemq itemq) {
+//	public int insertInquryList(ItemqDto itemq) {
 //		int itemqNo = itemMapper.getNextInquryNo();
 //
 ////		itemq.setItem();
@@ -175,7 +179,7 @@ public class ItemServiceImpl implements ItemService{
 
 	@Override
 	public void deleteTest(int itemqNo, int itemNo) {
-//		Itemq itemq = new Itemq();
+//		ItemqDto itemq = new ItemqDto();
 //		Item item = new Item();
 //		item.setItemNo(itemNo);
 //		itemq.setItem(item);

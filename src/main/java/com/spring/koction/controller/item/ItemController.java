@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+import com.spring.koction.dto.ItemqDto;
 import org.codehaus.groovy.syntax.Numbers;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -94,30 +95,31 @@ public class ItemController {
 
 		return mv;
 	}
-	@GetMapping("/test")
-	public ModelAndView testViewOrigin(@PathVariable int itemNo) {
-		ModelAndView mv = new ModelAndView();
-		List<Itemq> list = itemService.selectInquryList();
-		mv.addObject("list",list);
-		mv.setViewName("/item/ProductInfo");
-		return mv;
-	}
+//	@GetMapping("/test")
+//	public ModelAndView testViewOrigin(@PathVariable int itemNo) {
+//		ModelAndView mv = new ModelAndView();
+//		List<ItemqDto> list = itemService.selectInquryList();
+//		mv.addObject("list",list);
+//		mv.setViewName("/item/ProductInfo");
+//		return mv;
+//	}
 
-	@GetMapping("/test/{itemNo}")
-	public ModelAndView testView(@PathVariable int itemNo) {
-		ModelAndView mv = new ModelAndView();
-
-		List<Itemq> list = itemService.selectInquryList();
-		for(Itemq itemq : list) {
-			System.out.println(itemq.toString());
-		}
-
-		mv.addObject("list",list);
-		mv.addObject("itemNo", itemNo);
-//		System.out.println("itemNo////////////////////////"+itemNo);
-		mv.setViewName("/item/ProductInfo");
-		return mv;
-	}
+	//0804 상세 페이지랑 합치는 작업중
+//	@GetMapping("/test/{itemNo}")
+//	public ModelAndView testView(@PathVariable int itemNo) {
+//		ModelAndView mv = new ModelAndView();
+//
+//		List<ItemqDto> list = itemService.selectInquryList();
+//		for(ItemqDto itemq : list) {
+//			System.out.println(itemq.toString());
+//		}
+//
+//		mv.addObject("list",list);
+//		mv.addObject("itemNo", itemNo);
+////		System.out.println("itemNo////////////////////////"+itemNo);
+//		mv.setViewName("/item/ProductInfo");
+//		return mv;
+//	}
 
 	@PostMapping("/inquiry")
 	public ModelAndView testPost(Itemq itemq) {
@@ -130,9 +132,10 @@ public class ItemController {
 //		System.out.println("itemq////////////////////////"+itemq);
 
 		System.out.println(itemq.getItem());
-
+//		itemq.getItem().setItemNo(itemNo);
 		int itemqNo = itemService.insertInqury(itemq);
-		mv.setViewName("redirect:/item/searchItem/{itemNo}");
+		System.out.println("//////////////////"+itemq.getItem().getItemNo());
+		mv.setViewName("redirect:/item/searchItem/" +itemq.getItem().getItemNo());
 		return mv;
 	}
 
@@ -142,19 +145,29 @@ public class ItemController {
 		System.out.println("itemqNo========================================================="+itemqNo);
 		itemService.deleteTest(itemqNo, itemNo);
   	}
+
 	@GetMapping("/searchItem/{itemNo}")
 	public ModelAndView searchItemView(@PathVariable int itemNo) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/item/ProductInfo.html");
-		
+
+//		List<Itemq> list = itemService.selectInquryList(itemNo);
+
+		List<ItemqDto> list = itemService.selectInquryList(itemNo);
+
 		Item item = itemService.getItem(itemNo);
 		List<ItemFile> fileList = itemService.getItemFileList(itemNo);
 		
 		mv.addObject("item", item);
 		mv.addObject("fileList", fileList);
-		
+		mv.addObject("list",list);
+		mv.addObject("itemNo", itemNo);
+
+
 		itemService.updateItemCnt(itemNo);
 		
 		return mv;
 	}
+
+
 }
