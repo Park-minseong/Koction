@@ -14,6 +14,8 @@ public interface ItemMapper {
 	@Select("SELECT IFNULL(MAX(ITEMQ_NO), 0) + 1 FROM T_ITEMQ")
 	int getNextInquryNo();
 
+	int getNextItemqNo();
+
 //	@Insert("INSERT INTO ")
 //	void insertInquryList();
 

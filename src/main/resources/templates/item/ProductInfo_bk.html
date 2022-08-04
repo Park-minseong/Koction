@@ -164,11 +164,11 @@
 											<table class="table table-striped align-middle text-center">
 												<tr>
 													<th>판매자</th>
-													<td th:text="${user.userId}">bitcamp</td>
+													<td >bitcamp</td>
 												</tr>
 												<tr>
 													<th>기간</th>
-													<td th:text="${item.기간}">~2022/06/30 21:30</td>
+													<td>~2022/06/30 21:30</td>
 												</tr>
 												<tr>
 													<th>배송방법</th>
@@ -214,7 +214,7 @@
 												</tr>
 												<tr>
 													<th>현재가</th>
-													<td id="price-won" th:text="${order.orderprice}"></td>
+													<td id="price-won"></td>
 												</tr>
 												<tr>
 													<th>입찰금액</th>
@@ -322,31 +322,18 @@
 						<table class="table table-sm table-hover">
 							<tr>
 								<th>번호</th>
-								<th>문의유형</th>
 								<th>제목</th>
 								<th>등록자</th>
 								<th>등록일</th>
 							</tr>
-							<tr>
-								<td>1</td>
-								<td>상품문의</td>
-								<td>상품 상태 문의드립니다.</td>
-								<td>bitcamp1</td>
-								<td>2022/06/17</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>상품문의</td>
-								<td>비공개 문의 입니다.</td>
-								<td>bitcamp2</td>
-								<td>2022/06/18</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>배송문의</td>
-								<td>제주도 배송 문의</td>
-								<td>bitcamp3</td>
-								<td>2022/06/18</td>
+							<tr th:if="${#lists.size(list)} > 0" th:each="list : ${list}">
+								<td th:text="${list.itemqNo}"></td>
+								<td th:text="${list.itemqNm}">
+								</td>
+								<!-- <td th:text="${user.userId}"></td> -->
+								<td th:text="${list.user.userId}">11</td>
+								<td th:text="${#temporals.format(list.itemqRegdate, 'yyyy-MM-dd')}"></td>
+								
 							</tr>
 						</table>
 						<div id="ask_Modal">
@@ -357,109 +344,55 @@
 							</button>
 
 							<!-- 상품문의 모달창 -->
-							<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
-								data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-								aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="staticBackdropLabel">문의하기</h5>
-											<button type="button" class="btn-close" data-bs-dismiss="modal"
-												aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											<table>
-												<tr>
-													<th>물품번호</th>
-													<td>6015</td>
-												</tr>
-												<tr>
-													<th>문의유형</th>
-													<td>
-														<div class="ask_type">
-															<div class="form-check form-check-inline">
-																<input class="form-check-input" type="radio"
-																	name="inlineRadioOptions1" id="inlineRadio1">
-																<label class="form-check-label"
-																	for="inlineRadio1">상품</label>
-															</div>
-															<div class="form-check form-check-inline">
-																<input class="form-check-input" type="radio"
-																	name="inlineRadioOptions1" id="inlineRadio2">
-																<label class="form-check-label"
-																	for="inlineRadio2">배송</label>
-															</div>
-															<div class="form-check form-check-inline">
-																<input class="form-check-input" type="radio"
-																	name="inlineRadioOptions1" id="inlineRadio3">
-																<label class="form-check-label"
-																	for="inlineRadio3">기타</label>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<th>문의형식</th>
-													<td>
-														<div class="ask_ap">
-															<div class="form-check form-check-inline">
-																<input class="form-check-input" type="radio"
-																	name="inlineRadioOptions2" id="inlineRadio4">
-																<label class="form-check-label"
-																	for="inlineRadio4">공개</label>
-															</div>
-															<div class="form-check form-check-inline">
-																<input class="form-check-input" type="radio"
-																	name="inlineRadioOptions2" id="inlineRadio5">
-																<label class="form-check-label"
-																	for="inlineRadio5">비공개</label>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<th>제목</th>
-													<td>
-														<input type="text" class="ask_title" placeholder=" 제목을 입력하세요"
-															maxlength="50">
-													</td>
-												</tr>
-												<tr>
-													<th>작성자</th>
-													<td>admin</td>
-												</tr>
-												<tr>
-													<th>내용</th>
-													<td>
-														<textarea rows="8" class="ask_def"
-															placeholder=" 규정에 위반되는 경우 고지없이 삭제 될 수 있습니다."></textarea>
-													</td>
-												</tr>
-												<tr>
-													<th>답변완료 알림</th>
-													<td>
-														<label>
-															<input type="checkbox" value="Y">문자&nbsp;&nbsp;&nbsp;
-														</label>
-														<input type="text" maxlength="13" placeholder=" 000-000-0000">
-														<br>
-														<label>
-															<input type="checkbox">이메일
-														</label>
-														<input type="text" maxlength="30"
-															placeholder=" koction@koction.co.kr">
-													</td>
-												</tr>
-											</table>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-primary">등록</button>
-											<button type="button" class="btn btn-secondary"
-												data-bs-dismiss="modal">취소</button>
-										</div>
-									</div>
-								</div>
-							</div>
+                            <form id="frm" name="frm" method="post" action="/item/inquiry">
+                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel">문의하기</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <table>
+                                                    <tr>
+                                                        <th>물품번호</th>
+                                                        <td th:text="${itemNo}">
+														</td>
+														<input type="hidden" name="item"  th:value="${itemNo}">
+                                                    </tr>
+                                                    <tr>
+                                                        <th>제목</th>
+                                                        <td>
+                                                            <input type="text" class="ask_title" placeholder=" 제목을 입력하세요"
+                                                                maxlength="50" name="itemqNm">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>작성자</th>
+                                                        <td th:text="${#authentication.name}"></td>
+                                                        <input type="hidden" name="user" th:value="${#authentication.name}" readonly/>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>내용</th>
+                                                        <td>
+                                                            <textarea name="itemqContent" rows="8" class="ask_def"
+                                                                placeholder=" 규정에 위반되는 경우 고지없이 삭제 될 수 있습니다."></textarea>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">등록</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">취소</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
 						</div>
 					</div>
 					<!-- 상품문의 끝 -->

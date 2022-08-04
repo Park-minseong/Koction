@@ -150,7 +150,7 @@
 					</button>
 
 					<!--모달 영역-->
-					<form id="modalbid" action="/item/modalbid" method="post">
+					<form id="modalbid" name="modalbid" action="/item/modalbid" method="post">
 						<div class="modal fade" id="intro">
 							<div class="modal-dialog modal-dialog-centered">
 								<div class="modal-content">
@@ -169,25 +169,6 @@
 												<tr>
 													<th>기간</th>
 													<td>~2022/06/30 21:30</td>
-												</tr>
-												<tr>
-													<th>배송방법</th>
-													<td>
-														<div class="form-check form-check-inline">
-															<input class="form-check-input" type="radio"
-																name="flexRadioDefault1" id="flexRadioDefault1">
-															<label class="form-check-label" for="flexRadioDefault1">
-																택배
-															</label>
-														</div>
-														<div class="form-check form-check-inline">
-															<input class="form-check-input" type="radio"
-																name="flexRadioDefault1" id="flexRadioDefault2">
-															<label class="form-check-label" for="flexRadioDefault2">
-																직거래
-															</label>
-														</div>
-													</td>
 												</tr>
 												<tr>
 													<th>입찰방법</th>
@@ -323,13 +304,16 @@
 							<tr>
 								<th>번호</th>
 								<th>제목</th>
+								<th>내용</th>
 								<th>등록자</th>
 								<th>등록일</th>
 							</tr>
 							<tr th:if="${#lists.size(list)} > 0" th:each="list : ${list}">
 								<td th:text="${list.itemqNo}"></td>
-								<td th:text="${list.itemqNm}"></td>
+								<td th:text="${list.itemqNm}">
+								</td>
 								<!-- <td th:text="${user.userId}"></td> -->
+								<td th:text="${list.itemqContent}"></td>
 								<td th:text="${list.user.userId}">11</td>
 								<td th:text="${#temporals.format(list.itemqRegdate, 'yyyy-MM-dd')}"></td>
 								

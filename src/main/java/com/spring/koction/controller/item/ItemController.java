@@ -101,7 +101,7 @@ public class ItemController {
 	@PostMapping("/inquiry")
 	public ModelAndView testPost(Itemq itemq) {
 		ModelAndView mv = new ModelAndView();
-		itemq.getItem().setItemNo(itemNo);
+//		itemq.getItem().setItemNo(itemNo);
 
 
 //		System.out.println("itemNo////////////////////////"+itemNo);
@@ -110,7 +110,7 @@ public class ItemController {
 
 		System.out.println(itemq.getItem());
 
-		itemService.insertInqury(itemq);
+		int itemqNo = itemService.insertInqury(itemq);
 		mv.setViewName("redirect:/item/test/1");
 		return mv;
 	}

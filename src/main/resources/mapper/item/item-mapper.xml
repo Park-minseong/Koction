@@ -9,12 +9,27 @@
 			FROM T_ITEM
 	]]>
 	</select>
-	
+
+	<select id="getNextItemqNo" resultType="int">
+		<![CDATA[
+		SELECT IFNULL(MAX(ITEMQ_NO), 0) + 1
+			FROM T_ITEMQ
+	]]>
+	</select>
+
 	<update id="updateItemNo" parameterType="int">
 	<![CDATA[
 		UPDATE T_ITEM
 		SET ITEM_NO = ITEM_NO -1
 		WHERE ITEM_NO > #{itemNo}
+	]]>
+	</update>
+
+	<update id="updateItemqNo" parameterType="int">
+		<![CDATA[
+		UPDATE T_ITEMQ
+		SET ITEMQ_NO = ITEMQ_NO -1
+		WHERE ITEMQ_NO > #{itemqNo}
 	]]>
 	</update>
 </mapper>

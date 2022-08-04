@@ -13,7 +13,6 @@ import com.spring.koction.entity.Item;
 import com.spring.koction.entity.ItemCategory;
 import com.spring.koction.entity.ItemFile;
 import com.spring.koction.entity.Order;
-import com.spring.koction.entity.OrderId;
 import com.spring.koction.mapper.ItemMapper;
 import com.spring.koction.repository.ItemCategoryRepository;
 import com.spring.koction.repository.ItemFileRepository;
@@ -119,9 +118,13 @@ public class ItemServiceImpl implements ItemService{
 //	}
 
 	@Override
-	public void insertInqury(Itemq itemq) {
+	public int insertInqury(Itemq itemq) {
 //		itemMapper.insertInquery(itemq);
+		int itemqNo = itemMapper.getNextItemqNo();
+		itemq.setItemqNo(itemqNo);
 		itemqRepository.save(itemq);
+		itemqRepository.flush();
+		return itemq.getItemqNo();
 	}
 
 }

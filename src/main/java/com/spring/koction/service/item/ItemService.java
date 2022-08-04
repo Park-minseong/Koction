@@ -36,5 +36,6 @@ public interface ItemService {
 
 	List<Itemq> selectInquryList();
 
-	void insertInqury(Itemq itemq);
+	int insertInqury(Itemq itemq);
+
 }
