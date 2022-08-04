@@ -34,7 +34,7 @@ public class Itemq {
 	private String itemqContent;
 	
 	@Column(nullable = false)
-	private char itemqYn;
+	private char itemqYn ='Y';
 	
 	@Id
 	@ManyToOne

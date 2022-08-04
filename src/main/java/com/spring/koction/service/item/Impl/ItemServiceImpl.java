@@ -43,12 +43,6 @@ public class ItemServiceImpl implements ItemService{
 	ItemCategoryRepository itemCategoryRepository;
 
 
-
-	@Override
-	public Page<Item> getItemList(Item item, Pageable pageable) {
-		return null;
-	}
-
 	@Override
 	public List<Item> getMyItemList( ) {
 		return itemRepository.findAll();
@@ -89,9 +83,9 @@ public class ItemServiceImpl implements ItemService{
 
 
 	@Override
-	public List<Item> findCategory(int categoryNo) {
+	public Page<Item> findCategory(int categoryNo, Pageable pageable) {
 		// TODO Auto-generated method stub
-		return itemRepository.findByItemCategoryCategoryNo(categoryNo);
+		return itemRepository.findByItemCategoryCategoryNo(categoryNo, pageable);
 	}
 
 	@Override

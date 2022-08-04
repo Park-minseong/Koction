@@ -14,8 +14,6 @@ import com.spring.koction.entity.Order;
 
 public interface ItemService {
 
-	Page<Item> getItemList(Item item, Pageable pageable);
-
 	List<Item> getMyItemList();
 
 	void updateItem(Item item);
@@ -29,7 +27,7 @@ public interface ItemService {
 
 	List<Order> findOrder(String username);
 
-	List<Item> findCategory(int categoryNo);
+	Page<Item> findCategory(int categoryNo, Pageable pageable);
 
 	List<ItemCategory> findCategory();
 

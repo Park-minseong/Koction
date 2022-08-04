@@ -3,6 +3,10 @@ package com.spring.koction.controller.index;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,8 +37,8 @@ public class IndexController {
 	}
 	
 	@RequestMapping("/item/search/{categoryNo}")
-	public String category(@PathVariable int categoryNo, Model model) {
-		List<Item> itemList = itemService.findCategory(categoryNo);
+	public String category(@PathVariable int categoryNo, Model model,@PageableDefault(page = 0, size = 6, sort="itemNo" ,direction=Direction.DESC) Pageable pageable) {
+		Page<Item> itemList = itemService.findCategory(categoryNo, pageable);
 		System.out.println(itemList);
 		for(Item item:itemList) {
 			if(itemService.findItemFilesByItemNo(item.getItemNo()).size() != 0) {
