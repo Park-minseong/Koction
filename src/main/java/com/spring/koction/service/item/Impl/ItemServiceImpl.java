@@ -9,10 +9,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.spring.koction.entity.Item;
+import com.spring.koction.entity.ItemCategory;
 import com.spring.koction.entity.ItemFile;
 import com.spring.koction.entity.Order;
 import com.spring.koction.entity.OrderId;
 import com.spring.koction.mapper.ItemMapper;
+import com.spring.koction.repository.ItemCategoryRepository;
 import com.spring.koction.repository.ItemFileRepository;
 import com.spring.koction.repository.ItemRepository;
 import com.spring.koction.repository.ItemqRepository;
@@ -36,6 +38,9 @@ public class ItemServiceImpl implements ItemService{
 	@Autowired
 	OrderRepository orderRepository;
 	
+	@Autowired
+	ItemCategoryRepository itemCategoryRepository;
+
 
 
 	@Override
@@ -43,11 +48,9 @@ public class ItemServiceImpl implements ItemService{
 		return null;
 	}
 
-
-
 	@Override
-	public Item getMyItem(int itemNo) {
-		return itemRepository.findById(itemNo).get();
+	public List<Item> getMyItemList( ) {
+		return itemRepository.findAll();
 	}
 
 	@Override
@@ -61,7 +64,7 @@ public class ItemServiceImpl implements ItemService{
 
 	}
 	@Override
-	public int regitserItem(Item item) {
+	public int registerItem(Item item) {
 		int itemNo = itemMapper.getNextItemNo();
 		item.setItemNo(itemNo);
 		itemRepository.save(item);
@@ -75,16 +78,37 @@ public class ItemServiceImpl implements ItemService{
 			itemFile.setItemfileNo(itemFileRepository.selectNextItemNoByItemItemNo(itemFile.getItem().getItemNo()));
 			itemFileRepository.save(itemFile);
 		}
-		
 
 	}
-
-
 
 	@Override
 	public List<Order> findOrder(String username) {
 	
 		return orderRepository.findByUserUserId(username);
 	}
+
+
+	@Override
+	public List<Item> findCategory(int categoryNo) {
+		// TODO Auto-generated method stub
+		return itemRepository.findByItemCategoryCategoryNo(categoryNo);
+	}
+
+
+
+	@Override
+	public List<ItemCategory> findCategory() {
+		// TODO Auto-generated method stub
+		return itemCategoryRepository.findAll();
+	}
+
+
+
+	@Override
+	public List<ItemFile> findItemFilesByItemNo(int itemNo) {
+		return itemFileRepository.findByItemItemNo(itemNo);
+	}
+
+
 
 }

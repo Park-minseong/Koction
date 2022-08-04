@@ -137,5 +137,18 @@ public class UserController {
 		
 	}
 	
+	@PostMapping("/checkPw")
+	public Boolean checkPw(String userPresentPw, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+		
+		return passwordEncoder.matches(userPresentPw, customUserDetails.getPassword());
+	}
 	
+	@PostMapping("/changePw")
+	public ModelAndView changePw() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:/user/mypage");
+		System.out.println("비밀번호 변경");
+		return mv;
+	}
+
 }

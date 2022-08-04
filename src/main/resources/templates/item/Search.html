@@ -6,6 +6,39 @@
 	<head>
 		<meta charset="UTF-8">
 	    <title>검색결과</title>
+	    		<th:block layout:fragment="script">
+					<script>
+						//상품 별 잔여시간 계산
+							function restTime(e) {
+					            var now = new Date();
+					            var end = new Date($(e).attr("enddate"));
+					
+								var today = new Date().getTime();
+					            var gap = end - today;
+					            var day = (Math.ceil(gap / (1000 * 60 * 60 * 24)))-1;
+					            var hour = Math.ceil((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))-1;
+					            var min = Math.ceil((gap % (1000 * 60 * 60)) / (1000 * 60))-1;
+					            var sec = Math.ceil((gap % (1000 * 60)) / 1000);
+					            
+					            if (day >= 1) {
+					                $(e).text("남은시간 : " + day + "일 " + hour + "시간 " + min + "분");
+					            } else {
+					                $(e).text("남은시간 : " + hour + "시간 " + min + "분 " + sec + "초");
+					            }
+					        }
+					        $(function() {
+					            setInterval(function(){
+					                $(".timer").each(function(i,e){
+										 restTime(e); 
+						            })
+						        },1000);
+						        $("#sc_btn").on("click", function(){
+									//$("input[name='page']").val('0');
+									searchForm.submit();
+								});
+					        });
+		            </script>
+				</th:block>
 	    <th:block layout:fragment="css">
 	  		<link rel="stylesheet" th:href="@{/css/Ca_Se_In.css}">
 	  	</th:block>
@@ -20,39 +53,41 @@
          </div>
         <!-- 검색 버튼 영역 -->
         <hr>
-        <div id="searchArea" style="text-align: center;">
-            <div id="searchBar">
-            <input type="hidden" name="page" value="">
-                <svg xmlns="http://www.w3.org/2000/svg" style=" color: rgba(17,100,100,1);" width="24" height="24"
-                    fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                    <path
-                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                </svg>
-                    <select class="form-select se_select" name="searchCondition">
-                        <option value="all" th:selected= "${searchCondition eq 'all'}">전체</option>
-						<option value="title" th:selected= "${searchCondition eq 'title'}">제목</option>
-						<option value="seller" th:selected= "${searchCondition eq 'seller'}">판매자</option>
-						<option value="price" th:selected= "${searchCondition eq 'price'}">가격</option>
-                    </select>
-                <input type="text" name="searchKeyword" th:value="${searchKeyword}">
-                    <button id="sc_btn" type="button">Search</button>
-            </div>
-        </div>
+        <form id="searchForm" action="/item/search" method="get">
+	        <div id="searchArea" style="text-align: center;">
+	            <div id="searchBar">
+	            <input type="hidden" name="page" value="">
+	                <svg xmlns="http://www.w3.org/2000/svg" style=" color: rgba(17,100,100,1);" width="24" height="24"
+	                    fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+	                    <path
+	                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+	                </svg>
+	                    <select class="form-select se_select" name="searchCondition">
+	                        <option value="all" th:selected= "${searchCondition eq 'all'}">전체</option>
+							<option value="title" th:selected= "${searchCondition eq 'title'}">제목</option>
+							<option value="seller" th:selected= "${searchCondition eq 'seller'}">판매자</option>
+							<option value="price" th:selected= "${searchCondition eq 'price'}">가격</option>
+	                    </select>
+	                <input type="text" name="searchKeyword" th:value="${searchKeyword}">
+	                    <button id="sc_btn" type="button">Search</button>
+	            </div>
+	        </div>
+        </form>
         <hr>
         <!-- 검색 결과 영역 -->
+        <!--검색된 아이템 개수
         <div id="se_num">
             <svg xmlns="http://www.w3.org/2000/svg" style=" color: rgba(17,100,100,1);" width="24" height="24"
                 fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                 <path
                     d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
             </svg>
-            <pre>  검색결과  -  23건</pre>
+            <pre th:text="${#lists.size('Item')}"> 23건 </pre>
             <br><br>
-            <!-- <pre>           카테고리 : 디지털/가전  -  핸드폰</pre> -->
-        </div>
+        </div>-->
         <!-- 검색 결과 상품 리스트 -->
         <div id="se_List">
-            <div class="se_Info" id="se_Info">
+            <!--<div class="se_Info" id="se_Info">
                 <a href="ProductInfo.html" th:href="@{/}">
                     <table id="se_Table">
                         <thead>
@@ -80,68 +115,42 @@
                         </tbody>
                     </table>
                 </a>
-            </div>
+            </div>-->
 
-            <div class="se_Info" id="se_Info">
-                <a href="#">
+            <div class="se_Info" id="se_Info" th:each="itemList : ${itemList1}">
+                <a href="/">
                     <table id="se_Table">
                         <thead>
                             <tr>
-                                <th colspan="2"><img src="images/화장품.png" id="se_im" alt="화장품"></th>
+                            	<th colspan="2">
+                            		<img th:if="${itemList.itemFile ne null}" style="width: 330px; height: 220px;" th:src="@{/upload/} + ${itemList.itemFile.itemfileNm}" id="se_im" th:alt="${itemList.itemTitle} + '의 미리보기 사진'">
+                            		<img th:if="${itemList.itemFile eq null}" style="width: 330px; height: 220px;" th:src="@{/upload/noimg.png}" id="se_im" th:alt="${itemList.itemTitle}">
+                            	</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td colspan="2"> 상품명 : 가히 링클 바운스 멀티밤</td>
+                                <td colspan="2" th:text="'상품명 : ' + ${itemList.itemTitle}"></td>
                             </tr>
                             <tr>
-                                <td colspan="2">상품가격 : 46,500원</td>
+                                <td colspan="2" th:text="'상품가격 : ' + ${#numbers.formatInteger(itemList.itemStPrice, 0, 'COMMA')} + '원'">상품가격 : 000,000원</td>
                             </tr>
                             <tr>
-                                <td style="border-right: 1px solid rgb(140, 140, 140);">입찰 수 180</td>
-                                <td>조회 수 21,867</td>
+                                <td style="border-right: 1px solid rgb(140, 140, 140);" th:text="'입찰 수 : ' + ${#numbers.formatInteger(itemList.itemBidCnt, 0, 'COMMA')}"></td>
+                                <td th:text="'조회 수 : ' + ${#numbers.formatInteger(itemList.itemCnt, 0, 'COMMA')}"></td>
                             </tr>
                             <tr>
-                                <td colspan="2">판매자ID : bitcamp</td>
+                                <td colspan="2" th:text="'판매자 : ' + ${itemList.user.userId}">판매자 : ㅕㅑㅠㅕㅠ</td>
                             </tr>
                             <tr>
-                                <td colspan="2">남은시간 : 18시간 02분</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </a>
-            </div>
-
-            <div class="se_Info" id="se_Info">
-                <a href="#">
-                    <table id="se_Table">
-                        <thead>
-                            <tr>
-                                <th colspan="2"><img src="images/운동화.png" id="se_im" alt="아이폰14_1"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="2"> 상품명 : 휠라 꼬모 FS1SIB127</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">상품가격 : 25,000원</td>
-                            </tr>
-                            <tr>
-                                <td style="border-right: 1px solid rgb(140, 140, 140);">입찰 수 11</td>
-                                <td>조회 수 21,865</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">판매자ID : bitcamp</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">남은시간 : 24시간 55분</td>
+                                <td colspan="2" class="timer"  th:enddate="${itemList.itemEnddate}"></td>
                             </tr>
                         </tbody>
                     </table>
                 </a>
             </div>
         </div>
+
         <!-- 검색결과 창 하단 버튼 -->
         <div id="page_btn">
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">

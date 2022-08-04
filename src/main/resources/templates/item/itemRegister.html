@@ -3,6 +3,7 @@
   lang="ko"
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
   layout:decorate="~{layouts/layout}"
 >
 <head>
@@ -88,6 +89,10 @@
                 <div>
                     <!-- div -->
                     <table style="margin: 10px; margin-left: 30px;">
+                      	<tr>
+                            <td class="namecontent">작성자</td>
+                            <td class="inputcontent"><input type="text" name="user" th:value="${#authentication.name}" readonly/></td>
+                        </tr>
                         <tr>
                             <td class="namecontent">제목</td>
                             <td class="inputcontent"><input type="text" name="itemTitle" required/></td>
