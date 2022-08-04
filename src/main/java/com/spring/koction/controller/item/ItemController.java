@@ -117,6 +117,7 @@ public class ItemController {
 		mv.addObject("itemList1", itemList);
 		return mv;
 	}
+	
 	@GetMapping("/test")
 	public ModelAndView testViewOrigin(@PathVariable int itemNo) {
 		ModelAndView mv = new ModelAndView();
