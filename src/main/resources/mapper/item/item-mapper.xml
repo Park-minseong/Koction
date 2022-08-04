@@ -18,4 +18,12 @@
 	]]>
 	</update>
 	
+	<update id="updateItemCnt" parameterType="int">
+	<![CDATA[
+		UPDATE T_ITEM
+			SET ITEM_CNT = ITEM_CNT + 1
+			WHERE ITEM_NO = #{itemNo}
+	]]>
+	</update>
+	
 </mapper>

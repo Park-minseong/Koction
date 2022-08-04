@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -76,6 +77,22 @@ public class ItemController {
 	public ModelAndView searchView() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/item/Search.html");
+		
+		return mv;
+	}
+	
+	@GetMapping("/searchItem/{itemNo}")
+	public ModelAndView searchItemView(@PathVariable int itemNo) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/item/ProductInfo.html");
+		
+		Item item = itemService.getItem(itemNo);
+		List<ItemFile> fileList = itemService.getItemFileList(itemNo);
+		
+		mv.addObject("item", item);
+		mv.addObject("fileList", fileList);
+		
+		itemService.updateItemCnt(itemNo);
 		
 		return mv;
 	}
