@@ -3,10 +3,6 @@ package com.spring.koction.service.item.Impl;
 
 import java.util.List;
 
-
-import com.spring.koction.entity.*;
-import com.spring.koction.entity.Itemq;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +13,6 @@ import com.spring.koction.entity.ItemCategory;
 import com.spring.koction.entity.ItemFile;
 import com.spring.koction.entity.Itemq;
 import com.spring.koction.entity.Order;
-
 import com.spring.koction.mapper.ItemMapper;
 import com.spring.koction.repository.ItemCategoryRepository;
 import com.spring.koction.repository.ItemFileRepository;
@@ -135,6 +130,7 @@ public class ItemServiceImpl implements ItemService{
 	public List<ItemFile> findItemFilesByItemNo(int itemNo) {
 		return itemFileRepository.findByItemItemNo(itemNo);
 	}
+	
 
 	@Override
 	public void updateItemCnt(int itemNo) {
