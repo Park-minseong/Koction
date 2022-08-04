@@ -236,7 +236,7 @@
                                     <th nowrap>입급기한</th>
                                 </tr>
 
-                                <tr>
+                                <tr th:each="orderItem : ${orderList}">
                                     <td>
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" name="chk2">
@@ -246,13 +246,13 @@
                                     </td>
                                     <!--구매현황 구분 1번 해당 제품으로 이동 href 추가 필요-->
                                     <td onClick="location.href='ProductInfo.html'">1</td>
-                                    <td nowrap>1</td>
+                                    <td nowrap th:text="${orderItem.orderNo}"></td>
                                     <td nowrap><img id="vip" src="images/product01_2.jpg" th:src="@{/imagegs/product01_2.jpg}" width=50px height=50px alt="vip"></td>
-                                    <td nowrap>아이폰</td>
-                                    <td nowrap>850,000원</td>
-                                    <td nowrap>핸드폰</td>
+                                    <td nowrap th:text="${orderItem.item.itemTitle}"></td>
+                                    <td nowrap th:text="${orderItem.orderPrice}"></td>
+                                    <td nowrap th:text="${orderItem.item.itemCategory.categoryNm}"></td>
                                     <td nowrap>2022/06/30</td>
-                                    <td nowrap>bitcamp</td>
+                                    <td nowrap th:text="${orderItem.item.user.userId}">bitcamp</td>
                                     <td nowrap>2022/07/02</td>
                                 </tr>
                                 

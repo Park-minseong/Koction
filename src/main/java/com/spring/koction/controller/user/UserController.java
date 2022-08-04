@@ -1,23 +1,24 @@
 package com.spring.koction.controller.user;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.koction.entity.CustomUserDetails;
+import com.spring.koction.entity.Order;
 import com.spring.koction.entity.User;
+import com.spring.koction.service.item.ItemService;
 import com.spring.koction.service.user.UserService;
 
 @RestController
@@ -26,6 +27,8 @@ public class UserController {
 	
 	@Autowired
 	UserService userService;
+	@Autowired
+	ItemService itemService;
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
@@ -90,9 +93,15 @@ public class UserController {
   
   
 	@GetMapping("/mypage")
-	public ModelAndView mypage() {
+	public ModelAndView mypage(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/user/mypage.html");
+		List<Order> order = itemService.findOrder(customUserDetails.getUsername());
+		System.out.println(order);
+		mv.addObject("orderList", order);
+		
+		
+		
 		return mv;
 	}
 	
@@ -115,6 +124,7 @@ public class UserController {
 		return mv;
 	}
 	
+	
 	@PostMapping("/modifyInfo")
 	public void modifyInfo(User user, HttpServletResponse response, @AuthenticationPrincipal CustomUserDetails customUserDetails) throws IOException {
 		user.setUserPw(customUserDetails.getPassword());
@@ -126,5 +136,6 @@ public class UserController {
 		response.sendRedirect("/user/mypage");
 		
 	}
+	
 	
 }

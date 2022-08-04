@@ -10,10 +10,13 @@ import org.springframework.stereotype.Service;
 
 import com.spring.koction.entity.Item;
 import com.spring.koction.entity.ItemFile;
+import com.spring.koction.entity.Order;
+import com.spring.koction.entity.OrderId;
 import com.spring.koction.mapper.ItemMapper;
 import com.spring.koction.repository.ItemFileRepository;
 import com.spring.koction.repository.ItemRepository;
 import com.spring.koction.repository.ItemqRepository;
+import com.spring.koction.repository.OrderRepository;
 import com.spring.koction.service.item.ItemService;
 
 @Service
@@ -29,6 +32,10 @@ public class ItemServiceImpl implements ItemService{
 	
 	@Autowired
 	ItemFileRepository itemFileRepository;
+	
+	@Autowired
+	OrderRepository orderRepository;
+	
 
 
 	@Override
@@ -70,6 +77,14 @@ public class ItemServiceImpl implements ItemService{
 		}
 		
 
+	}
+
+
+
+	@Override
+	public List<Order> findOrder(String username) {
+	
+		return orderRepository.findByUserUserId(username);
 	}
 
 }
