@@ -71,4 +71,8 @@ public class Item {
 
 	@Transient
 	private ItemFile itemFile;
+	
+	@Transient
+	private Order order;
+	
 }

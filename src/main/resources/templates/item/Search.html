@@ -118,7 +118,7 @@
             </div>-->
 
             <div class="se_Info" id="se_Info" th:each="itemList : ${itemList1}">
-                <a href="/">
+                <a th:href="@{/item/searchItem/{itemNo} (itemNo=${itemList.itemNo})}">
                     <table id="se_Table">
                         <thead>
                             <tr>
