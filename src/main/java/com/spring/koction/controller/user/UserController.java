@@ -150,7 +150,6 @@ public class UserController {
 		ModelAndView mv = new ModelAndView();
 		
 		mv.setViewName("redirect:/user/mypage");
-//		
 
 		String updatePw = user.getUserPw();
 		user.setUserPw(passwordEncoder.encode(updatePw));
