@@ -10,13 +10,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이페이지</title>
     <th:block layout:fragment="css">
-        <link rel="stylesheet" th:href="@{/css/style-mypage.css}" href="/css/style-mypage.css">
+        <link rel="stylesheet" href="/css/style-mypage.css">
+        <style>
+        #formChangePw input{
+       	 	border: 1px solid gray;
+       	 	border-radius: 3px;
+        }
+        </style>
     </th:block>
 
     <th:block layout:fragment="script">
         <script>
+        //비밀번호 변경 시 현재 비밀번호 일치하는지 확인
+        function newPw(){
+			$.ajax({
+				url: '/user/checkPw',
+				type: 'post',
+				data: $("#formChangePw").serialize(),
+				success: function(obj){
+							if(obj == true){
+								if(confirm("비밀번호를 변경하시겠습니까?")){
+									$("#formChangePw").submit();
+								}else{
+									return;
+								}
+							} else {
+								alert("비밀번호가 틀렸습니다.");
+							  	$("#user_presentPw").focus();
+							  	return;
+							}
+						},
+				error: e =>{
+					console.log(e);
+				}
+			})
+		};
+
+        
+        //비밀번호 유효성 검사
+		function validatePassword(character) {
+			return /^[a-zA-Z0-9!@#$%^*+=-]{8,16}$/.test(character);
+		}
+		
+		$("#user_Pw").on("focusout", function() {
+			if(!validatePassword($("#user_Pw").val())) {
+				alert("숫자와 영문자를 조합한 8자리 이상 16자리 미만으로 정하세요.");
+				pwValidation = false;
+				setTimeout(function(){ 
+					$("#user_Pw").focus();
+					}, 10);
+			} else {
+				pwValidation = true;
+			}
+		});
+        
+        
         $(function(){
-            $("#checkall").on("click", function(){
+	
+			//비밀번호 변경 엔터로 서브밋
+			$("#formChangePw").keydown(function(e){
+				if(e.keyCode==13)
+				 newPw();
+			});
+			//끝
+	
+			$("#checkall").on("click", function(){
                 if($("#checkall").prop("checked")){
                     $("input[name=chk]").prop("checked", true);
                 } else {
@@ -100,40 +158,36 @@
 							<div class="modal-content" style="padding: 30px 30px 10px 30px;">
 								<h3 class="modal-header" style="display:contents;">비밀번호 변경</h3>
 								<div class="modal-body">
-									<form id="formChangePw">
-									<table class="pwUpdateTable">
-                                                <tr>
-                                                    <th>현재 비밀번호</th>
-                                                    <td> 
-                                                        <input type="password" name="mypageName">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>신규 비밀번호</th>
-                                                    <td>
-                                                        <input type="password" name="mypageWithdrawPrice">
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th>비밀번호 확인</th>
-                                                    <td>
-                                                        <input type="password" name="mypageAccountNumber">
-                                                    </td>
-                                                </tr>
-                                            </table>
-									
+									<form id="formChangePw" action="/user/changePw" method="post">
+										<input type="hidden" name="userId" th:value="${#authentication.principal.username}" />
+										<table class="pwUpdateTable">
+											<tr>
+												<th>현재 비밀번호</th>
+												<td>
+													<input type="password" name="userPresentPw" id="user_presentPw">
+												</td>
+											</tr>
+											<tr>
+												<th>신규 비밀번호</th>
+												<td>
+													<input type="password" name="userPw">
+												</td>
+											</tr>
+											<tr>
+												<th>비밀번호 확인</th>
+												<td>
+													<input type="password" id="user_pwChk">
+												</td>
+											</tr>
+										</table>
+										<div class="modal-footer">
+											<button type="button" onclick="newPw()" class="btn btn-default" data-dismiss="modal" id="confirm-ok" style="background-color: rgb(18, 100, 100); color:white;">변경</button>
+											<button type="button" onclick="reset()" class="btn btn-default" data-bs-dismiss="modal" id="confirm-cancle">취소</button>
+										</div>
+									</form>
 								</div>
-								<div class="modal-footer">
-									<button type="button" onClick="submit()" class="btn btn-default" data-dismiss="modal" id="confirm-ok" style="background-color: rgb(18, 100, 100); color:white;">변경</button>
-									<button type="button" onClick="reset()" class="btn btn-default" data-bs-dismiss="modal" id="confirm-cancle">취소</button>
-									
-								</div>
-								</form>
 							</div>
-					
 						</div>
-					</div>
-					
 					</div>
                     
                     <!--모달 영역 ajax 로 구현-->
@@ -204,7 +258,7 @@
                                     <th nowrap>입급기한</th>
                                 </tr>
 
-                                <tr>
+                                <tr th:each="orderItem : ${orderList}">
                                     <td>
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" name="chk2">
@@ -214,13 +268,13 @@
                                     </td>
                                     <!--구매현황 구분 1번 해당 제품으로 이동 href 추가 필요-->
                                     <td onClick="location.href='ProductInfo.html'">1</td>
-                                    <td nowrap>6015</td>
+                                    <td nowrap th:text="${orderItem.orderNo}"></td>
                                     <td nowrap><img id="vip" src="images/product01_2.jpg" th:src="@{/imagegs/product01_2.jpg}" width=50px height=50px alt="vip"></td>
-                                    <td nowrap>아이폰</td>
-                                    <td nowrap>850,000원</td>
-                                    <td nowrap>핸드폰</td>
+                                    <td nowrap th:text="${orderItem.item.itemTitle}"></td>
+                                    <td nowrap th:text="${orderItem.orderPrice}"></td>
+                                    <td nowrap th:text="${orderItem.item.itemCategory.categoryNm}"></td>
                                     <td nowrap>2022/06/30</td>
-                                    <td nowrap>bitcamp</td>
+                                    <td nowrap th:text="${orderItem.item.user.userId}">bitcamp</td>
                                     <td nowrap>2022/07/02</td>
                                 </tr>
                                 

@@ -14,7 +14,5 @@ public interface UserService {
 
 	void updateInfo(User user);
 	
-	
-
 
 }

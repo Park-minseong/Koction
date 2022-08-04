@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.spring.koction.entity.Item;
 import com.spring.koction.entity.ItemCategory;
-import com.spring.koction.entity.ItemFile;
 import com.spring.koction.service.item.ItemService;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,7 +25,7 @@ public class IndexController {
 		return "/user/guide";
 	}
 	
-	@RequestMapping("/category")
+	@RequestMapping("item/category")
 	public String category(Model model) {
 		List<ItemCategory> category = itemService.findCategory();
 		model.addAttribute("category", category);
@@ -38,8 +37,9 @@ public class IndexController {
 		List<Item> itemList = itemService.findCategory(categoryNo);
 		System.out.println(itemList);
 		for(Item item:itemList) {
-			item.setItemFile(itemService.findItemFilesByItemNo(item.getItemNo()).get(0));
-			//System.out.println(itemService.findItemFilesByItemNo(item.getItemNo()).t);
+			if(itemService.findItemFilesByItemNo(item.getItemNo()).size() != 0) {
+				item.setItemFile(itemService.findItemFilesByItemNo(item.getItemNo()).get(0));
+			}
 		}
 		
 		model.addAttribute("itemList1", itemList);
@@ -55,7 +55,7 @@ public class IndexController {
 		return "/item/support";
 	}
 	
-	@RequestMapping("/mypage")
+	@RequestMapping("/user/mypage")
 	public String mypage() {
 		return "/user/mypage";
 	}

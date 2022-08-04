@@ -1,6 +1,7 @@
 package com.spring.koction.controller.user;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.koction.entity.CustomUserDetails;
+import com.spring.koction.entity.Order;
 import com.spring.koction.entity.User;
+import com.spring.koction.service.item.ItemService;
 import com.spring.koction.service.user.UserService;
 
 @RestController
@@ -24,6 +27,8 @@ public class UserController {
 	
 	@Autowired
 	UserService userService;
+	@Autowired
+	ItemService itemService;
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
@@ -88,9 +93,15 @@ public class UserController {
   
   
 	@GetMapping("/mypage")
-	public ModelAndView mypage() {
+	public ModelAndView mypage(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/user/mypage.html");
+		List<Order> order = itemService.findOrder(customUserDetails.getUsername());
+		System.out.println(order);
+		mv.addObject("orderList", order);
+		
+		
+		
 		return mv;
 	}
 	
@@ -113,6 +124,7 @@ public class UserController {
 		return mv;
 	}
 	
+	
 	@PostMapping("/modifyInfo")
 	public void modifyInfo(User user, HttpServletResponse response, @AuthenticationPrincipal CustomUserDetails customUserDetails) throws IOException {
 		user.setUserPw(customUserDetails.getPassword());
@@ -125,5 +137,18 @@ public class UserController {
 		
 	}
 	
+	@PostMapping("/checkPw")
+	public Boolean checkPw(String userPresentPw, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+		
+		return passwordEncoder.matches(userPresentPw, customUserDetails.getPassword());
+	}
 	
+	@PostMapping("/changePw")
+	public ModelAndView changePw() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:/user/mypage");
+		System.out.println("비밀번호 변경");
+		return mv;
+	}
+
 }
