@@ -6,8 +6,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import org.codehaus.groovy.syntax.Numbers;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.spring.koction.entity.CustomUserDetails;
+import com.spring.koction.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,11 +40,19 @@ public class ItemController {
 
 	//내 아이템 조회 /item/myItem
 	@GetMapping("")
-	public ModelAndView myItem(Item item) {
+	public ModelAndView myItem(Item item, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("item/myItem.html");
-		List<Item> myItemList = itemService.getMyItemList();
+		String test = customUserDetails.getUsername();
+		List<Item> myItemList = itemService.getMyItemList(test);
+		for(Item item1:myItemList) {
+			if(itemService.findItemFilesByItemNo(item1.getItemNo()).size() != 0) {
+				item1.setItemFile(itemService.findItemFilesByItemNo(item1.getItemNo()).get(0));
+			}
+		}
 		mv.addObject("itemList", myItemList);
+//		mv.addObject("itemFile", myItemFile);
+
 		return mv;
 	}
 
@@ -63,7 +77,7 @@ public class ItemController {
 		itemService.registerItemFile(fileList);
 		
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("redirect:/item/myItem");
+		mv.setViewName("redirect:/item"); // myitem이 아니라 item으로 보내야해서 수정함
 		return mv;
 	}
 	
@@ -113,6 +127,20 @@ public class ItemController {
 		mv.setViewName("redirect:/item/test/1");
 		return mv;
 	}
-	
-	
+
+	@GetMapping("/searchItem/{itemNo}")
+	public ModelAndView searchItemView(@PathVariable int itemNo) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/item/ProductInfo.html");
+		
+		Item item = itemService.getItem(itemNo);
+		List<ItemFile> fileList = itemService.getItemFileList(itemNo);
+		
+		mv.addObject("item", item);
+		mv.addObject("fileList", fileList);
+		
+		itemService.updateItemCnt(itemNo);
+		
+		return mv;
+	}
 }

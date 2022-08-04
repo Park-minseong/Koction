@@ -13,6 +13,9 @@ public interface ItemMapper {
 	int getNextItemNo();
 	
 	void updateItemNp(int itemNo);
+
+	void updateItemCnt(int itemNo);
+
 	
 	void updateUserPw(User user);
 	

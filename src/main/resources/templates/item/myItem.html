@@ -64,24 +64,49 @@
                 <tr>
                   <!-- <tr th:each="item : ${itemList}"> -->
                   <td>
-                    <a th:if="${itemList ne null}" th:id="${item.itemNo}"
-                      ><img src="/images/kanu.png"
-                    /></a>
+                    <!-- <a th:if="${itemList ne null}" th:id="${item.itemNo}"
+                      ><img
+                        src="/images/kanu.png"
+                        th:src="${itemFile.itemfilePath}"
+                    /></a> -->
+                    <!-- <div
+                      th:if="${itemList ne null}"
+                      th:each="file : ${itemFile}"
+                      th:remove="tag"
+                    > -->
+                    <div>
+                      <!-- <a
+                        th:id="${file.itemfileNo}"
+                        th:href="${file.itemfileNm}"
+                        th:text="${file.itemfileOrgNm}"
+                      ></a>
+                      <img th:src="@{/upload} + ${file.itemfileNm}" /> -->
+                      <a href=""></a>
+                      <img
+                        th:if="${item.itemFile ne null}"
+                        th:src="@{/upload/} + ${item.itemFile.itemfileNm}"
+                      />
+                      <img
+                        th:if="${item.itemFile eq null}"
+                        th:src="@{/upload/noimg.png}"
+                      />
+                      <br />
+                    </div>
                   </td>
-                  <td th:text="${item.itemNm}">커피</td>
+                  <td th:text="${item.itemNm}">-</td>
                   <td th:text="${item.itemTitle}" class="wide" id="name0">
-                    먹다 남은 카누 팝니다!
+                    등록된 상품이 없습니다.
                   </td>
-                  <td>1</td>
+                  <td th:text="${item.itemCnt}">-</td>
                   <td th:text="${item.itemStPrice}" class="less_wide">
-                    30,000원
+                    시작가
                   </td>
                   <td>기한입찰</td>
                   <td
                     th:text="${#temporals.format(item.itemRegdate, 'yyyy-MM-dd HH:mm')}"
                     class="wide"
                   >
-                    2022 / 05 / 26
+                    등록일
                   </td>
                   <!-- <th:block
                     th:if="${item.itemYn == 'Y' || item.itemYn.equals('Y')}"
@@ -95,7 +120,7 @@
                   </th:block> -->
                   <td class="sold" th:if="${item.itemYn == 'Y'}">판매완료</td>
                   <td class="sold" th:unless="${item.itemYn == 'N'}">
-                    판매종료
+                    입찰종료
                   </td>
 
                   <td></td>
@@ -112,7 +137,14 @@
             <div class="accordion-body">
               <div class="detail">
                 <div class="imageArea">
-                  <img src="/images/kanu.png" alt="" />
+                  <img
+                    th:if="${item.itemFile ne null}"
+                    th:src="@{/upload/} + ${item.itemFile.itemfileNm}"
+                  />
+                  <img
+                    th:if="${item.itemFile eq null}"
+                    th:src="@{/upload/noimg.png}"
+                  />
                 </div>
                 <div th:text="${item.itemContent}" class="textArea">
                   100개 들었는데 3개 먹어서 97개 남아있습니다
