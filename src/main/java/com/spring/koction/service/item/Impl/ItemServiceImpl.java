@@ -64,6 +64,12 @@ public class ItemServiceImpl implements ItemService{
 		return itemFileRepository.findAll();
 	}
 
+	//??? 이거 뭔가요,, ㅋㅋㅋ 없어서 일단 추가했습니다.
+	@Override
+	public List<Item> getMyItemList() {
+		return null;
+	}
+
 	@Override
 	public void updateItem(Item item) {
 		itemRepository.save(item);
@@ -177,7 +183,6 @@ public class ItemServiceImpl implements ItemService{
 
 		//itemqRepository.delete(itemq);
 		itemMapper.deleteTest(itemqNo, itemNo);
-		//강사님 지금 item_no 도 pk 입니다.
 	}
 
 	@Override

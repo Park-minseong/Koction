@@ -14,7 +14,7 @@
 	<th:block layout:fragment="script">
 		<script th:inline="javascript">
 			/*<[CDATA[*/
-			const list = /*[[${list}]]*/;
+			const list = /*[[${list}]]*/
 			/*]]>*/
 			console.log(list);
 			/* 종현님 모달창 값 덤프 */
@@ -31,6 +31,7 @@
 					$("#total").text(String($total).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + '원' + ' (구매 수수료 포함)');
 				}
 			});
+
 
 			//상품 별 잔여시간 계산
 			function restTime(e) {
@@ -50,8 +51,8 @@
 				} else {
 					$ex_time.text("남은시간 : " + hour + "시간 " + min + "분 " + sec + "초");
 				}
-			}, 1000);
-
+			}
+		
 			function deleteTest(itemqNo, itemNo) {
 				$.ajax({
 					url: '/item/test/deleteTest',
@@ -80,7 +81,7 @@
 	            } else {
 	                $(e).text("남은시간 : " + hour + "시간 " + min + "분 " + sec + "초");
 	            }
-	        }
+	        
 	        $(function() {
 	            setInterval(function(){
 	                $(".timer").each(function(i,e){
