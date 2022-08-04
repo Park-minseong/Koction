@@ -3,17 +3,14 @@ package com.spring.koction.service.item.Impl;
 
 import java.util.List;
 
+import com.spring.koction.entity.*;
 import com.spring.koction.entity.Itemq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
-import com.spring.koction.entity.Item;
-import com.spring.koction.entity.ItemCategory;
-import com.spring.koction.entity.ItemFile;
-import com.spring.koction.entity.Order;
-import com.spring.koction.entity.OrderId;
 import com.spring.koction.mapper.ItemMapper;
 import com.spring.koction.repository.ItemCategoryRepository;
 import com.spring.koction.repository.ItemFileRepository;
@@ -42,10 +39,24 @@ public class ItemServiceImpl implements ItemService{
 	@Autowired
 	ItemCategoryRepository itemCategoryRepository;
 
+	@Override
+	public Page<Item> getItemList(Item item, Pageable pageable) {
+		return null;
+	}
+
+//	@Override
+//	public List<Item> getMyItemList() {
+//		return null;
+//	}
 
 	@Override
-	public List<Item> getMyItemList( ) {
-		return itemRepository.findAll();
+	public List<Item> getMyItemList(String userId) {
+		return itemRepository.findByUserUserId(userId);
+	}
+
+	@Override
+	public List<ItemFile> getMyItemFile( ) {
+		return itemFileRepository.findAll();
 	}
 
 	@Override
