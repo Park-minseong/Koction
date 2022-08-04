@@ -155,14 +155,17 @@
         <div id="page_btn">
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="btn-group me-2" role="group" aria-label="Second group">
-                    <div class="btn_page_side">
-                        <button type="button" class="btn btn-outline-secondary btn_page" style="border: 0;"><</button>
-                        <button type="button" class="btn btn-outline-secondary btn_page">1</button>
-                        <button type="button" class="btn btn-outline-secondary btn_page">2</button>
-                        <button type="button" class="btn btn-outline-secondary btn_page">3</button>
-                        <button type="button" class="btn btn-outline-secondary btn_page">4</button>
-                        <button type="button" class="btn btn-outline-secondary btn_page">5</button>
-                        <button type="button" class="btn btn-outline-secondary btn_page" style="border: 0;">></button>
+                    <div class="btn_page_side" th:with="pageNumber = ${itemList1.pageable.pageNumber},
+												pageSize = 5,
+												totalPages = ${itemList1.totalPages},
+												startPage = ${T(java.lang.Math).floor(pageNumber / pageSize) * pageSize +1},
+												tempEndPage = ${startPage + pageSize -1},
+												endPage = ${tempEndPage > totalPages ? totalPages : tempEndPage}">
+                        <button type="button" class="btn btn-outline-secondary btn_page" style="border: 0;" th:if="${pageNumber > 0}"><</button>
+                        <div  th:each="page : ${#numbers.sequence(0, 2)}" th:remove="tag">
+                       		<button type="button" class="btn btn-outline-secondary btn_page" th:href="@{/item/search(page=${page -1}, categoryNo = ${page.itemCategory.categoryNo})}" th:value="${page}">1</button>
+                        </div>
+                        <button type="button" class="btn btn-outline-secondary btn_page" style="border: 0;"  th:if="${pageNumber < totalPages -1}">></button>
                     </div>
                 </div>
             </div>
