@@ -64,9 +64,24 @@
                 <tr>
                   <!-- <tr th:each="item : ${itemList}"> -->
                   <td>
-                    <a th:if="${itemList ne null}" th:id="${item.itemNo}"
-                      ><img src="/images/kanu.png"
-                    /></a>
+                    <!-- <a th:if="${itemList ne null}" th:id="${item.itemNo}"
+                      ><img
+                        src="/images/kanu.png"
+                        th:src="${itemFile.itemfilePath}"
+                    /></a> -->
+                    <div
+                      th:if="${itemList ne null}"
+                      th:each="file : ${itemFile}"
+                      th:remove="tag"
+                    >
+                      <a
+                        th:id="${file.itemfileNo}"
+                        th:href="${file.itemfileNm}"
+                        th:text="${file.itemfileOrgNm}"
+                      ></a>
+                      <img th:src="@{/} + ${file.itemfileNm}" />
+                      <br />
+                    </div>
                   </td>
                   <td th:text="${item.itemNm}">커피</td>
                   <td th:text="${item.itemTitle}" class="wide" id="name0">

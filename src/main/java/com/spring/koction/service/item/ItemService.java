@@ -16,6 +16,8 @@ public interface ItemService {
 
 	List<Item> getMyItemList();
 
+	List<ItemFile> getMyItemFile();
+
 	void updateItem(Item item);
 
 	List<ItemFile> getItemFileList(int itemNo);

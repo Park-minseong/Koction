@@ -31,7 +31,9 @@ public class ItemController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("item/myItem.html");
 		List<Item> myItemList = itemService.getMyItemList();
+		List<ItemFile> myItemFile = itemService.getMyItemFile();
 		mv.addObject("itemList", myItemList);
+		mv.addObject("itemFile", myItemFile);
 		return mv;
 	}
 
