@@ -38,4 +38,5 @@ public interface ItemService {
 
 	int insertInqury(Itemq itemq);
 
+	void deleteTest(int itemqNo, int itemNo);
 }

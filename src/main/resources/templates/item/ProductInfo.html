@@ -12,7 +12,11 @@
 	</th:block>
 
 	<th:block layout:fragment="script">
-		<script>
+		<script th:inline="javascript">
+			/*<[CDATA[*/
+			const list = /*[[${list}]]*/;
+			/*]]>*/
+			console.log(list);
 			/* 종현님 모달창 값 덤프 */
 			/*input일때는 value로 받아오고 <p id="key"></p>, td는 텍스트*/
 			$(function () {
@@ -48,6 +52,23 @@
 					$ex_time.text("남은시간 : " + hour + "시간 " + min + "분 " + sec + "초");
 				}
 			}, 1000);
+
+			function deleteTest(itemqNo, itemNo) {
+				$.ajax({
+					url: '/item/test/deleteTest',
+					type: 'post',
+					data: {
+						"itemqNo" : itemqNo,
+						"itemNo" : itemNo,
+						  },
+					success: function() {
+						location.reload();
+					},
+					error: function(e) {
+						console.log(e);
+					}
+				});
+			}
 		</script>
 	</th:block>
 </head>
@@ -307,16 +328,17 @@
 								<th>내용</th>
 								<th>등록자</th>
 								<th>등록일</th>
+								<th></th>
 							</tr>
-							<tr th:if="${#lists.size(list)} > 0" th:each="list : ${list}">
-								<td th:text="${list.itemqNo}"></td>
-								<td th:text="${list.itemqNm}">
+							<tr th:each="itemq : ${list}" th:if="${itemq.itemqYn} != 'N'">
+								<td th:text="${itemq.itemqNo}"></td>
+								<td th:text="${itemq.itemqNm}">
 								</td>
 								<!-- <td th:text="${user.userId}"></td> -->
-								<td th:text="${list.itemqContent}"></td>
-								<td th:text="${list.user.userId}">11</td>
-								<td th:text="${#temporals.format(list.itemqRegdate, 'yyyy-MM-dd')}"></td>
-								
+								<td th:text="${itemq.itemqContent}"></td>
+								<td th:text="${itemq.user.userId}">11</td>
+								<td th:text="${#temporals.format(itemq.itemqRegdate, 'yyyy-MM-dd')}"></td>
+								<td><button type="button" th:onclick="'deleteTest('+ ${itemq.itemqNo} +', ' + ${itemNo} + ')'">삭제</button></td>
 							</tr>
 						</table>
 						<div id="ask_Modal">
