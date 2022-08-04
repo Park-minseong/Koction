@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import com.spring.koction.entity.Item;
 import com.spring.koction.entity.ItemCategory;
 import com.spring.koction.entity.ItemFile;
+import com.spring.koction.entity.Order;
 
 public interface ItemService {
 
@@ -23,6 +24,9 @@ public interface ItemService {
 	int registerItem(Item item);
 
 	void registerItemFile(List<ItemFile> fileList);
+
+
+	List<Order> findOrder(String username);
 
 	List<Item> findCategory(int categoryNo);
 
