@@ -46,26 +46,56 @@
 			})
 		};
 
+		
+        $(function(){
+	
+			//비밀번호 확인
+				let pwCheck = false;
+				$("#user_newPw").on("change", function() {
+					if($("#user_newPw").val() == $("#user_pwChk").val()) {
+						pwCheck = true;
+						$("#pwchk-result").css("color", "green");
+						$("#pwchk-result").text("비밀번호 일치");
+					} else {
+						pwCheck = false;
+						$("#pwchk-result").css("color", "red");
+						$("#pwchk-result").text("비밀번호 불일치");
+					}
+				});
+				
+				//비밀번호 확인
+			
+				$("#user_pwChk").on("change", function() {
+					if($("#user_newPw").val() == $("#user_pwChk").val()) {
+						pwCheck = true;
+						$("#pwchk-result").css("color", "green");
+						$("#pwchk-result").text("비밀번호 일치");
+					} else {
+						pwCheck = false;
+						$("#pwchk-result").css("color", "red");
+						$("#pwchk-result").text("비밀번호 불일치");
+					}
+				});
+				
+				//비밀번호 유효성 검사
         
-        //비밀번호 유효성 검사
+        let pwValidation = false;
 		function validatePassword(character) {
 			return /^[a-zA-Z0-9!@#$%^*+=-]{8,16}$/.test(character);
 		}
 		
-		$("#user_Pw").on("focusout", function() {
-			if(!validatePassword($("#user_Pw").val())) {
-				alert("숫자와 영문자를 조합한 8자리 이상 16자리 미만으로 정하세요.");
+		$("#user_newPw").on("focusout", function() {
+			if(!validatePassword($("#user_newPw").val())) {
+				alert("숫자와 영문자,특수문자를 조합한 8자리 이상 16자리 미만으로 정하세요.");
 				pwValidation = false;
 				setTimeout(function(){ 
-					$("#user_Pw").focus();
+					$("#user_newPw").focus();
 					}, 10);
 			} else {
 				pwValidation = true;
 			}
 		});
         
-        
-        $(function(){
 	
 			//비밀번호 변경 엔터로 서브밋
 			$("#formChangePw").keydown(function(e){
@@ -170,13 +200,14 @@
 											<tr>
 												<th>신규 비밀번호</th>
 												<td>
-													<input type="password" name="userPw">
+													<input type="password" name="userPw" id=user_newPw>
 												</td>
 											</tr>
 											<tr>
 												<th>비밀번호 확인</th>
 												<td>
 													<input type="password" id="user_pwChk">
+													 <span id="pwchk-result" style="font-size: 12px; margin-left: 5px;">한번 더 입력하세요</span>
 												</td>
 											</tr>
 										</table>

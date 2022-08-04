@@ -18,14 +18,19 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spring.koction.commons.FileUtils;
 import com.spring.koction.entity.Item;
 import com.spring.koction.entity.ItemFile;
+import com.spring.koction.entity.Itemq;
 import com.spring.koction.service.item.ItemService;
+import com.spring.koction.service.user.UserService;
 
 @RestController
 @RequestMapping("/item")
 public class ItemController {
 	@Autowired
 	ItemService itemService;
-	Item user;
+
+	@Autowired
+	UserService userService;
+
 	//내 아이템 조회 /item/myItem
 	@GetMapping("")
 	public ModelAndView myItem(Item item) {
@@ -35,9 +40,6 @@ public class ItemController {
 		mv.addObject("itemList", myItemList);
 		return mv;
 	}
-
-
-
 
 	@GetMapping("/registerItem")
 	public ModelAndView registerItemView() {
@@ -77,7 +79,37 @@ public class ItemController {
 	public ModelAndView searchView() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/item/Search.html");
-		
+
+
+		return mv;
+	}
+	@GetMapping("/test")
+	public ModelAndView testViewOrigin(@PathVariable int itemNo) {
+		ModelAndView mv = new ModelAndView();
+		List<Itemq> list = itemService.selectInquryList();
+		mv.addObject("list",list);
+		mv.setViewName("/item/ProductInfo");
+		return mv;
+	}
+
+	@GetMapping("/test/{itemNo}")
+	public ModelAndView testView(@PathVariable int itemNo) {
+		ModelAndView mv = new ModelAndView();
+
+		List<Itemq> list = itemService.selectInquryList();
+		mv.addObject("list",list);
+		mv.addObject("itemNo", itemNo);
+//		System.out.println("itemNo////////////////////////"+itemNo);
+		mv.setViewName("/item/ProductInfo");
+		return mv;
+	}
+
+	@PostMapping("/inquiry")
+	public ModelAndView testPost(Itemq itemq) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println(itemq.getItem());
+		itemService.insertInqury(itemq);
+		mv.setViewName("redirect:/item/test/1");
 		return mv;
 	}
 	
