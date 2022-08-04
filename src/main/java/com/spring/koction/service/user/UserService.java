@@ -13,6 +13,9 @@ public interface UserService {
 	User findLoginUser(String userId);
 
 	void updateInfo(User user);
+
+	void updatePw(User user);
+
 	
 
 }
