@@ -14,11 +14,7 @@ import com.spring.koction.entity.CustomUserDetails;
 import com.spring.koction.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -136,7 +132,7 @@ public class ItemController {
 		System.out.println(itemq.getItem());
 
 		int itemqNo = itemService.insertInqury(itemq);
-		mv.setViewName("redirect:/item/test/1");
+		mv.setViewName("redirect:/item/searchItem/{itemNo}");
 		return mv;
 	}
 
@@ -145,7 +141,7 @@ public class ItemController {
 	public void deleteTest(@RequestParam int itemqNo, @RequestParam int itemNo){
 		System.out.println("itemqNo========================================================="+itemqNo);
 		itemService.deleteTest(itemqNo, itemNo);
-  }
+  	}
 	@GetMapping("/searchItem/{itemNo}")
 	public ModelAndView searchItemView(@PathVariable int itemNo) {
 		ModelAndView mv = new ModelAndView();

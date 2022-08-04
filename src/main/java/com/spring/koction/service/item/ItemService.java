@@ -49,7 +49,6 @@ public interface ItemService {
 
 	void deleteTest(int itemqNo, int itemNo);
 
-	void insertInqury(Itemq itemq);
 
 	List<Item> hotProcSort();
 	
