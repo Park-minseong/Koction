@@ -3,6 +3,10 @@ package com.spring.koction.service.item.Impl;
 
 import java.util.List;
 
+
+import com.spring.koction.entity.*;
+import com.spring.koction.entity.Itemq;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +17,7 @@ import com.spring.koction.entity.ItemCategory;
 import com.spring.koction.entity.ItemFile;
 import com.spring.koction.entity.Itemq;
 import com.spring.koction.entity.Order;
+
 import com.spring.koction.mapper.ItemMapper;
 import com.spring.koction.repository.ItemCategoryRepository;
 import com.spring.koction.repository.ItemFileRepository;
@@ -59,6 +64,12 @@ public class ItemServiceImpl implements ItemService{
 	@Override
 	public List<ItemFile> getMyItemFile( ) {
 		return itemFileRepository.findAll();
+	}
+
+	//??? 이거 뭔가요,, ㅋㅋㅋ 없어서 일단 추가했습니다.
+	@Override
+	public List<Item> getMyItemList() {
+		return null;
 	}
 
 	@Override
@@ -155,9 +166,25 @@ public class ItemServiceImpl implements ItemService{
 //	}
 
 	@Override
-	public void insertInqury(Itemq itemq) {
+	public int insertInqury(Itemq itemq) {
 //		itemMapper.insertInquery(itemq);
+		int itemqNo = itemMapper.getNextItemqNo();
+		itemq.setItemqNo(itemqNo);
 		itemqRepository.save(itemq);
+		itemqRepository.flush();
+		return itemq.getItemqNo();
+	}
+
+	@Override
+	public void deleteTest(int itemqNo, int itemNo) {
+//		Itemq itemq = new Itemq();
+//		Item item = new Item();
+//		item.setItemNo(itemNo);
+//		itemq.setItem(item);
+//		itemq.setItemqNo(itemqNo);
+
+		//itemqRepository.delete(itemq);
+		itemMapper.deleteTest(itemqNo, itemNo);
 	}
 
 	@Override

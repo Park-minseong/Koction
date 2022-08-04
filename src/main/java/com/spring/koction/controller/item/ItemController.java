@@ -12,12 +12,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+
+import org.springframework.web.bind.annotation.*;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -127,6 +131,10 @@ public class ItemController {
 		ModelAndView mv = new ModelAndView();
 
 		List<Itemq> list = itemService.selectInquryList();
+		for(Itemq itemq : list) {
+			System.out.println(itemq.toString());
+		}
+
 		mv.addObject("list",list);
 		mv.addObject("itemNo", itemNo);
 //		System.out.println("itemNo////////////////////////"+itemNo);
@@ -137,12 +145,26 @@ public class ItemController {
 	@PostMapping("/inquiry")
 	public ModelAndView testPost(Itemq itemq) {
 		ModelAndView mv = new ModelAndView();
+//		itemq.getItem().setItemNo(itemNo);
+
+
+//		System.out.println("itemNo////////////////////////"+itemNo);
+//		System.out.println("itemq////////////////////////"+itemq.getItem().getItemNo());
+//		System.out.println("itemq////////////////////////"+itemq);
+
 		System.out.println(itemq.getItem());
-		itemService.insertInqury(itemq);
-		mv.setViewName("redirect:/item/test/1");
+
+		int itemqNo = itemService.insertInqury(itemq);
+		mv.setViewName("redirect:/item/searchItem/{itemNo}");
 		return mv;
 	}
 
+
+	@PostMapping("/test/deleteTest")
+	public void deleteTest(@RequestParam int itemqNo, @RequestParam int itemNo){
+		System.out.println("itemqNo========================================================="+itemqNo);
+		itemService.deleteTest(itemqNo, itemNo);
+  	}
 	@GetMapping("/searchItem/{itemNo}")
 	public ModelAndView searchItemView(@PathVariable int itemNo) {
 		ModelAndView mv = new ModelAndView();
