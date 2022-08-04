@@ -101,16 +101,15 @@ public class ItemController {
 	@PostMapping("/inquiry")
 	public ModelAndView testPost(Itemq itemq) {
 		ModelAndView mv = new ModelAndView();
-<<<<<<< HEAD
 		itemq.getItem().setItemNo(itemNo);
 
 
 //		System.out.println("itemNo////////////////////////"+itemNo);
 //		System.out.println("itemq////////////////////////"+itemq.getItem().getItemNo());
 //		System.out.println("itemq////////////////////////"+itemq);
-=======
+
 		System.out.println(itemq.getItem());
->>>>>>> upstream/master
+
 		itemService.insertInqury(itemq);
 		mv.setViewName("redirect:/item/test/1");
 		return mv;
