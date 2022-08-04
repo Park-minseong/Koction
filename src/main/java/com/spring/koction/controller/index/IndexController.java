@@ -9,13 +9,14 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.koction.entity.Item;
 import com.spring.koction.entity.ItemCategory;
 import com.spring.koction.service.item.ItemService;
-import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
@@ -75,4 +76,27 @@ public class IndexController {
 
 		return "/index";
 	}
+	
+	
+	//index 핫딜
+		@GetMapping("/")
+		public ModelAndView hotProc(Item item) {
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("/index.html");
+			List<Item> hotProc = itemService.hotProcSort();
+			List<Item> endProc = itemService.endProcSort();
+			
+			
+			for(Item item1:hotProc) {
+				if(itemService.findItemFilesByItemNo(item1.getItemNo()).size() != 0) {
+					item1.setItemFile(itemService.findItemFilesByItemNo(item1.getItemNo()).get(0));
+				}
+			}
+			
+			mv.addObject("hotProcList", hotProc);
+			mv.addObject("endProcList", endProc);
+			return mv;
+		}
+		
+	
 }

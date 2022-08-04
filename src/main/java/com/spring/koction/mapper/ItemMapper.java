@@ -1,8 +1,11 @@
 package com.spring.koction.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import com.spring.koction.entity.Item;
 import com.spring.koction.entity.User;
 
 @Mapper
@@ -12,6 +15,10 @@ public interface ItemMapper {
 	void updateItemNp(int itemNo);
 	
 	void updateUserPw(User user);
+	
+	List<Item> hotProcSort();
+	
+	List<Item> endProcSort();
 
 
 	@Select("SELECT IFNULL(MAX(ITEMQ_NO), 0) + 1 FROM T_ITEMQ")

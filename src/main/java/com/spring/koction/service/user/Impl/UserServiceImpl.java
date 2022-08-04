@@ -10,18 +10,17 @@ import com.spring.koction.service.user.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
-	
+
 	@Autowired
 	UserRepository userRepository;
-	
+
 	@Autowired
 	ItemMapper itemMapper;
-
 
 	@Override
 	public User idCheck(String userId) {
 		// TODO Auto-generated method stub
-		if(userRepository.findById(userId).isPresent()) {
+		if (userRepository.findById(userId).isPresent()) {
 			return userRepository.findById(userId).get();
 		} else {
 			return null;
@@ -43,14 +42,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void updateInfo(User user) {
 		userRepository.save(user);
-		
+
 	}
 
 	@Override
 	public void updatePw(User user) {
 		itemMapper.updateUserPw(user);
-		
+
 	}
 
-
+	
 }

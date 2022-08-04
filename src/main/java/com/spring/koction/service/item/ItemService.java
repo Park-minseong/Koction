@@ -1,6 +1,5 @@
 package com.spring.koction.service.item;
 
-
 import java.util.List;
 
 import com.spring.koction.entity.Itemq;
@@ -14,6 +13,8 @@ import com.spring.koction.entity.Order;
 
 public interface ItemService {
 
+	List<Item> hotProc();
+
 	List<Item> getMyItemList();
 
 	void updateItem(Item item);
@@ -24,7 +25,6 @@ public interface ItemService {
 
 	void registerItemFile(List<ItemFile> fileList);
 
-
 	List<Order> findOrder(String username);
 
 	Page<Item> findCategory(int categoryNo, Pageable pageable);
@@ -33,8 +33,13 @@ public interface ItemService {
 
 	List<ItemFile> findItemFilesByItemNo(int itemNo);
 
-
 	List<Itemq> selectInquryList();
 
 	void insertInqury(Itemq itemq);
+
+	List<Item> hotProcSort();
+	
+	List<Item> endProcSort();
+
+	List<Item> endProc();
 }

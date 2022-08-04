@@ -3,7 +3,6 @@ package com.spring.koction.service.item.Impl;
 
 import java.util.List;
 
-import com.spring.koction.entity.Itemq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,8 +11,8 @@ import org.springframework.stereotype.Service;
 import com.spring.koction.entity.Item;
 import com.spring.koction.entity.ItemCategory;
 import com.spring.koction.entity.ItemFile;
+import com.spring.koction.entity.Itemq;
 import com.spring.koction.entity.Order;
-import com.spring.koction.entity.OrderId;
 import com.spring.koction.mapper.ItemMapper;
 import com.spring.koction.repository.ItemCategoryRepository;
 import com.spring.koction.repository.ItemFileRepository;
@@ -122,6 +121,30 @@ public class ItemServiceImpl implements ItemService{
 	public void insertInqury(Itemq itemq) {
 //		itemMapper.insertInquery(itemq);
 		itemqRepository.save(itemq);
+	}
+
+	@Override
+	public List<Item> hotProc() {
+		
+		return itemRepository.findAll();
+	}
+	
+	@Override
+	public List<Item> hotProcSort() {
+		return itemMapper.hotProcSort();
+
+	}
+	
+	@Override
+	public List<Item> endProc() {
+		
+		return itemRepository.findAll();
+	}
+	
+	@Override
+	public List<Item> endProcSort() {
+		return itemMapper.endProcSort();
+
 	}
 
 }
