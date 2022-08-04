@@ -18,12 +18,39 @@
 	]]>
 	</update>
 	
-		<update id="updateUserPw" parameterType="user">
+	<update id="updateItemCnt" parameterType="int">
+	<![CDATA[
+		UPDATE T_ITEM
+			SET ITEM_CNT = ITEM_CNT + 1
+			WHERE ITEM_NO = #{itemNo}
+	]]>
+	</update>
+		
+	<update id="updateUserPw" parameterType="user">
 	<![CDATA[
 		UPDATE T_USER
 		SET USER_PW = #{userPw}
 		WHERE USER_ID LIKE #{userId}
 	]]>
 	</update>
+	
+	<select id="hotProcSort" resultType="item">
+	<![CDATA[
+		SELECT *
+		FROM T_ITEM
+		ORDER BY ITEM_CNT DESC
+		LIMIT 3
+	]]>
+	</select>
+	
+	<select id="endProcSort" resultType="item">
+	<![CDATA[
+		SELECT *
+		FROM T_ITEM
+		WHERE ITEM_ENDDATE > NOW()
+		ORDER BY ITEM_ENDDATE DESC
+		LIMIT 3
+	]]>
+	</select>
 	
 </mapper>
