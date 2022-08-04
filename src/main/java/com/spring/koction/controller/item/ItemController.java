@@ -99,18 +99,10 @@ public class ItemController {
 	}
 
 	@PostMapping("/inquiry")
-	public ModelAndView testPost(Itemq itemq, int itemNo) {
+	public ModelAndView testPost(Itemq itemq) {
 		ModelAndView mv = new ModelAndView();
-		itemq.getItem().setItemNo(itemNo);
-
-		int itemq = itemService.
-//		System.out.println("itemNo////////////////////////"+itemNo);
-		System.out.println("itemq////////////////////////"+itemq.getItem().getItemNo());
-//		System.out.println("itemq////////////////////////"+itemq);
+		System.out.println(itemq.getItem());
 		itemService.insertInqury(itemq);
-//		System.out.println("itemNo////////////////////////"+itemNo);
-//		System.out.println("itemq////////////////////////"+itemq.getItem());
-//		System.out.println("itemq////////////////////////"+itemq);
 		mv.setViewName("redirect:/item/test/1");
 		return mv;
 	}

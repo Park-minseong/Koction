@@ -359,8 +359,8 @@
                                                     <tr>
                                                         <th>물품번호</th>
                                                         <td th:text="${itemNo}">
-															<input type="hidden" name="itemNo"  th:value="${itemNo}">
 														</td>
+														<input type="hidden" name="item"  th:value="${itemNo}">
                                                     </tr>
                                                     <tr>
                                                         <th>제목</th>
@@ -371,7 +371,8 @@
                                                     </tr>
                                                     <tr>
                                                         <th>작성자</th>
-                                                        <td th:text="${#authentication.name}"><input type="hidden" name="user" th:value="${#authentication.name}" readonly/></td>
+                                                        <td th:text="${#authentication.name}"></td>
+                                                        <input type="hidden" name="user" th:value="${#authentication.name}" readonly/>
                                                     </tr>
                                                     <tr>
                                                         <th>내용</th>
