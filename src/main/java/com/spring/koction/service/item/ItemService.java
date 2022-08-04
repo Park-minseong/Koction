@@ -3,19 +3,17 @@ package com.spring.koction.service.item;
 
 import java.util.List;
 
+import com.spring.koction.entity.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import com.spring.koction.entity.Item;
-import com.spring.koction.entity.ItemCategory;
-import com.spring.koction.entity.ItemFile;
-import com.spring.koction.entity.Order;
 
 public interface ItemService {
 
 	Page<Item> getItemList(Item item, Pageable pageable);
 
-	List<Item> getMyItemList();
+//	List<Item> getMyItemList();
+
+	List<Item> getMyItemList(String userId);
 
 	List<ItemFile> getMyItemFile();
 
@@ -35,6 +33,5 @@ public interface ItemService {
 	List<ItemCategory> findCategory();
 
 	List<ItemFile> findItemFilesByItemNo(int itemNo);
-
 
 }
