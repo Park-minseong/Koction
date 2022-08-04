@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.spring.koction.entity.*;
 import com.spring.koction.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -75,6 +80,21 @@ public class ItemController {
 		mv.setViewName("/item/Search.html");
 
 
+		return mv;
+	}
+	
+	@GetMapping("/search/{categoryNo}")
+	public ModelAndView category(@PathVariable int categoryNo, Model model,@PageableDefault(page = 0, size = 6, sort="itemNo" ,direction=Direction.DESC) Pageable pageable) {
+		ModelAndView mv = new ModelAndView();
+		Page<Item> itemList = itemService.findCategory(categoryNo, pageable);
+		System.out.println(itemList);
+		for(Item item:itemList) {
+			if(itemService.findItemFilesByItemNo(item.getItemNo()).size() != 0) {
+				item.setItemFile(itemService.findItemFilesByItemNo(item.getItemNo()).get(0));
+			}
+		}
+		mv.setViewName("/item/search.html");
+		mv.addObject("itemList1", itemList);
 		return mv;
 	}
 	@GetMapping("/test")

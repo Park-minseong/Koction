@@ -36,20 +36,7 @@ public class IndexController {
 		return "/item/Category";
 	}
 	
-	@RequestMapping("/item/search/{categoryNo}")
-	public String category(@PathVariable int categoryNo, Model model,@PageableDefault(page = 0, size = 6, sort="itemNo" ,direction=Direction.DESC) Pageable pageable) {
-		Page<Item> itemList = itemService.findCategory(categoryNo, pageable);
-		System.out.println(itemList);
-		for(Item item:itemList) {
-			if(itemService.findItemFilesByItemNo(item.getItemNo()).size() != 0) {
-				item.setItemFile(itemService.findItemFilesByItemNo(item.getItemNo()).get(0));
-			}
-		}
-		
-		model.addAttribute("itemList1", itemList);
-		return "/item/Search";
-	}
-	
+
 	/*
 	 * @RequestMapping("/guide") public String guide() { return "/project/guide"; }
 	 */
