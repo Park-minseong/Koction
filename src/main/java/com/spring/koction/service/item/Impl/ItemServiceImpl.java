@@ -1,17 +1,21 @@
 package com.spring.koction.service.item.Impl;
 
 
+
 import com.spring.koction.dto.ItemqDto;
 import com.spring.koction.entity.*;
 import com.spring.koction.mapper.ItemMapper;
 import com.spring.koction.repository.*;
 import com.spring.koction.service.item.ItemService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
+
 
 @Service
 public class ItemServiceImpl implements ItemService{
@@ -122,6 +126,7 @@ public class ItemServiceImpl implements ItemService{
 	public List<ItemFile> findItemFilesByItemNo(int itemNo) {
 		return itemFileRepository.findByItemItemNo(itemNo);
 	}
+	
 
 	@Override
 	public void updateItemCnt(int itemNo) {
