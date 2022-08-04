@@ -4,8 +4,10 @@ package com.spring.koction.service.item.Impl;
 import java.util.List;
 
 
+
 import com.spring.koction.entity.*;
 import com.spring.koction.entity.Itemq;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,12 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
-
-import com.spring.koction.entity.Item;
-import com.spring.koction.entity.ItemCategory;
-import com.spring.koction.entity.ItemFile;
-import com.spring.koction.entity.Itemq;
-import com.spring.koction.entity.Order;
 
 import com.spring.koction.mapper.ItemMapper;
 import com.spring.koction.repository.ItemCategoryRepository;
@@ -162,9 +158,26 @@ public class ItemServiceImpl implements ItemService{
 //	}
 
 	@Override
-	public void insertInqury(Itemq itemq) {
+	public int insertInqury(Itemq itemq) {
 //		itemMapper.insertInquery(itemq);
+		int itemqNo = itemMapper.getNextItemqNo();
+		itemq.setItemqNo(itemqNo);
 		itemqRepository.save(itemq);
+		itemqRepository.flush();
+		return itemq.getItemqNo();
+	}
+
+	@Override
+	public void deleteTest(int itemqNo, int itemNo) {
+//		Itemq itemq = new Itemq();
+//		Item item = new Item();
+//		item.setItemNo(itemNo);
+//		itemq.setItem(item);
+//		itemq.setItemqNo(itemqNo);
+
+		//itemqRepository.delete(itemq);
+		itemMapper.deleteTest(itemqNo, itemNo);
+		//강사님 지금 item_no 도 pk 입니다.
 	}
 
 	@Override

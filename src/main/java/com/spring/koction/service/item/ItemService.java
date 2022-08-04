@@ -44,6 +44,11 @@ public interface ItemService {
 
 	List<Itemq> selectInquryList();
 
+
+	int insertInqury(Itemq itemq);
+
+	void deleteTest(int itemqNo, int itemNo);
+
 	void insertInqury(Itemq itemq);
 
 	List<Item> hotProcSort();
@@ -51,4 +56,5 @@ public interface ItemService {
 	List<Item> endProcSort();
 
 	List<Item> endProc();
+
 }

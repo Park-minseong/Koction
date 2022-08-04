@@ -112,6 +112,10 @@ public class ItemController {
 		ModelAndView mv = new ModelAndView();
 
 		List<Itemq> list = itemService.selectInquryList();
+		for(Itemq itemq : list) {
+			System.out.println(itemq.toString());
+		}
+
 		mv.addObject("list",list);
 		mv.addObject("itemNo", itemNo);
 //		System.out.println("itemNo////////////////////////"+itemNo);
@@ -122,12 +126,26 @@ public class ItemController {
 	@PostMapping("/inquiry")
 	public ModelAndView testPost(Itemq itemq) {
 		ModelAndView mv = new ModelAndView();
+//		itemq.getItem().setItemNo(itemNo);
+
+
+//		System.out.println("itemNo////////////////////////"+itemNo);
+//		System.out.println("itemq////////////////////////"+itemq.getItem().getItemNo());
+//		System.out.println("itemq////////////////////////"+itemq);
+
 		System.out.println(itemq.getItem());
-		itemService.insertInqury(itemq);
+
+		int itemqNo = itemService.insertInqury(itemq);
 		mv.setViewName("redirect:/item/test/1");
 		return mv;
 	}
 
+
+	@PostMapping("/test/deleteTest")
+	public void deleteTest(@RequestParam int itemqNo, @RequestParam int itemNo){
+		System.out.println("itemqNo========================================================="+itemqNo);
+		itemService.deleteTest(itemqNo, itemNo);
+  }
 	@GetMapping("/searchItem/{itemNo}")
 	public ModelAndView searchItemView(@PathVariable int itemNo) {
 		ModelAndView mv = new ModelAndView();
