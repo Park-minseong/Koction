@@ -2,6 +2,11 @@ package com.spring.koction.service.item;
 
 import java.util.List;
 
+
+import com.spring.koction.dto.ItemqDto;
+import com.spring.koction.entity.*;
+import com.spring.koction.entity.Itemq;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -45,7 +50,7 @@ public interface ItemService {
 
 	Item getItem(int itemNo);
 
-	List<Itemq> selectInquryList();
+//	List<Itemq> selectInquryList(int itemNo);
 
 
 	int insertInqury(Itemq itemq);
@@ -59,4 +64,5 @@ public interface ItemService {
 
 	List<Item> endProc();
 
+	List<ItemqDto> selectInquryList(int itemNo);
 }

@@ -1,25 +1,21 @@
 package com.spring.koction.service.item.Impl;
 
 
-import java.util.List;
+
+import com.spring.koction.dto.ItemqDto;
+import com.spring.koction.entity.*;
+import com.spring.koction.mapper.ItemMapper;
+import com.spring.koction.repository.*;
+import com.spring.koction.service.item.ItemService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.spring.koction.entity.Item;
-import com.spring.koction.entity.ItemCategory;
-import com.spring.koction.entity.ItemFile;
-import com.spring.koction.entity.Itemq;
-import com.spring.koction.entity.Order;
-import com.spring.koction.mapper.ItemMapper;
-import com.spring.koction.repository.ItemCategoryRepository;
-import com.spring.koction.repository.ItemFileRepository;
-import com.spring.koction.repository.ItemRepository;
-import com.spring.koction.repository.ItemqRepository;
-import com.spring.koction.repository.OrderRepository;
-import com.spring.koction.service.item.ItemService;
+
+import java.util.List;
+
 
 @Service
 public class ItemServiceImpl implements ItemService{
@@ -145,12 +141,17 @@ public class ItemServiceImpl implements ItemService{
 		return itemRepository.findById(itemNo).get();
 	}
 
-	public List<Itemq> selectInquryList() {
-		return itemqRepository.findAll();
+//	public List<Itemq> selectInquryList(int itemNo) {
+////		return itemqRepository.findAll();
+//		return itemMapper.selectInquryList(itemNo);
+//	}
+	public List<ItemqDto> selectInquryList(int itemNo) {
+//		return itemqRepository.findAll();
+		return itemMapper.selectInquryList(itemNo);
 	}
 
 //	@Override
-//	public int insertInquryList(Itemq itemq) {
+//	public int insertInquryList(ItemqDto itemq) {
 //		int itemqNo = itemMapper.getNextInquryNo();
 //
 ////		itemq.setItem();
@@ -173,7 +174,7 @@ public class ItemServiceImpl implements ItemService{
 
 	@Override
 	public void deleteTest(int itemqNo, int itemNo) {
-//		Itemq itemq = new Itemq();
+//		ItemqDto itemq = new ItemqDto();
 //		Item item = new Item();
 //		item.setItemNo(itemNo);
 //		itemq.setItem(item);

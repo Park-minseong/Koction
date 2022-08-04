@@ -319,24 +319,33 @@
 				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 					<!-- 상품문의 -->
 					<div id="ask">
-						<table class="table table-sm table-hover">
+						<table class="table table-sm table-hover w-auto">
 							<tr>
-								<th>번호</th>
-								<th>제목</th>
-								<th>내용</th>
-								<th>등록자</th>
-								<th>등록일</th>
-								<th></th>
+								<th nowrap>번호</th>
+								<th nowrap>제목</th>
+								<th nowrap>내용</th>
+								<th nowrap>등록자</th>
+								<th nowrap>등록일</th>
+								<th nowrap></th>
 							</tr>
-							<tr th:each="itemq : ${list}" th:if="${itemq.itemqYn} != 'N'">
-								<td th:text="${itemq.itemqNo}"></td>
-								<td th:text="${itemq.itemqNm}">
+<!--							<tr th:each="itemq : ${list}" th:if="${itemq.itemqYn} != 'N'">-->
+							<tr th:each="itemq : ${list}">
+								<td nowrap th:text="${itemq.itemqNo}"></td>
+								<td nowrap th:text="${itemq.itemqNm}">
 								</td>
 								<!-- <td th:text="${user.userId}"></td> -->
-								<td th:text="${itemq.itemqContent}"></td>
-								<td th:text="${itemq.user.userId}">11</td>
-								<td th:text="${#temporals.format(itemq.itemqRegdate, 'yyyy-MM-dd')}"></td>
-								<td><button type="button" th:onclick="'deleteTest('+ ${itemq.itemqNo} +', ' + ${itemNo} + ')'">삭제</button></td>
+								<td nowrap th:text="${itemq.itemqContent}"></td>
+								<td nowrap th:text="${itemq.userId}">11</td>
+								<td nowrap th:text="${#temporals.format(itemq.itemqRegdate, 'yyyy-MM-dd')}"></td>
+								<!-- <td th:text="${#temporals.createDate(itemq.itemqRegdate, 'yyyy/MM/dd')}"></td> -->
+								<!-- <td><button type="button" th:if="${#authentication.name} eq 'qw'" th:onclick="'deleteTest('+ ${itemq.itemqNo} +', ' + ${itemNo} + ')'">삭제</button></td> -->
+								<td nowrap>
+									<button type="button" th:if="${itemq.userId.equals(#authentication.getName())}" 
+											th:onclick="'deleteTest('+ ${itemq.itemqNo} +', ' + ${itemNo} + ')'" 
+											class="btn btn-light">삭제
+									</button>
+								</td>
+							
 							</tr>
 						</table>
 						<div id="ask_Modal">

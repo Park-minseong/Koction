@@ -1,37 +1,28 @@
 package com.spring.koction.controller.item;
 
-import java.io.IOException;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-
-import org.springframework.web.bind.annotation.*;
-
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.spring.koction.commons.FileUtils;
+import com.spring.koction.dto.ItemqDto;
 import com.spring.koction.entity.CustomUserDetails;
 import com.spring.koction.entity.Item;
 import com.spring.koction.entity.ItemFile;
 import com.spring.koction.entity.Itemq;
 import com.spring.koction.service.item.ItemService;
 import com.spring.koction.service.user.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/item")
@@ -102,6 +93,33 @@ public class ItemController {
 
 		return mv;
 	}
+
+//	@GetMapping("/test")
+//	public ModelAndView testViewOrigin(@PathVariable int itemNo) {
+//		ModelAndView mv = new ModelAndView();
+//		List<ItemqDto> list = itemService.selectInquryList();
+//		mv.addObject("list",list);
+//		mv.setViewName("/item/ProductInfo");
+//		return mv;
+//	}
+
+	//0804 상세 페이지랑 합치는 작업중
+//	@GetMapping("/test/{itemNo}")
+//	public ModelAndView testView(@PathVariable int itemNo) {
+//		ModelAndView mv = new ModelAndView();
+//
+//		List<ItemqDto> list = itemService.selectInquryList();
+//		for(ItemqDto itemq : list) {
+//			System.out.println(itemq.toString());
+//		}
+//
+//		mv.addObject("list",list);
+//		mv.addObject("itemNo", itemNo);
+////		System.out.println("itemNo////////////////////////"+itemNo);
+//		mv.setViewName("/item/ProductInfo");
+//		return mv;
+//	}
+
 	
 	@GetMapping("/search/{categoryNo}")
 	public ModelAndView category(@PathVariable int categoryNo, Model model,@PageableDefault(page = 0, size = 6, sort="itemNo" ,direction=Direction.DESC) Pageable pageable) {
@@ -117,31 +135,6 @@ public class ItemController {
 		mv.addObject("itemList1", itemList);
 		return mv;
 	}
-	
-	@GetMapping("/test")
-	public ModelAndView testViewOrigin(@PathVariable int itemNo) {
-		ModelAndView mv = new ModelAndView();
-		List<Itemq> list = itemService.selectInquryList();
-		mv.addObject("list",list);
-		mv.setViewName("/item/ProductInfo");
-		return mv;
-	}
-
-	@GetMapping("/test/{itemNo}")
-	public ModelAndView testView(@PathVariable int itemNo) {
-		ModelAndView mv = new ModelAndView();
-
-		List<Itemq> list = itemService.selectInquryList();
-		for(Itemq itemq : list) {
-			System.out.println(itemq.toString());
-		}
-
-		mv.addObject("list",list);
-		mv.addObject("itemNo", itemNo);
-//		System.out.println("itemNo////////////////////////"+itemNo);
-		mv.setViewName("/item/ProductInfo");
-		return mv;
-	}
 
 	@PostMapping("/inquiry")
 	public ModelAndView testPost(Itemq itemq) {
@@ -154,9 +147,10 @@ public class ItemController {
 //		System.out.println("itemq////////////////////////"+itemq);
 
 		System.out.println(itemq.getItem());
-
+//		itemq.getItem().setItemNo(itemNo);
 		int itemqNo = itemService.insertInqury(itemq);
-		mv.setViewName("redirect:/item/searchItem/{itemNo}");
+		System.out.println("//////////////////"+itemq.getItem().getItemNo());
+		mv.setViewName("redirect:/item/searchItem/" +itemq.getItem().getItemNo());
 		return mv;
 	}
 
@@ -166,19 +160,29 @@ public class ItemController {
 		System.out.println("itemqNo========================================================="+itemqNo);
 		itemService.deleteTest(itemqNo, itemNo);
   	}
+
 	@GetMapping("/searchItem/{itemNo}")
 	public ModelAndView searchItemView(@PathVariable int itemNo) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/item/ProductInfo.html");
-		
+
+//		List<Itemq> list = itemService.selectInquryList(itemNo);
+
+		List<ItemqDto> list = itemService.selectInquryList(itemNo);
+
 		Item item = itemService.getItem(itemNo);
 		List<ItemFile> fileList = itemService.getItemFileList(itemNo);
 		
 		mv.addObject("item", item);
 		mv.addObject("fileList", fileList);
-		
+		mv.addObject("list",list);
+		mv.addObject("itemNo", itemNo);
+
+
 		itemService.updateItemCnt(itemNo);
 		
 		return mv;
 	}
+
+
 }
