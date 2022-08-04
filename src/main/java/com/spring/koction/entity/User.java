@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import lombok.Data;
 
@@ -15,6 +16,7 @@ import lombok.Data;
 @Data
 @Table(name="T_USER")
 @DynamicInsert
+@DynamicUpdate
 public class User {
 	@Id
 	private String userId;
