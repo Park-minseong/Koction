@@ -12,6 +12,7 @@ import com.spring.koction.entity.Item;
 import com.spring.koction.entity.ItemCategory;
 import com.spring.koction.entity.ItemFile;
 import com.spring.koction.service.item.ItemService;
+import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
@@ -63,5 +64,11 @@ public class IndexController {
 	public String item() {
 		return "/item/myItem";
 	}
-	
+
+
+	@RequestMapping("/")
+	public String index() {
+
+		return "/index";
+	}
 }

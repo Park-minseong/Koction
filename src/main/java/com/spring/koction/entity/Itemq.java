@@ -11,11 +11,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Data
 @Table(name="T_ITEMQ")
 @IdClass(ItemqId.class)
+@DynamicInsert
+@DynamicUpdate
 public class Itemq {
 	@Id
 	private int itemqNo;

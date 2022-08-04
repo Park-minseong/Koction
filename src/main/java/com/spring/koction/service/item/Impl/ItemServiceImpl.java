@@ -3,6 +3,7 @@ package com.spring.koction.service.item.Impl;
 
 import java.util.List;
 
+import com.spring.koction.entity.Itemq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -73,7 +74,6 @@ public class ItemServiceImpl implements ItemService{
 			itemFile.setItemfileNo(itemFileRepository.selectNextItemNoByItemItemNo(itemFile.getItem().getItemNo()));
 			itemFileRepository.save(itemFile);
 		}
-
 	}
 
 	@Override
@@ -81,8 +81,6 @@ public class ItemServiceImpl implements ItemService{
 		// TODO Auto-generated method stub
 		return itemRepository.findByItemCategoryCategoryNo(categoryNo);
 	}
-
-
 
 	@Override
 	public List<ItemCategory> findCategory() {
@@ -97,7 +95,28 @@ public class ItemServiceImpl implements ItemService{
 		return itemFileRepository.findByItemItemNo(itemNo);
 	}
 
+	@Override
+	public List<Itemq> selectInquryList() {
+		return itemqRepository.findAll();
+	}
 
+//	@Override
+//	public int insertInquryList(Itemq itemq) {
+//		int itemqNo = itemMapper.getNextInquryNo();
+//
+////		itemq.setItem();
+//		itemq.setItemqNo(itemqNo);
+////		itemMapper.insertInquryList();
+//		itemqRepository.save(itemq);
+//		itemqRepository.flush();
+//		return itemq.getItemqNo();
+//	}
+
+	@Override
+	public void insertInqury(Itemq itemq) {
+//		itemMapper.insertInquery(itemq);
+		itemqRepository.save(itemq);
+	}
 
 
 }

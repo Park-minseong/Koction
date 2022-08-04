@@ -3,6 +3,7 @@ package com.spring.koction.service.item;
 
 import java.util.List;
 
+import com.spring.koction.entity.Itemq;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -31,4 +32,7 @@ public interface ItemService {
 	List<ItemFile> findItemFilesByItemNo(int itemNo);
 
 
+	List<Itemq> selectInquryList();
+
+	void insertInqury(Itemq itemq);
 }
