@@ -4,6 +4,7 @@ package com.spring.koction.service.item.Impl;
 import java.util.List;
 
 import com.spring.koction.entity.*;
+import com.spring.koction.entity.Itemq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,8 +39,6 @@ public class ItemServiceImpl implements ItemService{
 	@Autowired
 	ItemCategoryRepository itemCategoryRepository;
 
-
-
 	@Override
 	public Page<Item> getItemList(Item item, Pageable pageable) {
 		return null;
@@ -67,7 +66,18 @@ public class ItemServiceImpl implements ItemService{
 
 	@Override
 	public List<ItemFile> getItemFileList(int itemNo) {
-		return null;
+
+		Item item = new Item();
+		
+		item.setItemNo(itemNo);
+		
+		List<ItemFile> fileList = itemFileRepository.findByItemItemNo(itemNo);
+		
+		if(fileList == null || fileList.isEmpty()) {
+			return null;
+		} else {
+			return fileList;
+		}
 
 	}
 	@Override
@@ -85,7 +95,6 @@ public class ItemServiceImpl implements ItemService{
 			itemFile.setItemfileNo(itemFileRepository.selectNextItemNoByItemItemNo(itemFile.getItem().getItemNo()));
 			itemFileRepository.save(itemFile);
 		}
-
 	}
 
 	@Override
@@ -96,12 +105,10 @@ public class ItemServiceImpl implements ItemService{
 
 
 	@Override
-	public List<Item> findCategory(int categoryNo) {
+	public Page<Item> findCategory(int categoryNo, Pageable pageable) {
 		// TODO Auto-generated method stub
-		return itemRepository.findByItemCategoryCategoryNo(categoryNo);
+		return itemRepository.findByItemCategoryCategoryNo(categoryNo, pageable);
 	}
-
-
 
 	@Override
 	public List<ItemCategory> findCategory() {
@@ -116,6 +123,39 @@ public class ItemServiceImpl implements ItemService{
 		return itemFileRepository.findByItemItemNo(itemNo);
 	}
 
+	@Override
+	public void updateItemCnt(int itemNo) {
+		// TODO Auto-generated method stub
+		itemMapper.updateItemCnt(itemNo);
+		
+	}
 
+	@Override
+	public Item getItem(int itemNo) {
+		// TODO Auto-generated method stub
+		return itemRepository.findById(itemNo).get();
+	}
+
+	public List<Itemq> selectInquryList() {
+		return itemqRepository.findAll();
+	}
+
+//	@Override
+//	public int insertInquryList(Itemq itemq) {
+//		int itemqNo = itemMapper.getNextInquryNo();
+//
+////		itemq.setItem();
+//		itemq.setItemqNo(itemqNo);
+////		itemMapper.insertInquryList();
+//		itemqRepository.save(itemq);
+//		itemqRepository.flush();
+//		return itemq.getItemqNo();
+//	}
+
+	@Override
+	public void insertInqury(Itemq itemq) {
+//		itemMapper.insertInquery(itemq);
+		itemqRepository.save(itemq);
+	}
 
 }

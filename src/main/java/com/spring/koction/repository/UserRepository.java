@@ -6,4 +6,6 @@ import com.spring.koction.entity.User;
 
 public interface UserRepository extends JpaRepository<User, String> {
 	User findByUserId(String UserId);
+
+	void save(String userPw);
 }
