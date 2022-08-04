@@ -18,4 +18,12 @@
 	]]>
 	</update>
 	
+		<update id="updateUserPw" parameterType="user">
+	<![CDATA[
+		UPDATE T_USER
+		SET USER_PW = #{userPw}
+		WHERE USER_ID LIKE #{userId}
+	]]>
+	</update>
+	
 </mapper>

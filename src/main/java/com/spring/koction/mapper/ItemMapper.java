@@ -1,15 +1,18 @@
 package com.spring.koction.mapper;
 
-import com.spring.koction.entity.Itemq;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+
+import com.spring.koction.entity.User;
 
 @Mapper
 public interface ItemMapper {
 	int getNextItemNo();
 	
 	void updateItemNp(int itemNo);
+	
+	void updateUserPw(User user);
+
 
 	@Select("SELECT IFNULL(MAX(ITEMQ_NO), 0) + 1 FROM T_ITEMQ")
 	int getNextInquryNo();

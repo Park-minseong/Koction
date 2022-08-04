@@ -15,6 +15,7 @@
 	
 	<typeAliases>
 		<typeAlias type="com.spring.koction.entity.Item" alias="item"></typeAlias>
+		<typeAlias type="com.spring.koction.entity.User" alias="user"></typeAlias>
 		
 	</typeAliases>
 </configuration>
