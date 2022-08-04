@@ -33,6 +33,10 @@ public interface ItemService {
 
 	List<ItemFile> findItemFilesByItemNo(int itemNo);
 
+	void updateItemCnt(int itemNo);
+
+	Item getItem(int itemNo);
+
 
 	List<Itemq> selectInquryList();
 

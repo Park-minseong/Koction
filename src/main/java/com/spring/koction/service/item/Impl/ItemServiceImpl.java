@@ -55,7 +55,18 @@ public class ItemServiceImpl implements ItemService{
 
 	@Override
 	public List<ItemFile> getItemFileList(int itemNo) {
-		return null;
+
+		Item item = new Item();
+		
+		item.setItemNo(itemNo);
+		
+		List<ItemFile> fileList = itemFileRepository.findByItemItemNo(itemNo);
+		
+		if(fileList == null || fileList.isEmpty()) {
+			return null;
+		} else {
+			return fileList;
+		}
 
 	}
 	@Override
@@ -102,6 +113,18 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@Override
+	public void updateItemCnt(int itemNo) {
+		// TODO Auto-generated method stub
+		itemMapper.updateItemCnt(itemNo);
+		
+	}
+
+	@Override
+	public Item getItem(int itemNo) {
+		// TODO Auto-generated method stub
+		return itemRepository.findById(itemNo).get();
+	}
+
 	public List<Itemq> selectInquryList() {
 		return itemqRepository.findAll();
 	}

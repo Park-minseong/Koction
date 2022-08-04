@@ -18,7 +18,16 @@
 	]]>
 	</update>
 	
+	<update id="updateItemCnt" parameterType="int">
+	<![CDATA[
+		UPDATE T_ITEM
+			SET ITEM_CNT = ITEM_CNT + 1
+			WHERE ITEM_NO = #{itemNo}
 		<update id="updateUserPw" parameterType="user">
+	]]>
+	</update>
+		
+	<update id="updateUserPw" parameterType="user">
 	<![CDATA[
 		UPDATE T_USER
 		SET USER_PW = #{userPw}
