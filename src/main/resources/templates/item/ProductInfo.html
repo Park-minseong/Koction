@@ -32,27 +32,6 @@
 				}
 			});
 
-
-			//상품 별 잔여시간 계산
-			function restTime(e) {
-	            var now = new Date();
-	            var end = new Date($(e).attr("enddate"));
-	
-				var today = new Date().getTime();
-
-				var gap = $end_time - today;
-				var day = (Math.ceil(gap / (1000 * 60 * 60 * 24))) - 1;
-				var hour = Math.ceil((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-				var min = Math.ceil((gap % (1000 * 60 * 60)) / (1000 * 60));
-				var sec = Math.ceil((gap % (1000 * 60)) / 1000);
-
-				if (day >= 2) {
-					$ex_time.text("남은시간 : " + day + "일 " + hour + "시간 " + min + "분");
-				} else {
-					$ex_time.text("남은시간 : " + hour + "시간 " + min + "분 " + sec + "초");
-				}
-			}
-		
 			function deleteTest(itemqNo, itemNo) {
 				$.ajax({
 					url: '/item/test/deleteTest',
@@ -69,7 +48,13 @@
 					}
 				});
 			}
-
+			
+			//상품 별 잔여시간 계산
+			function restTime(e) {
+	            var now = new Date();
+	            var end = new Date($(e).attr("enddate"));
+	
+				var today = new Date().getTime();
 	            var gap = end - today;
 	            var day = (Math.ceil(gap / (1000 * 60 * 60 * 24)))-1;
 	            var hour = Math.ceil((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))-1;
@@ -81,7 +66,7 @@
 	            } else {
 	                $(e).text("남은시간 : " + hour + "시간 " + min + "분 " + sec + "초");
 	            }
-	        
+	        }
 	        $(function() {
 	            setInterval(function(){
 	                $(".timer").each(function(i,e){
@@ -89,6 +74,7 @@
 		            })
 		        },1000);
 	        });
+
 
 		</script>
 	</th:block>
@@ -160,8 +146,8 @@
 			<!-- 상품 상세정보 부분 -->
 			<div id="pro_Info">
 				<table class="table table-hover">
-					<caption>현재가 &nbsp; &nbsp; &nbsp; &nbsp;
-						<span id="price" th:text="${#numbers.formatInteger(item.itemStPrice, 0, 'COMMA')} + '원'">850,000원</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<caption>현재가 &nbsp; &nbsp;
+						<span id="price" th:text="${#numbers.formatInteger(item.itemStPrice, 0, 'COMMA')} + '원'">850,000원</span>&nbsp;&nbsp;&nbsp;
 						<p class="timer"  th:enddate="${item.itemEnddate}"></p>
 					</caption>
 					<tr>
