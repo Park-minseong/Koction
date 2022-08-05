@@ -8,12 +8,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Data;
 
 @Entity
 @Data
 @Table(name="T_ITEM_FILE")
 @IdClass(ItemFileId.class)
+
 public class ItemFile {
 	@Id
 	private int itemfileNo;
@@ -30,5 +33,6 @@ public class ItemFile {
 	@Id
 	@ManyToOne
 	@JoinColumn(name="ITEM_NO")
+	@JsonBackReference
 	private Item item;
 }

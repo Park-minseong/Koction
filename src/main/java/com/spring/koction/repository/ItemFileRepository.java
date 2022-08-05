@@ -2,6 +2,7 @@ package com.spring.koction.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,4 +16,5 @@ public interface ItemFileRepository extends JpaRepository<ItemFile, ItemFileId> 
 	int selectNextItemNoByItemItemNo(@Param("itemNo") int ItemNo);
 
 	List<ItemFile> findByItemItemNo(int itemNo);
+	
 }

@@ -14,6 +14,8 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.Data;
 
 @Entity
@@ -68,8 +70,9 @@ public class Item {
 	private User user;
 
 	@Transient
+	@JsonManagedReference
 	private ItemFile itemFile;
-	
+		
 	@Transient
 	private Order order;
 	

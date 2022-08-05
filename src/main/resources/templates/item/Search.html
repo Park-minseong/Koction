@@ -41,6 +41,23 @@
 				</th:block>
 	    <th:block layout:fragment="css">
 	  		<link rel="stylesheet" th:href="@{/css/Ca_Se_In.css}">
+	  		<style>
+	  		.pgn a{
+		  		text-decoration: none;
+		  		display: inline-block;
+		  		margin: 0 5px;
+	  		}
+	  		
+	  		
+	  		.pgn a button{
+		  		margin: 0;
+	  		}
+	  		
+	  		.pgn a button:hover{
+		  		margin: 0;
+	  		}
+	  		
+	  		</style>
 	  	</th:block>
 	</head>
 
@@ -155,14 +172,23 @@
         <div id="page_btn">
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="btn-group me-2" role="group" aria-label="Second group">
-                    <div class="btn_page_side">
-                        <button type="button" class="btn btn-outline-secondary btn_page" style="border: 0;"><</button>
-                        <button type="button" class="btn btn-outline-secondary btn_page">1</button>
-                        <button type="button" class="btn btn-outline-secondary btn_page">2</button>
-                        <button type="button" class="btn btn-outline-secondary btn_page">3</button>
-                        <button type="button" class="btn btn-outline-secondary btn_page">4</button>
-                        <button type="button" class="btn btn-outline-secondary btn_page">5</button>
-                        <button type="button" class="btn btn-outline-secondary btn_page" style="border: 0;">></button>
+                    <div class="btn_page_side pgn" th:with="pageNumber = ${itemList1.pageable.pageNumber},
+												pageSize = 5,
+												totalPages = ${itemList1.totalPages},
+												startPage = ${T(java.lang.Math).floor(pageNumber / pageSize) * pageSize +1},
+												tempEndPage = ${startPage + pageSize -1},
+												endPage = ${tempEndPage > totalPages ? totalPages : tempEndPage}">
+						<a th:href="'/item/search/' + ${categoryNo} +'?page=' + ${pageNumber-1}">						
+                        <button type="button" class="btn btn-outline-secondary btn_page" style="border: 0;" th:if="${pageNumber > 0}">&lt;</button>
+                        </a>
+                        
+                        <a th:each="page : ${#numbers.sequence(startPage, endPage)}" th:href="'/item/search/' + ${categoryNo} +'?page=' + ${page -1}">
+                       		<button type="button" class="btn btn-outline-secondary btn_page"  th:text="${page}"></button>
+                        </a>
+                        
+                        <a th:href="'/item/search/' + ${categoryNo} +'?page=' + ${pageNumber+1}">	
+                        <button type="button" class="btn btn-outline-secondary btn_page" style="border: 0;"  th:if="${pageNumber < totalPages -1}">&gt;</button>
+                   		</a>
                     </div>
                 </div>
             </div>
