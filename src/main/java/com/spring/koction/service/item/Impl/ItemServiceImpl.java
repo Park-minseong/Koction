@@ -2,20 +2,27 @@ package com.spring.koction.service.item.Impl;
 
 
 
-import com.spring.koction.dto.ItemqDto;
-import com.spring.koction.dto.OrderDto;
-import com.spring.koction.entity.*;
-import com.spring.koction.mapper.ItemMapper;
-import com.spring.koction.repository.*;
-import com.spring.koction.service.item.ItemService;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
-import java.util.List;
+import com.spring.koction.dto.ItemqDto;
+import com.spring.koction.entity.Item;
+import com.spring.koction.entity.ItemCategory;
+import com.spring.koction.entity.ItemFile;
+import com.spring.koction.entity.Itemq;
+import com.spring.koction.entity.Order;
+import com.spring.koction.mapper.ItemMapper;
+import com.spring.koction.repository.ItemCategoryRepository;
+import com.spring.koction.repository.ItemFileRepository;
+import com.spring.koction.repository.ItemRepository;
+import com.spring.koction.repository.ItemqRepository;
+import com.spring.koction.repository.OrderRepository;
+import com.spring.koction.service.item.ItemService;
 
 
 @Service
@@ -111,8 +118,13 @@ public class ItemServiceImpl implements ItemService{
 
 	@Override
 	public Page<Item> findCategory(int categoryNo, Pageable pageable) {
-		// TODO Auto-generated method stub
-		return itemRepository.findByItemCategoryCategoryNo(categoryNo, pageable);
+		Page<Item> itemList = itemRepository.findByItemCategoryCategoryNo(categoryNo, pageable);
+		for(int i = 0; i < itemList.getSize();  i++) {
+			if(itemList.getContent().get(i).getItemEnddate().compareTo(LocalDateTime.now())  <= 0) {
+				itemList.getContent().remove(i);
+			}
+		}
+		return itemList;
 	}
 
 	@Override
