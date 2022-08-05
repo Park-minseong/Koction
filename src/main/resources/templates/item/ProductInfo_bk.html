@@ -12,11 +12,7 @@
 	</th:block>
 
 	<th:block layout:fragment="script">
-		<script th:inline="javascript">
-			/*<[CDATA[*/
-			const list = /*[[${list}]]*/;
-			/*]]>*/
-			console.log(list);
+		<script>
 			/* 종현님 모달창 값 덤프 */
 			/*input일때는 value로 받아오고 <p id="key"></p>, td는 텍스트*/
 			$(function () {
@@ -32,13 +28,14 @@
 				}
 			});
 
-			//상품 별 잔여시간 계산
-			function restTime(e) {
-	            var now = new Date();
-	            var end = new Date($(e).attr("enddate"));
-	
-				var today = new Date().getTime();
+			/* Date이용 남은시간 */
+			var $ex_time = $(".ex_time");
+			/* var $end_time = new Date($(".end_time")); */
+			var $end_time = new Date("June 30, 2022, 21:30:00");
+			var now = new Date();
 
+			setInterval(function () {
+				var today = new Date().getTime();
 				var gap = $end_time - today;
 				var day = (Math.ceil(gap / (1000 * 60 * 60 * 24))) - 1;
 				var hour = Math.ceil((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -51,44 +48,6 @@
 					$ex_time.text("남은시간 : " + hour + "시간 " + min + "분 " + sec + "초");
 				}
 			}, 1000);
-
-			function deleteTest(itemqNo, itemNo) {
-				$.ajax({
-					url: '/item/test/deleteTest',
-					type: 'post',
-					data: {
-						"itemqNo" : itemqNo,
-						"itemNo" : itemNo,
-						  },
-					success: function() {
-						location.reload();
-					},
-					error: function(e) {
-						console.log(e);
-					}
-				});
-			}
-
-	            var gap = end - today;
-	            var day = (Math.ceil(gap / (1000 * 60 * 60 * 24)))-1;
-	            var hour = Math.ceil((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))-1;
-	            var min = Math.ceil((gap % (1000 * 60 * 60)) / (1000 * 60))-1;
-	            var sec = Math.ceil((gap % (1000 * 60)) / 1000);
-	            
-	            if (day >= 1) {
-	                $(e).text("남은시간 : " + day + "일 " + hour + "시간 " + min + "분");
-	            } else {
-	                $(e).text("남은시간 : " + hour + "시간 " + min + "분 " + sec + "초");
-	            }
-	        }
-	        $(function() {
-	            setInterval(function(){
-	                $(".timer").each(function(i,e){
-						 restTime(e); 
-		            })
-		        },1000);
-	        });
-
 		</script>
 	</th:block>
 </head>
@@ -98,20 +57,20 @@
 		<!-- 카테고리/상품명 -->
 		<div id="pro_name">
 			<!-- <p>카테고리 : 디지털/가전 - 핸드폰</p> -->
-			<h1><strong th:text="${item.itemTitle}">아이폰 14 - 256gb</strong></h1>
+			<h1><strong>아이폰 14 - 256gb</strong></h1>
 		</div>
-		<hr/>
-		<br/>
+		<hr>
 		<!-- 상품사진, 정보 부분의 묶음 -->
 		<div id="pro_main">
 			<!-- 상품사진 캐러셀 부분 -->
-			<!--기존 캐러셀
 			<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
 				<div class="carousel-indicators">
 					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
 						class="active" aria-current="true" aria-label="Slide 1"></button>
 					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
 						aria-label="Slide 2"></button>
+					<!--                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button> -->
 				</div>
 				<div class="carousel-inner">
 					<div class="carousel-item active">
@@ -131,65 +90,42 @@
 					<span class="carousel-control-next-icon" aria-hidden="true"></span>
 					<span class="visually-hidden">Next</span>
 				</button>
-			</div>-->
-			<!--타임리프 캐러셀-->
-			<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-				  <div class="carousel-indicators">
-				    <button type="button" data-bs-target="#carouselExampleIndicators" th:each="fileList : ${fileList}" 
-				    data-bs-slide-to="0" th:data-bs-slide-to="${fileList.itemfileNo-1}" 
-				    aria-label="Slide 1" th:aria-label="'Slide '+ ${fileList.itemfileNo}" 
-				    class="active" th:class="${fileList.itemfileNo eq 1} ? 'active' : ''" 
-				    aria-current="true" th:aria-current="${fileList.itemfileNo eq 1} ? 'true' : 'false'"></button>
-				  </div>
-				  <div class="carousel-inner">
-				    <div class="carousel-item active" th:each="fileList : ${fileList}" th:class="${fileList.itemfileNo eq 1} ? 'carousel-item active' : 'carousel-item'">
-				      <img th:src="@{/upload/} + ${fileList.itemfileNm}" class="d-block w-100" th:alt="${fileList.itemfileOrgNm}" style="width: 966px; height: 644px;">
-				    </div>
-				  </div>
-				  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				    <span class="visually-hidden">Previous</span>
-				  </button>
-				  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-				    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-				    <span class="visually-hidden">Next</span>
-				  </button>
 			</div>
 
 			<!-- 상품 상세정보 부분 -->
 			<div id="pro_Info">
 				<table class="table table-hover">
 					<caption>현재가 &nbsp; &nbsp; &nbsp; &nbsp;
-						<span id="price" th:text="${#numbers.formatInteger(item.itemStPrice, 0, 'COMMA')} + '원'">850,000원</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<p class="timer"  th:enddate="${item.itemEnddate}"></p>
+						<span id="price">850,000원</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<p class="ex_time"></p>
 					</caption>
 					<tr>
 						<th>물품번호</th>
-						<td th:text="${item.itemNo}">6015</td>
+						<td>6015</td>
 					</tr>
 					<tr>
-						<th>경매기한</th>
-						<td class="end_time" th:text="${#temporals.format(item.itemEnddate, 'yyyy/MM/dd HH:mm')}">2022/06/30 21:30</td>
+						<th>경매기간</th>
+						<td class="end_time">2022/06/30 21:30</td>
 					</tr>
 					<tr>
 						<th>시작가</th>
-						<td th:text="${#numbers.formatInteger(item.itemStPrice, 0, 'COMMA')} + '원'">150,000원</td>
+						<td>150,000원</td>
 					</tr>
 					<tr>
 						<th>입찰단위</th>
-						<td id="bid-price" th:text="${#numbers.formatInteger(item.itemBidUnit, 0, 'COMMA')} + '원'">50,000원</td>
+						<td id="bid-price">50,000원</td>
 					</tr>
 					<tr>
 						<th>즉시구매</th>
-						<td th:text="${#numbers.formatInteger(item.itemNbPrice, 0, 'COMMA')} + '원'">1,500,000원</td>
+						<td>1,500,000원</td>
 					</tr>
 					<tr>
 						<th>입찰방식</th>
-						<td>공개</td>
+						<td>비공개</td>
 					</tr>
 					<tr>
 						<th style="border-bottom: 2px solid rgb(100,100,100);">입찰 수</th>
-						<td style="border-bottom: 2px solid rgb(100,100,100);" th:text="${#numbers.formatInteger(item.itemBidCnt, 0, 'COMMA')} + '회'">2</td>
+						<td style="border-bottom: 2px solid rgb(100,100,100);">2</td>
 					</tr>
 					<tr>
 						<th>배송방법</th>
@@ -197,11 +133,11 @@
 					</tr>
 					<tr>
 						<th>판매자 ID</th>
-						<td th:text="${item.user.userId}">bitcamp</td>
+						<td>bitcamp</td>
 					</tr>
 					<tr>
 						<th>판매등급</th>
-						<td th:text="실버">없음</td>
+						<td>없음</td>
 					</tr>
 				</table>
 				<!-- 입찰 및 찜하기 버튼 -->
@@ -214,7 +150,7 @@
 					</button>
 
 					<!--모달 영역-->
-					<form id="modalbid" name="modalbid" action="/item/modalbid" method="post">
+					<form id="modalbid" action="/item/modalbid" method="post">
 						<div class="modal fade" id="intro">
 							<div class="modal-dialog modal-dialog-centered">
 								<div class="modal-content">
@@ -233,6 +169,25 @@
 												<tr>
 													<th>기간</th>
 													<td>~2022/06/30 21:30</td>
+												</tr>
+												<tr>
+													<th>배송방법</th>
+													<td>
+														<div class="form-check form-check-inline">
+															<input class="form-check-input" type="radio"
+																name="flexRadioDefault1" id="flexRadioDefault1">
+															<label class="form-check-label" for="flexRadioDefault1">
+																택배
+															</label>
+														</div>
+														<div class="form-check form-check-inline">
+															<input class="form-check-input" type="radio"
+																name="flexRadioDefault1" id="flexRadioDefault2">
+															<label class="form-check-label" for="flexRadioDefault2">
+																직거래
+															</label>
+														</div>
+													</td>
 												</tr>
 												<tr>
 													<th>입찰방법</th>
@@ -312,7 +267,53 @@
 				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 					<!-- -----상품내용------- -->
 					<div class="ContentSection_content_section__Hkpff">
-						<p th:text="${item.itemContent}">상품내용 ㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹ</p>
+						<p class=""></p>
+						<p class=""></p>
+						<figure class="ContentSection_image__cEovs"><img alt="아이폰14 프로 예상 렌더링"
+								src="https://d8gageze1i5x5.cloudfront.net/phones/contents/spec-iphone14/c_1.png">
+							<figcaption><strong>아이폰14 프로</strong></figcaption>
+						</figure>
+						<p class=""></p>
+						<h3 class="tw-mt-16">목차</h3>
+						<nav class="ContentSection_nav__DDf0B">
+							<ol type="1" class="">
+								<li><a href="#content-1">1. 아이폰14 디자인</a></li>
+							</ol>
+							<ol type="1" class="">
+								<li><a href="#content-2">2. 아이폰14 색상</a></li>
+							</ol>
+							<ol type="1" class="">
+								<li><a href="#content-3">3. 아이폰14 스펙</a>
+									<ol type="a" class="">
+										<li><a href="#content-4">a. 아이폰14 프로 화면 크기</a></li>
+									</ol>
+									<ol type="a" class="">
+										<li><a href="#content-5">b. 8G 램 탑재</a></li>
+									</ol>
+									<ol type="a" class="">
+										<li><a href="#content-6">c. 전면 카메라 성능 개선</a></li>
+									</ol>
+									<ol type="a" class="">
+										<li><a href="#content-7">d. 8K 동영상 녹화 지원</a></li>
+									</ol>
+									<ol type="a" class="">
+										<li><a href="#content-8">e. A16 바이오닉 프로세서 탑재</a></li>
+									</ol>
+								</li>
+						</nav>
+						<p class=""></p>
+						<hr>
+						<p class=""></p>
+						<h2 id="content-1" class=""><strong>◼ 아이폰14 디자인</strong></h2>
+						<p class="">새롭게 출시되는 아이폰 다자인 중 가장 관심도 높은 부분은 역시 M자 탈모라고 불리는 노치 디스플레이인데요.<br> 상단의 노치 디자인과 카메라 범프가
+							<!-- --> <mark class="ContentSection_highlight-blue_background__os74I"><strong>아이폰14 디자인에서는
+									개선</strong></mark>
+						</p>
+						<p class=""></p>
+						<figure class="ContentSection_image__cEovs"><img alt="아이폰14 프로 예상 렌더링"
+								src="https://d8gageze1i5x5.cloudfront.net/phones/contents/spec-iphone14/c_2.png">
+						</figure>
+
 					</div>
 				</div>
 				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -322,20 +323,17 @@
 							<tr>
 								<th>번호</th>
 								<th>제목</th>
-								<th>내용</th>
 								<th>등록자</th>
 								<th>등록일</th>
-								<th></th>
 							</tr>
-							<tr th:each="itemq : ${list}" th:if="${itemq.itemqYn} != 'N'">
-								<td th:text="${itemq.itemqNo}"></td>
-								<td th:text="${itemq.itemqNm}">
+							<tr th:if="${#lists.size(list)} > 0" th:each="list : ${list}">
+								<td th:text="${list.itemqNo}"></td>
+								<td th:text="${list.itemqNm}">
 								</td>
 								<!-- <td th:text="${user.userId}"></td> -->
-								<td th:text="${itemq.itemqContent}"></td>
-								<td th:text="${itemq.user.userId}">11</td>
-								<td th:text="${#temporals.format(itemq.itemqRegdate, 'yyyy-MM-dd')}"></td>
-								<td><button type="button" th:onclick="'deleteTest('+ ${itemq.itemqNo} +', ' + ${itemNo} + ')'">삭제</button></td>
+								<td th:text="${list.user.userId}">11</td>
+								<td th:text="${#temporals.format(list.itemqRegdate, 'yyyy-MM-dd')}"></td>
+								
 							</tr>
 						</table>
 						<div id="ask_Modal">

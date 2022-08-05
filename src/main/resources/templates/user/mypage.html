@@ -46,26 +46,56 @@
 			})
 		};
 
+		
+        $(function(){
+	
+			//비밀번호 확인
+				let pwCheck = false;
+				$("#user_newPw").on("change", function() {
+					if($("#user_newPw").val() == $("#user_pwChk").val()) {
+						pwCheck = true;
+						$("#pwchk-result").css("color", "green");
+						$("#pwchk-result").text("비밀번호 일치");
+					} else {
+						pwCheck = false;
+						$("#pwchk-result").css("color", "red");
+						$("#pwchk-result").text("비밀번호 불일치");
+					}
+				});
+				
+				//비밀번호 확인
+			
+				$("#user_pwChk").on("change", function() {
+					if($("#user_newPw").val() == $("#user_pwChk").val()) {
+						pwCheck = true;
+						$("#pwchk-result").css("color", "green");
+						$("#pwchk-result").text("비밀번호 일치");
+					} else {
+						pwCheck = false;
+						$("#pwchk-result").css("color", "red");
+						$("#pwchk-result").text("비밀번호 불일치");
+					}
+				});
+				
+				//비밀번호 유효성 검사
         
-        //비밀번호 유효성 검사
+        let pwValidation = false;
 		function validatePassword(character) {
 			return /^[a-zA-Z0-9!@#$%^*+=-]{8,16}$/.test(character);
 		}
 		
-		$("#user_Pw").on("focusout", function() {
-			if(!validatePassword($("#user_Pw").val())) {
-				alert("숫자와 영문자를 조합한 8자리 이상 16자리 미만으로 정하세요.");
+		$("#user_newPw").on("focusout", function() {
+			if(!validatePassword($("#user_newPw").val())) {
+				alert("숫자와 영문자,특수문자를 조합한 8자리 이상 16자리 미만으로 정하세요.");
 				pwValidation = false;
 				setTimeout(function(){ 
-					$("#user_Pw").focus();
+					$("#user_newPw").focus();
 					}, 10);
 			} else {
 				pwValidation = true;
 			}
 		});
         
-        
-        $(function(){
 	
 			//비밀번호 변경 엔터로 서브밋
 			$("#formChangePw").keydown(function(e){
@@ -170,13 +200,14 @@
 											<tr>
 												<th>신규 비밀번호</th>
 												<td>
-													<input type="password" name="userPw">
+													<input type="password" name="userPw" id=user_newPw>
 												</td>
 											</tr>
 											<tr>
 												<th>비밀번호 확인</th>
 												<td>
 													<input type="password" id="user_pwChk">
+													 <span id="pwchk-result" style="font-size: 12px; margin-left: 5px;">한번 더 입력하세요</span>
 												</td>
 											</tr>
 										</table>
@@ -367,53 +398,7 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <h3>관심상품</h3>
-                    <div class="sell-box">
-                        <div class="table-responsive">
-                            <table class="table table-striped align-middle text-center table-hover">
-                                <tr>
-                                    <th>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="checkall3">
-                                            <label class="form-check-label" for="flexCheckDisabled">
-                                            </label>
-                                        </div>
-                                    </th>
-                                    <th nowrap>구분</th>
-                                    <th nowrap>물품번호</th>
-                                    <th nowrap>이미지</th>
-                                    <th nowrap>물품명</th>
-                                    <th nowrap>입찰가</th>
-                                    <th nowrap>제품정보</th>
-                                    <th nowrap>남은기간</th>
-                                    <th nowrap>판매자</th>
-                                    <th nowrap>현재가격</th>
-                                </tr>
-                                
-                                <tr>
-                                    <td>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" name="chk3">
-                                        <label class="form-check-label">
-                                        </label>
-                                    </div>
-                                    </td>
-                                    <!--관심상품 구분 1번 해당 제품페이지로 이동 href 추가 필요-->
-                                    <td onClick="location.href='ProductInfo.html'">1</td>
-                                    <td nowrap>0011</td>
-                                    <td><img id="vip" src="images/kanu.png" th:src="@{/images/kanu.png}" width=50px height=50px alt="vip"></td>
-                                    <td nowrap>카누</td>
-                                    <td nowrap>1,000원</td>
-                                    <td nowrap>카누</td>
-                                    <td nowrap>2022/06/12</td>
-                                    <td nowrap>고기천</td>
-                                    <td nowrap>3,000원</td>
-                                </tr>
-                            </table>
-                        </div>
-                </div>
-            </div>
+               
         </article>
     </main>
     <footer></footer>

@@ -98,21 +98,24 @@
 			<div class="hot_prod">
 				<p id="hot_title">베스트 핫딜</p>
 				<div class="step_wrap">
-					<div class="hot_prod_list_1 hotlist">
-						<a href="ProductInfo.html">
+					<div class="hot_prod_list_1 hotlist" th:each="item:${hotProcList}">
+						<a href="/item/test">
 							<div class="img-box">
-								<img src="/images/product01.jpg"
-									style="width:auto; max-width:100%; height:auto; max-height:250px;">
+								<img th:if="${item.itemFile ne null}"
+									th:src="@{/upload/}+${item.itemFile.itemfileNm}"
+									style="width:284px; max-width:100%; height:180px; max-height:250px;"/>
+								<img th:if="${item.itemFile eq null}"
+										th:src="@{/upload/noimg.png}"/>	
 							</div>
 						</a>
 						<div class="con-box">
 							<dl>
-								<dt>아이폰 14 - 256GB</dt>
+								<dt th:text="${item.itemNm}">아이폰 14 - 256GB</dt>
 								<dd style="min-height:40px;">
 									<table>
 										<tr>
-											<td id="pr_name"><b>경매가</b></td>
-											<td>850,000원</td>
+											<td><b>경매가</b></td>
+											<td th:text="${item.itemStPrice}">850,000원</td>
 										</tr>
 										<tr>
 											<td id="pr_name"><b>입찰수</b></td>
@@ -124,7 +127,7 @@
 										</tr>
 										<tr>
 											<td id="pr_name"><b>조회수</b></td>
-											<td>17,111</td>
+											<td th:text="${item.itemCnt}">17,111</td>
 										</tr>
 
 									</table>
@@ -134,7 +137,7 @@
 							</dl>
 						</div>
 					</div>
-					<div class="hot_prod_list_2 hotlist">
+					<!--<div class="hot_prod_list_2 hotlist">
 						<div class="img-box">
 							<img src="/images/화장품.png"
 								style="width:auto; max-width:100%; height:auto; max-height:250px;">
@@ -201,25 +204,29 @@
 								<p class="timer" colspan="2" data-end-time="2022-08-18T10:00:00+09:00"></p>
 							</dl>
 						</div>
-					</div>
+					</div> -->
 				</div>
-			</div>
+			</div> 
 
 			<div class="fin_prod">
 				<p id="fin_title">마감임박 상품</p>
 				<div class="step_wrap">
-					<div class="fin_prod_list_1 finlist">
+					<div class="fin_prod_list_1 finlist" th:each="item:${endProcList}">
 						<div class="img-box">
-							<img src="/images/텐트.png" style="width:auto; max-width:100%; height:auto; max-height:250px;">
+							<img th:if="${item.itemFile ne null}"
+									th:src="@{/upload/}+${item.itemFile.itemfileNm}"
+									style="width:284px; max-width:100%; height:180px; max-height:250px;"/>
+								<img th:if="${item.itemFile eq null}"
+										th:src="@{/upload/noimg.png}"/>	
 						</div>
 						<div class="con-box">
 							<dl>
-								<dt>네이처 하이크 에어텐트</dt>
+								<dt th:text="${item.itemNm}">네이처 하이크 에어텐트</dt>
 								<dd style="min-height:40px;">
 									<table>
 										<tr>
 											<td id="pr_name"><b>경매가</b></td>
-											<td>734,640원</td>
+											<td th:text="${item.itemStPrice}">734,640원</td>
 										</tr>
 										<tr>
 											<td id="pr_name"><b>입찰수</b></td>
@@ -231,7 +238,7 @@
 										</tr>
 										<tr>
 											<td id="pr_name"><b>조회수</b></td>
-											<td>4,764</td>
+											<td th:text="${item.itemCnt}">4,764</td>
 										</tr>
 
 									</table>
@@ -241,7 +248,7 @@
 							</dl>
 						</div>
 					</div>
-					<div class="fin_prod_list_2 finlist">
+					<!-- <div class="fin_prod_list_2 finlist">
 						<div class="img-box">
 							<img src="/images/후리스.png"
 								style="width:auto; max-width:100%; height:auto; max-height:250px;">
@@ -308,7 +315,7 @@
 								<p class="timer" colspan="2" data-end-time="2022-08-03T18:30:00+09:00"></p>
 							</dl>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
