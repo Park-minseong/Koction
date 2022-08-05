@@ -118,10 +118,8 @@
                   >
                     <td class="sold">판매종료</td>
                   </th:block> -->
-                  <td class="sold" th:if="${item.itemYn == 'Y'}">판매완료</td>
-                  <td class="sold" th:unless="${item.itemYn == 'N'}">
-                    입찰종료
-                  </td>
+                  <td class="sold" th:if="${item.itemYn} == 'Y'">판매중</td>
+                  <td class="sold" th:if="${item.itemYn} == 'N'">입찰종료</td>
 
                   <td></td>
                 </tr>
