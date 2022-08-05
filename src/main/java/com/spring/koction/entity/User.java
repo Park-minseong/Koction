@@ -48,4 +48,5 @@ public class User {
 	@ManyToOne
 	@JoinColumn(name="GRADE_NO")
 	private UserGrade userGrade;
+	
 }
