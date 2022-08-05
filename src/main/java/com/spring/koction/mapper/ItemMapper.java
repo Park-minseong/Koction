@@ -3,6 +3,7 @@ package com.spring.koction.mapper;
 import java.util.List;
 
 import com.spring.koction.dto.ItemqDto;
+import com.spring.koction.dto.OrderDto;
 import com.spring.koction.entity.Itemq;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -43,6 +44,9 @@ public interface ItemMapper {
 
 	@Select("SELECT * FROM T_ITEMQ WHERE ITEMQ_YN = 'Y' AND ITEM_NO=#{itemNo} ORDER BY ITEMQ_NO")
 	List<ItemqDto> selectInquryList(int itemNo);
+
+
+//	void insertOrder(OrderDto orderDto);
 
 //	@Select(SELECT * FROM T_ITEMQ WHERE ITEMQ_YN = 'Y')
 }
