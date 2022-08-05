@@ -85,7 +85,7 @@
 				<p id="hot_title">베스트 핫딜</p>
 				<div class="step_wrap">
 					<div class="hot_prod_list_1 hotlist" th:each="item:${hotProcList}">
-						<a th:href="@{/searchItem/{itemNo}(itemNo=${item.itemNo})}">
+						<a th:href="@{/item/searchItem/{itemNo}(itemNo=${item.itemNo})}">
 							<div class="img-box">
 								<img th:if="${item.itemFile ne null}"
 									th:src="@{/upload/}+${item.itemFile.itemfileNm}"
@@ -101,15 +101,11 @@
 									<table>
 										<tr>
 											<td><b>경매가</b></td>
-											<td th:text="${item.itemStPrice}"></td>
+											<td th:text="${#numbers.formatInteger(item.itemStPrice, 3, 'COMMA') + '원'}"></td>
 										</tr>
 										<tr>
 											<td id="pr_name"><b>입찰수</b></td>
 											<td>2</td>
-										</tr>
-										<tr>
-											<td id="pr_name"><b>관심수</b></td>
-											<td>143</td>
 										</tr>
 										<tr>
 											<td id="pr_name"><b>조회수</b></td>
@@ -131,7 +127,7 @@
 				<p id="fin_title">마감임박 상품</p>
 				<div class="step_wrap">
 					<div class="fin_prod_list_1 finlist" th:each="item:${endProcList}">
-						<a th:href="@{/searchItem/{itemNo}(itemNo=${item.itemNo})}">
+						<a th:href="@{/item/searchItem/{itemNo}(itemNo=${item.itemNo})}">
 							<div class="img-box">
 								<img th:if="${item.itemFile ne null}"
 									th:src="@{/upload/}+${item.itemFile.itemfileNm}"
@@ -147,15 +143,11 @@
 									<table>
 										<tr>
 											<td id="pr_name"><b>경매가</b></td>
-											<td th:text="${item.itemStPrice}">734,640원</td>
+											<td th:text="${#numbers.formatInteger(item.itemStPrice, 3, 'COMMA') + '원'}"></td>
 										</tr>
 										<tr>
 											<td id="pr_name"><b>입찰수</b></td>
 											<td>5</td>
-										</tr>
-										<tr>
-											<td id="pr_name"><b>관심수</b></td>
-											<td>65</td>
 										</tr>
 										<tr>
 											<td id="pr_name"><b>조회수</b></td>

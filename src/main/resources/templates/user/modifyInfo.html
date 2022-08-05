@@ -123,8 +123,29 @@
 		        }).open();
 		     }
 		     
-		     
-		     
+		     function modifyPw() {
+					$.ajax({
+						url: '/user/checkPw',
+						type: 'post',
+						data: $("#join-form").serialize(),
+						success: function (obj) {
+							if (obj == true) {
+								alert("회원정보가 수정되었습니다.");
+								$("#join-form").submit()
+							}
+							else {
+								alert("비밀번호가 틀렸습니다.");
+								$("#userPw").focus();
+								return;
+							}
+						},
+
+						error: e => {
+							console.log(e);
+						}
+					})
+				};
+			
 		</script>
 	</th:block>
 
@@ -163,7 +184,7 @@
 								<li>
 									<label for="reg-input-pw">비밀번호 확인</label>
 
-									<input type="password" id="userPw" required />
+									<input type="password" id="userPw" name="userPresentPw" required/>
 
 								</li>
 								<li>
@@ -207,7 +228,7 @@
 								</li>
 								<li style="justify-content: center; margin:13px 3px 13px;">
 									<a href="./mypage"><input type="button" value="뒤로가기" id="go-back-btn" /></a>
-									<input type="submit" value="수정하기" id="regist-sybmit-btn" />
+									<input type="button" onclick="modifyPw()" value="수정하기" id="regist-sybmit-btn" />
 								</li>
 							</ul>
 						</fieldset>

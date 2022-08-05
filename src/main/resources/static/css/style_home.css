@@ -49,10 +49,16 @@ a:link {
   margin: 30px;
 }
 
+<<<<<<< HEAD
 .hot_prod img,
 .fin_prod img {
   height: 160px;
   width: 250px;
+=======
+.hot_prod img, .fin_prod img {
+    height: 180px;
+    width: 284px;
+>>>>>>> upstream/master
 }
 
 .wrap {
@@ -60,10 +66,16 @@ a:link {
   justify-content: center;
 }
 
+<<<<<<< HEAD
 .hot_prod td,
 .fin_prod td {
   padding: 2px 20px 2px 0px;
   font-size: 14px;
+=======
+.hot_prod td, .fin_prod td{
+    padding: 2px 20px 2px 0px;
+    font-size: 17px;
+>>>>>>> upstream/master
 }
 
 .hot_prod #time,
@@ -129,6 +141,7 @@ hr {
   -webkit-transform: scale(1.05);
 }
 
+<<<<<<< HEAD
 .hot_prod_list_1 .img-box,
 .hot_prod_list_2 .img-box,
 .hot_prod_list_3 .img-box,
@@ -137,6 +150,12 @@ hr {
 .fin_prod_list_3 .img-box {
   border-bottom: 1px solid #ddd;
   padding-bottom: 25px;
+=======
+.con-box dt{
+    font-size: 25px;
+    text-align: center;
+    padding: 20px 15px 0px;
+>>>>>>> upstream/master
 }
 
 .con-box dt {

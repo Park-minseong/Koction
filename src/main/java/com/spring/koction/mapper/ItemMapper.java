@@ -2,15 +2,20 @@ package com.spring.koction.mapper;
 
 import java.util.List;
 
+<<<<<<< HEAD
 import com.spring.koction.dto.ItemqDto;
 import com.spring.koction.dto.OrderDto;
 import com.spring.koction.entity.Itemq;
 import com.spring.koction.entity.Order;
 import org.apache.ibatis.annotations.Insert;
+=======
+>>>>>>> upstream/master
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.spring.koction.dto.ItemqDto;
 import com.spring.koction.entity.Item;
 import com.spring.koction.entity.User;
 
@@ -42,7 +47,7 @@ public interface ItemMapper {
 //	int getInquryItemNo();
 
 	@Update("UPDATE T_ITEMQ SET ITEMQ_YN='N' WHERE ITEMQ_NO=#{itemqNo} AND ITEM_NO=#{itemNo}")
-	void deleteTest(int itemqNo, int itemNo);
+	void deleteTest(@Param("itemqNo") int itemqNo, @Param("itemNo") int itemNo);
 
 	@Select("SELECT * FROM T_ITEMQ WHERE ITEMQ_YN = 'Y' AND ITEM_NO=#{itemNo} ORDER BY ITEMQ_NO")
 	List<ItemqDto> selectInquryList(int itemNo);

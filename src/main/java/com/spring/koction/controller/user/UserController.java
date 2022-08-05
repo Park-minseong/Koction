@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.spring.koction.entity.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -103,11 +104,21 @@ public class UserController {
 		System.out.println(order);
 		System.out.println(order);
 		mv.addObject("orderList", order);
+		String test = customUserDetails.getUsername();
+		List<Item> myItemList = itemService.getMyItemList(test);
+		for(Item item1:myItemList) {
+			if(itemService.findItemFilesByItemNo(item1.getItemNo()).size() != 0) {
+				item1.setItemFile(itemService.findItemFilesByItemNo(item1.getItemNo()).get(0));
+			}
+		}
+		mv.addObject("itemList", myItemList);
 		
-		
-		
+
 		return mv;
 	}
+
+
+
 	
 	@GetMapping("/logout")
 	public ModelAndView logout(HttpSession session) {

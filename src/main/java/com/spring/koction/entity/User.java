@@ -42,7 +42,7 @@ public class User {
 	@Column(nullable = false ,columnDefinition = "char(1)")
 	private char userYn='Y';
 	
-	@Column(columnDefinition = "varchar(45) default 'USER'")
+	@Column(columnDefinition = "varchar(45) default 'ROLE_USER'")
 	private String role;
 	
 	@ManyToOne

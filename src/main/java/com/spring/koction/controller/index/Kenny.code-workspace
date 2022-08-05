@@ -1,0 +1,49 @@
+{
+  "folders": [
+    {
+      "name": "Bootstrap",
+      "path": "Bootstrap"
+    },
+    {
+      "name": "HTML & CSS",
+      "path": "HTML & CSS"
+    },
+    {
+      "name": "JAVASCRIPT(ECMA5)",
+      "path": "JAVASCRIPT(ECMA5)"
+    },
+    {
+      "name": "JAVASCRIPT(zerocho)",
+      "path": "JAVASCRIPT(zerocho)"
+    },
+    {
+      "name": "jQuery",
+      "path": "jQuery"
+    },
+    {
+      "name": "Self_Study",
+      "path": "Self_Study"
+    },
+    {
+      "path": "Javascript ES6"
+    },
+    {
+      "path": "React"
+    },
+    {
+      "path": "Project"
+    },
+    {
+      "path": "Javascript Dream Coding"
+    },
+    {
+      "path": "GitTest"
+    },
+    {
+      "path": "GitCooperationTest"
+    }
+  ],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "JAVASCRIPT(zerocho)"
+  }
+}
