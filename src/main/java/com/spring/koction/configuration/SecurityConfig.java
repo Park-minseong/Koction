@@ -32,7 +32,7 @@ public class SecurityConfig {
 		//authorizeHttpRequests로 요청에 대한 권한을 설정할 수 있다.
 		http.authorizeRequests().antMatchers("/").permitAll()
 		                            .antMatchers("/user/**").permitAll()
-		                            .antMatchers("/item").access("hasAnyRole('USER')")
+		                            .antMatchers("/item/**").access("hasAnyRole('ROLE_USER')")
 		                            .antMatchers("/item/category").permitAll()
 		                            .antMatchers("/item/searchItem/**").permitAll()
 		                            .antMatchers("/item/search/**").permitAll()
