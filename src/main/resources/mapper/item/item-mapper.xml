@@ -16,7 +16,12 @@
 			FROM T_ITEMQ
 	]]>
 	</select>
-
+	<select id="getNextOrderNo" resultType="int">
+		<![CDATA[
+		SELECT IFNULL(MAX(ORDER_NO), 0) + 1
+			FROM T_ORDER
+	]]>
+	</select>
 	<update id="updateItemNo" parameterType="int">
 	<![CDATA[
 		UPDATE T_ITEM
@@ -42,7 +47,15 @@
 			WHERE ITEM_NO = #{itemNo}
 	]]>
 	</update>
-		
+
+	<update id="updateBidCnt" parameterType="int">
+		<![CDATA[
+		UPDATE T_ITEM
+			SET ITEM_BID_CNT = ITEM_BID_CNT + 1
+			WHERE ITEM_NO = #{itemNo}
+	]]>
+	</update>
+
 	<update id="updateUserPw" parameterType="user">
 	<![CDATA[
 		UPDATE T_USER

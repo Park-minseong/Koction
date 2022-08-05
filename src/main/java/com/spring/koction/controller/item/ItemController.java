@@ -3,12 +3,10 @@ package com.spring.koction.controller.item;
 import com.spring.koction.commons.FileUtils;
 import com.spring.koction.dto.ItemqDto;
 import com.spring.koction.dto.OrderDto;
-import com.spring.koction.entity.CustomUserDetails;
-import com.spring.koction.entity.Item;
-import com.spring.koction.entity.ItemFile;
-import com.spring.koction.entity.Itemq;
+import com.spring.koction.entity.*;
 import com.spring.koction.service.item.ItemService;
 import com.spring.koction.service.user.UserService;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -155,6 +153,22 @@ public class ItemController {
 		return mv;
 	}
 
+	@PostMapping("/modalbid")
+	public ModelAndView modalPost(Order order) {
+		ModelAndView mv = new ModelAndView();
+		OrderDto orderDto = new OrderDto();
+//		itemService.insertOrder(orderDto);
+		int orderNo = itemService.insertOrder(order);
+		mv.setViewName("redirect:/item/searchItem/" +order.getItem().getItemNo());
+		return mv;
+	}
+
+	@GetMapping("/modalbid")
+	public ModelAndView modalGet() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/user/login");
+		return mv;
+	}
 
 	@PostMapping("/test/deleteTest")
 	public void deleteTest(int itemqNo, int itemNo){
@@ -163,7 +177,7 @@ public class ItemController {
   	}
 
 	@GetMapping("/searchItem/{itemNo}")
-	public ModelAndView searchItemView(@PathVariable int itemNo, OrderDto orderDto) {
+	public ModelAndView searchItemView(@PathVariable int itemNo) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/item/ProductInfo.html");
 
@@ -174,13 +188,11 @@ public class ItemController {
 		Item item = itemService.getItem(itemNo);
 		List<ItemFile> fileList = itemService.getItemFileList(itemNo);
 
-//		itemService.insertOrder(orderDto);
 
 		mv.addObject("item", item);
 		mv.addObject("fileList", fileList);
 		mv.addObject("list",list);
 		mv.addObject("itemNo", itemNo);
-//		mv.addObject("orderDto", orderDto);
 
 		itemService.updateItemCnt(itemNo);
 		
