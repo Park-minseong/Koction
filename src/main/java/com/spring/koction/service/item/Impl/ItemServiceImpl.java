@@ -188,6 +188,7 @@ public class ItemServiceImpl implements ItemService{
 //		itemq.setItemqNo(itemqNo);
 
 		//itemqRepository.delete(itemq);
+		System.out.println("itemqNo//////////////////////////////////////////" + itemqNo);
 		itemMapper.deleteTest(itemqNo, itemNo);
 	}
 
