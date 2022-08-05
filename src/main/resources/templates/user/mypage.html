@@ -280,10 +280,10 @@
                                     <th nowrap>이미지</th>
                                     <th nowrap>물품명</th>
                                     <th nowrap>구매가격</th>
-                                    <th nowrap>구매정보</th>
+                                    <th nowrap>카테고리</th>
                                     <th nowrap>구매일</th>
                                     <th nowrap>판매자</th>
-                                    <th nowrap>입급기한</th>
+                                    <th nowrap>입금기한</th>
                                 </tr>
 
                                 <tr th:each="orderItem:${orderList}">
@@ -302,9 +302,9 @@
 	                                    <td nowrap th:text="${orderItem.item.itemTitle}"></td>
 	                                    <td nowrap th:text="${orderItem.orderPrice}"></td>
 	                                    <td nowrap th:text="${orderItem.item.itemCategory.categoryNm}"></td>
-	                                    <td nowrap>2022/06/30</td>
-	                                    <td nowrap th:text="${orderItem.item.user.userId}">bitcamp</td>
-	                                    <td nowrap>2022/07/02</td>
+	                                    <td nowrap></td>
+	                                    <td nowrap th:text="${orderItem.item.user.userId}"></td>
+	                                    <td nowrap></td>
                                     </a>
                                 </tr>
                             </table>
@@ -328,13 +328,13 @@
                                     <th nowrap>물품번호</th>
                                     <th nowrap>이미지</th>
                                     <th nowrap>물품명</th>
-                                    <th nowrap>구매가격</th>
-                                    <th nowrap>구매정보</th>
-                                    <th nowrap>구매일</th>
+                                    <th nowrap>시작가격</th>
+                                    <th nowrap>카테고리</th>
+                                    <th nowrap>판매일</th>
                                     <th nowrap>판매자</th>
-                                    <th nowrap>입급기한</th>
+                                    <th nowrap>입금기한</th>
                                 </tr>
-                                <tr>
+                                <tr th:each="item : ${itemList}">
                                     <td>
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" name="chk">
@@ -343,18 +343,25 @@
                                     </div>
                                     </td>
                                     <!--판매현황 구분 1번 해당 제품 수정페이지로 이동 href 추가 필요-->
-                                    <td onClick="location.href='_03_myitem_edit.html'">1</td>
-                                    <td nowrap>1502</td>
-                                    <td><img id="vip" src="images/case.png" th:src="@{/images/case.png}" width=50px height=50px alt="vip"></td>
-                                    <td nowrap>케이스</td>
-                                    <td nowrap>9,000원</td>
-                                    <td nowrap>액세서리</td>
-                                    <td nowrap>2022/06/19</td>
-                                    <td nowrap>admin</td>
-                                    <td nowrap>2022/06/24</td>
+                                    <td onClick="location.href='_03_myitem_edit.html'"></td>
+                                    <td th:text="${item.itemNo}" nowrap></td>
+                                    <td><img id="vip" width="50px" height="50px"
+                                        th:if="${item.itemFile ne null}"
+                                        th:src="@{/upload/} + ${item.itemFile.itemfileNm}"
+                                      />
+                                      <img id="vip" width="50px" height="50px"
+                                        th:if="${item.itemFile eq null}"
+                                        th:src="@{/upload/noimg.png}"
+                                      /></td>
+                                    <td th:text="${item.itemNm}" nowrap></td>
+                                    <td th:text="${item.itemStPrice}" nowrap></td>
+                                    <td th:text="${item.itemCategory.categoryNm}" nowrap></td>
+                                    <td th:text="${#temporals.format(item.itemRegdate, 'yyyy-MM-dd HH:mm')}" nowrap></td>
+                                    <td th:text="${item.user.userId}" nowrap></td>
+                                    <td th:text="${#temporals.format(item.itemEnddate, 'yyyy-MM-dd HH:mm')}" nowrap></td>
                                 </tr>
                                 
-                                <tr>
+                                <!--<tr>
                                     <td>
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" name="chk">
@@ -362,7 +369,7 @@
                                         </label>
                                     </div>
                                     </td>
-                                    <!--판매현황 구분 2번 해당 수정페이지로 이동 href 추가 필요-->
+                                    판매현황 구분 2번 해당 수정페이지로 이동 href 추가 필요
                                     <td onClick="location.href='ProductInfo.html'">2</td>
                                     <td nowrap>2900</td>
                                     <td><img id="vip" src="images/headphone.png" th:src="@{/imagegs/headphone.png}" width=50px height=50px alt="vip"></td>
@@ -372,7 +379,7 @@
                                     <td nowrap>2022/06/12</td>
                                     <td nowrap>admin</td>
                                     <td nowrap>2022/06/16</td>
-                                </tr>
+                                </tr>-->
                             </table>
                         </div>
                     </div>
