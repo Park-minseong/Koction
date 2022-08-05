@@ -216,6 +216,10 @@
 
 					<!--모달 영역-->
 					<form id="modalbid" name="modalbid" action="/item/modalbid" method="post">
+						<!-- <input type="hidden" name="itemNo" th:value="${itemNo}"> -->
+						<!-- <input type="hidden" name="userId" th:value="${#authentication.name}"> -->
+						<input type="hidden" name="item" th:value="${itemNo}">
+						<input type="hidden" name="user" th:value="${#authentication.name}">
 						<div class="modal fade" id="intro">
 							<div class="modal-dialog modal-dialog-centered">
 								<div class="modal-content">
@@ -230,10 +234,12 @@
 												<tr>
 													<th>판매자</th>
 													<td th:text="${item.user.userId}">bitcamp</td>
+													<!-- <input type="hidden" name="user"  th:value="${item.user.userId}"> -->
 												</tr>
 												<tr>
 													<th>기간</th>
 													<td th:text="${#temporals.format(item.itemEnddate, 'yyyy/MM/dd HH:mm')}">~2022/06/30 21:30</td>
+													<!-- <input type="hidden" name="item" th:value="${item.itemEnddate}"> -->
 												</tr>
 												<tr>
 													<th>입찰방법</th>
@@ -244,30 +250,43 @@
 												<tr>
 													<th>입찰단위</th>
 													<td id="bid-price-won" th:text="${#numbers.formatInteger(item.itemBidUnit, 0, 'COMMA')} + '원'"></td>
+													<!-- <input type="hidden" name="item" th:value="${item.itemBidUnit}"> -->
 												</tr>
 												<tr>
 													<th>현재가</th>
 													<td id="price-won" th:text="${#numbers.formatInteger(item.itemStPrice, 0, 'COMMA')} + '원'"></td>
+													<!-- <input type="hidden" name="item" th:value="${item.itemStPrice}"> -->
 												</tr>
 												<tr>
 													<th>입찰금액</th>
 													<td>
-														<input id="price" type="text" placeholder="희망 입찰가격">
+														<input id="price" type="number" placeholder="희망 입찰가격" name="orderPrice" th:value="${orderPrice}" required>
 													</td>
 												</tr>
-												<tr>
+												<!-- <tr>
 													<th>총 구매금액</th>
 													<td>
-														<p id="total"></p>
+														<p id="total" ></p>
+														<p th:text="${orderPrice}"></p>
 													</td>
-												</tr>
+												</tr> -->
 											</table>
 										</div>
 									</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+										<div sec:authorize="!isAuthenticated()" th:remove="tag">
+											<button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+												<a href="/user/login" style="color: white;" >입찰하기</a>
+											</button>
+										</div>
+										<div sec:authorize="isAuthenticated()" th:remove="tag">
+											<button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+												입찰하기
+											</button>
+										</div>
+										<!-- <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
 											입찰하기
-										</button>
+										</button> -->
 										<button type="button" class="btn btn-primary" data-bs-dismiss="modal">
 											닫기
 										</button>

@@ -3,7 +3,6 @@ package com.spring.koction.service.item.Impl;
 
 
 import com.spring.koction.dto.ItemqDto;
-import com.spring.koction.dto.OrderDto;
 import com.spring.koction.entity.*;
 import com.spring.koction.mapper.ItemMapper;
 import com.spring.koction.repository.*;
@@ -153,11 +152,6 @@ public class ItemServiceImpl implements ItemService{
 
 
 //	@Override
-//	public void insertOrder(OrderDto orderDto) {
-//		itemMapper.insertOrder(orderDto);
-//	}
-
-//	@Override
 //	public int insertInquryList(ItemqDto itemq) {
 //		int itemqNo = itemMapper.getNextInquryNo();
 //
@@ -179,6 +173,16 @@ public class ItemServiceImpl implements ItemService{
 		return itemq.getItemqNo();
 	}
 
+	@Override
+	public int insertOrder(Order order) {
+		int orderNo = itemMapper.getNextOrderNo();
+		order.setOrderNo(orderNo);
+		itemMapper.updateBidCnt(order.getItem().getItemNo());
+//		itemMapper.insertOrder(order);
+		orderRepository.save(order);
+		orderRepository.flush();
+		return order.getOrderNo();
+	}
 	@Override
 	public void deleteTest(int itemqNo, int itemNo) {
 //		ItemqDto itemq = new ItemqDto();

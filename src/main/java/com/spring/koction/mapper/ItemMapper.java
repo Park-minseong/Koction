@@ -5,6 +5,8 @@ import java.util.List;
 import com.spring.koction.dto.ItemqDto;
 import com.spring.koction.dto.OrderDto;
 import com.spring.koction.entity.Itemq;
+import com.spring.koction.entity.Order;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -45,8 +47,15 @@ public interface ItemMapper {
 	@Select("SELECT * FROM T_ITEMQ WHERE ITEMQ_YN = 'Y' AND ITEM_NO=#{itemNo} ORDER BY ITEMQ_NO")
 	List<ItemqDto> selectInquryList(int itemNo);
 
+	int getNextOrderNo();
 
-//	void insertOrder(OrderDto orderDto);
+	void updateBidCnt(int itemNo);
+
+//	@Update("UPDATE T_ORDER SET ORDER_PRICE WHERE ORDER_PRICE > #{orderPrice} AND USER_ID = #{userId} AND ITEM_NO = #{itemNo}")
+//	void insertOrder(OrderDto order);
+
+//	@Insert("INSERT INTO t_order VALUES (( SELECT IFNULL(MAX(order_no),0) + 1 FROM t_order A),#{userId},${orderPrice},#{itemNo})")
+//	void insertOrder(OrderDto order);
 
 //	@Select(SELECT * FROM T_ITEMQ WHERE ITEMQ_YN = 'Y')
 }

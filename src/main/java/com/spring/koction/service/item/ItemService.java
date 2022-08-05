@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.spring.koction.dto.ItemqDto;
 import com.spring.koction.dto.OrderDto;
-import com.spring.koction.entity.*;
 import com.spring.koction.entity.Itemq;
 
 import org.springframework.data.domain.Page;
@@ -14,7 +13,6 @@ import org.springframework.data.domain.Pageable;
 import com.spring.koction.entity.Item;
 import com.spring.koction.entity.ItemCategory;
 import com.spring.koction.entity.ItemFile;
-import com.spring.koction.entity.Itemq;
 import com.spring.koction.entity.Order;
 
 public interface ItemService {
@@ -67,5 +65,6 @@ public interface ItemService {
 
 	List<ItemqDto> selectInquryList(int itemNo);
 
-//	void insertOrder(OrderDto orderDto);
+//	void insertOrder(OrderDto order);
+	int insertOrder(Order order);
 }
