@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import com.spring.koction.dto.ItemqDto;
+import com.spring.koction.dto.OrderDto;
 import com.spring.koction.entity.*;
 import com.spring.koction.entity.Itemq;
 
@@ -65,4 +66,6 @@ public interface ItemService {
 	List<Item> endProc();
 
 	List<ItemqDto> selectInquryList(int itemNo);
+
+//	void insertOrder(OrderDto orderDto);
 }

@@ -32,27 +32,6 @@
 				}
 			});
 
-
-			//상품 별 잔여시간 계산
-			function restTime(e) {
-	            var now = new Date();
-	            var end = new Date($(e).attr("enddate"));
-	
-				var today = new Date().getTime();
-
-				var gap = $end_time - today;
-				var day = (Math.ceil(gap / (1000 * 60 * 60 * 24))) - 1;
-				var hour = Math.ceil((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-				var min = Math.ceil((gap % (1000 * 60 * 60)) / (1000 * 60));
-				var sec = Math.ceil((gap % (1000 * 60)) / 1000);
-
-				if (day >= 2) {
-					$ex_time.text("남은시간 : " + day + "일 " + hour + "시간 " + min + "분");
-				} else {
-					$ex_time.text("남은시간 : " + hour + "시간 " + min + "분 " + sec + "초");
-				}
-			}
-		
 			function deleteTest(itemqNo, itemNo) {
 				$.ajax({
 					url: '/item/test/deleteTest',
@@ -69,7 +48,13 @@
 					}
 				});
 			}
-
+			
+			//상품 별 잔여시간 계산
+			function restTime(e) {
+	            var now = new Date();
+	            var end = new Date($(e).attr("enddate"));
+	
+				var today = new Date().getTime();
 	            var gap = end - today;
 	            var day = (Math.ceil(gap / (1000 * 60 * 60 * 24)))-1;
 	            var hour = Math.ceil((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))-1;
@@ -81,7 +66,7 @@
 	            } else {
 	                $(e).text("남은시간 : " + hour + "시간 " + min + "분 " + sec + "초");
 	            }
-	        
+	        }
 	        $(function() {
 	            setInterval(function(){
 	                $(".timer").each(function(i,e){
@@ -89,6 +74,7 @@
 		            })
 		        },1000);
 	        });
+
 
 		</script>
 	</th:block>
@@ -160,8 +146,8 @@
 			<!-- 상품 상세정보 부분 -->
 			<div id="pro_Info">
 				<table class="table table-hover">
-					<caption>현재가 &nbsp; &nbsp; &nbsp; &nbsp;
-						<span id="price" th:text="${#numbers.formatInteger(item.itemStPrice, 0, 'COMMA')} + '원'">850,000원</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<caption>현재가 &nbsp; &nbsp;
+						<span id="price" th:text="${#numbers.formatInteger(item.itemStPrice, 0, 'COMMA')} + '원'">850,000원</span>&nbsp;&nbsp;&nbsp;
 						<p class="timer"  th:enddate="${item.itemEnddate}"></p>
 					</caption>
 					<tr>
@@ -229,38 +215,25 @@
 											<table class="table table-striped align-middle text-center">
 												<tr>
 													<th>판매자</th>
-													<td >bitcamp</td>
+													<td th:text="${item.user.userId}">bitcamp</td>
 												</tr>
 												<tr>
 													<th>기간</th>
-													<td>~2022/06/30 21:30</td>
+													<td th:text="${#temporals.format(item.itemEnddate, 'yyyy/MM/dd HH:mm')}">~2022/06/30 21:30</td>
 												</tr>
 												<tr>
 													<th>입찰방법</th>
 													<td>
-														<div class="form-check form-check-inline">
-															<input class="form-check-input" type="radio"
-																name="flexRadioDefault2" id="flexRadioDefault3">
-															<label class="form-check-label" for="flexRadioDefault3">
-																즉시구매
-															</label>
-														</div>
-														<div class="form-check form-check-inline">
-															<input class="form-check-input" type="radio"
-																name="flexRadioDefault2" id="flexRadioDefault4">
-															<label class="form-check-label" for="flexRadioDefault4">
-																입찰
-															</label>
-														</div>
+														공개
 													</td>
 												</tr>
 												<tr>
 													<th>입찰단위</th>
-													<td id="bid-price-won"></td>
+													<td id="bid-price-won" th:text="${#numbers.formatInteger(item.itemBidUnit, 0, 'COMMA')} + '원'"></td>
 												</tr>
 												<tr>
 													<th>현재가</th>
-													<td id="price-won"></td>
+													<td id="price-won" th:text="${#numbers.formatInteger(item.itemStPrice, 0, 'COMMA')} + '원'"></td>
 												</tr>
 												<tr>
 													<th>입찰금액</th>
@@ -351,7 +324,7 @@
 						<div id="ask_Modal">
 							<!-- 상품문의 모달버튼 -->
 							<button type="button" class="btn btn-primary" data-bs-toggle="modal"
-								data-bs-target="#staticBackdrop">
+								data-bs-target="#staticBackdrop" sec:authorize="isAuthenticated">
 								문의하기
 							</button>
 
