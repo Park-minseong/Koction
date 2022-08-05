@@ -2,6 +2,7 @@ package com.spring.koction.controller.item;
 
 import com.spring.koction.commons.FileUtils;
 import com.spring.koction.dto.ItemqDto;
+import com.spring.koction.dto.OrderDto;
 import com.spring.koction.entity.CustomUserDetails;
 import com.spring.koction.entity.Item;
 import com.spring.koction.entity.ItemFile;
@@ -162,7 +163,7 @@ public class ItemController {
   	}
 
 	@GetMapping("/searchItem/{itemNo}")
-	public ModelAndView searchItemView(@PathVariable int itemNo) {
+	public ModelAndView searchItemView(@PathVariable int itemNo, OrderDto orderDto) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/item/ProductInfo.html");
 
@@ -172,12 +173,14 @@ public class ItemController {
 
 		Item item = itemService.getItem(itemNo);
 		List<ItemFile> fileList = itemService.getItemFileList(itemNo);
-		
+
+//		itemService.insertOrder(orderDto);
+
 		mv.addObject("item", item);
 		mv.addObject("fileList", fileList);
 		mv.addObject("list",list);
 		mv.addObject("itemNo", itemNo);
-
+//		mv.addObject("orderDto", orderDto);
 
 		itemService.updateItemCnt(itemNo);
 		
