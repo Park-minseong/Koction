@@ -2,14 +2,13 @@ package com.spring.koction.mapper;
 
 import java.util.List;
 
-<<<<<<< HEAD
+
 import com.spring.koction.dto.ItemqDto;
 import com.spring.koction.dto.OrderDto;
 import com.spring.koction.entity.Itemq;
 import com.spring.koction.entity.Order;
 import org.apache.ibatis.annotations.Insert;
-=======
->>>>>>> upstream/master
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
