@@ -157,7 +157,7 @@ public class ItemController {
 
 
 	@PostMapping("/test/deleteTest")
-	public void deleteTest(@RequestParam int itemqNo, @RequestParam int itemNo){
+	public void deleteTest(int itemqNo, int itemNo){
 		System.out.println("itemqNo========================================================="+itemqNo);
 		itemService.deleteTest(itemqNo, itemNo);
   	}
