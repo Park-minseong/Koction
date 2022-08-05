@@ -12,49 +12,35 @@
 
 	<th:block layout:fragment="script">
 		<script>
-			function remaindTime(e) {
-				var now = new Date(); //현재시간을 구한다. 
-				var end = new Date($(e).attr("data-end-time"));
-				var open = new Date($(e).attr("data-start-time"));
-
-				//오늘날짜의 오전9시 - 오픈시간기준
-
-				var nt = now.getTime(); // 현재의 시간만 가져온다
-				var ot = open.getTime(); // 오픈시간만 가져온다
-				var et = end.getTime(); // 종료시간만 가져온다.
-
-				if (nt < ot) { //현재시간이 오픈시간보다 이르면 오픈시간까지의 남은 시간을 구한다. 
-					var sec = parseInt(ot - nt) / 1000;
-					var hour = parseInt(sec / 60 / 60);
-					var sec = (sec - (hour * 60 * 60));
-					var min = parseInt(sec / 60);
-					var sec = parseInt(sec - (min * 60));
-					if (hour < 10) {hour = "0" + hour;}
-					if (min < 10) {min = "0" + min;}
-					if (sec < 10) {sec = "0" + sec;}
-
-					$(e).html("<span style='color:rgb(128, 128, 128)'>" + hour + "시간 " + min + "분 " + sec + "초 후 시작 </span>")
-				} else { //현재시간이 오픈시간보다 늦고 마감시간보다 이르면 마감시간까지 남은 시간을 구한다. 
-					var sec = parseInt(et - nt) / 1000;
-					var hour = parseInt(sec / 60 / 60);
-					var sec = (sec - (hour * 60 * 60));
-					var min = parseInt(sec / 60);
-					var sec = parseInt(sec - (min * 60));
-					if (hour < 10) {hour = "0" + hour;}
-					if (min < 10) {min = "0" + min;}
-					if (sec < 10) {sec = "0" + sec;}
-
-					$(e).text(hour + "시간 " + min + "분 " + sec + "초 후 마감")
-				}
-			}
-			$(function () {
-				setInterval(function () {
-					$(".timer").each(function (i, e) {
-						remaindTime(e);
-					})
-				}, 1000);
-			});
-
+			//상품 별 잔여시간 계산
+							function restTime(e) {
+					            var now = new Date();
+					            var end = new Date($(e).attr("enddate"));
+					
+								var today = new Date().getTime();
+					            var gap = end - today;
+					            var day = (Math.ceil(gap / (1000 * 60 * 60 * 24)))-1;
+					            var hour = Math.ceil((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))-1;
+					            var min = Math.ceil((gap % (1000 * 60 * 60)) / (1000 * 60))-1;
+					            var sec = Math.ceil((gap % (1000 * 60)) / 1000);
+					            
+					            if (day >= 1) {
+					                $(e).text("남은시간 : " + day + "일 " + hour + "시간 " + min + "분");
+					            } else {
+					                $(e).text("남은시간 : " + hour + "시간 " + min + "분 " + sec + "초");
+					            }
+					        }
+					        $(function() {
+					            setInterval(function(){
+					                $(".timer").each(function(i,e){
+										 restTime(e); 
+						            })
+						        },1000);
+						        $("#sc_btn").on("click", function(){
+									//$("input[name='page']").val('0');
+									searchForm.submit();
+								});
+					        });
 		</script>
 	</th:block>
 
@@ -99,7 +85,7 @@
 				<p id="hot_title">베스트 핫딜</p>
 				<div class="step_wrap">
 					<div class="hot_prod_list_1 hotlist" th:each="item:${hotProcList}">
-						<a href="/item/test">
+						<a th:href="@{/searchItem/{itemNo}(itemNo=${item.itemNo})}">
 							<div class="img-box">
 								<img th:if="${item.itemFile ne null}"
 									th:src="@{/upload/}+${item.itemFile.itemfileNm}"
@@ -110,12 +96,12 @@
 						</a>
 						<div class="con-box">
 							<dl>
-								<dt th:text="${item.itemNm}">아이폰 14 - 256GB</dt>
+								<dt th:text="${item.itemNm}"></dt>
 								<dd style="min-height:40px;">
 									<table>
 										<tr>
 											<td><b>경매가</b></td>
-											<td th:text="${item.itemStPrice}">850,000원</td>
+											<td th:text="${item.itemStPrice}"></td>
 										</tr>
 										<tr>
 											<td id="pr_name"><b>입찰수</b></td>
@@ -133,78 +119,11 @@
 									</table>
 
 								</dd>
-								<p class="timer" colspan="2" data-end-time="2022-08-11T20:00:00+09:00"></p>
+								<p colspan="2" class="timer" th:enddate="${item.itemEnddate}"></p>
 							</dl>
 						</div>
 					</div>
-					<!--<div class="hot_prod_list_2 hotlist">
-						<div class="img-box">
-							<img src="/images/화장품.png"
-								style="width:auto; max-width:100%; height:auto; max-height:250px;">
-						</div>
-						<div class="con-box">
-							<dl>
-								<dt>가히 링클 바운스 멀티밤</dt>
-								<dd style="min-height:40px;">
-									<table>
-										<tr>
-											<td id="pr_name"><b>경매가</b></td>
-											<td>46,500원</td>
-										</tr>
-										<tr>
-											<td id="pr_name"><b>입찰수</b></td>
-											<td>180</td>
-										</tr>
-										<tr>
-											<td id="pr_name"><b>관심수</b></td>
-											<td>55</td>
-										</tr>
-										<tr>
-											<td id="pr_name"><b>조회수</b></td>
-											<td>21,867</td>
-										</tr>
-
-									</table>
-
-								</dd>
-								<p class="timer" colspan="2" data-end-time="2022-08-16T10:00:00+09:00"></p>
-							</dl>
-						</div>
-					</div>
-					<div class="hot_prod_list_3 hotlist">
-						<div class="img-box">
-							<img src="/images/운동화.png"
-								style="width:auto; max-width:100%; height:auto; max-height:250px;">
-						</div>
-						<div class="con-box">
-							<dl>
-								<dt>휠라 꼬모 FS1SIB127</dt>
-								<dd style="min-height:40px;">
-									<table>
-										<tr>
-											<td id="pr_name"><b>경매가</b></td>
-											<td>25,000원</td>
-										</tr>
-										<tr>
-											<td id="pr_name"><b>입찰수</b></td>
-											<td>11</td>
-										</tr>
-										<tr>
-											<td id="pr_name"><b>관심수</b></td>
-											<td>75</td>
-										</tr>
-										<tr>
-											<td id="pr_name"><b>조회수</b></td>
-											<td>21,865</td>
-										</tr>
-
-									</table>
-
-								</dd>
-								<p class="timer" colspan="2" data-end-time="2022-08-18T10:00:00+09:00"></p>
-							</dl>
-						</div>
-					</div> -->
+					
 				</div>
 			</div> 
 
@@ -212,13 +131,15 @@
 				<p id="fin_title">마감임박 상품</p>
 				<div class="step_wrap">
 					<div class="fin_prod_list_1 finlist" th:each="item:${endProcList}">
-						<div class="img-box">
-							<img th:if="${item.itemFile ne null}"
+						<a th:href="@{/searchItem/{itemNo}(itemNo=${item.itemNo})}">
+							<div class="img-box">
+								<img th:if="${item.itemFile ne null}"
 									th:src="@{/upload/}+${item.itemFile.itemfileNm}"
 									style="width:284px; max-width:100%; height:180px; max-height:250px;"/>
 								<img th:if="${item.itemFile eq null}"
 										th:src="@{/upload/noimg.png}"/>	
 						</div>
+						</a>
 						<div class="con-box">
 							<dl>
 								<dt th:text="${item.itemNm}">네이처 하이크 에어텐트</dt>
@@ -244,7 +165,7 @@
 									</table>
 
 								</dd>
-								<p class="timer" colspan="2" data-end-time="2022-08-03T16:00:00+09:00"></p>
+								<p colspan="2" class="timer" th:enddate="${item.itemEnddate}"></p>
 							</dl>
 						</div>
 					</div>
