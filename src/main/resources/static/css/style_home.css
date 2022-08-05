@@ -50,8 +50,8 @@
 }
 
 .hot_prod img, .fin_prod img {
-    height: 160px;
-    width: 250px;
+    height: 180px;
+    width: 284px;
 }
 
 .wrap {
@@ -61,7 +61,7 @@
 
 .hot_prod td, .fin_prod td{
     padding: 2px 20px 2px 0px;
-    font-size: 14px;
+    font-size: 17px;
 }
 
 
@@ -124,7 +124,7 @@ hr {
 }
 
 .con-box dt{
-    font-size: larger;
+    font-size: 25px;
     text-align: center;
     padding: 20px 15px 0px;
 }
