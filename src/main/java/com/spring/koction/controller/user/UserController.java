@@ -98,7 +98,9 @@ public class UserController {
 	public ModelAndView mypage(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/user/mypage.html");
+		
 		List<Order> order = itemService.findOrder(customUserDetails.getUsername());
+		System.out.println(order);
 		System.out.println(order);
 		mv.addObject("orderList", order);
 		
