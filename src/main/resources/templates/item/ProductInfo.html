@@ -215,38 +215,25 @@
 											<table class="table table-striped align-middle text-center">
 												<tr>
 													<th>판매자</th>
-													<td >bitcamp</td>
+													<td th:text="${item.user.userId}">bitcamp</td>
 												</tr>
 												<tr>
 													<th>기간</th>
-													<td>~2022/06/30 21:30</td>
+													<td th:text="${#temporals.format(item.itemEnddate, 'yyyy/MM/dd HH:mm')}">~2022/06/30 21:30</td>
 												</tr>
 												<tr>
 													<th>입찰방법</th>
 													<td>
-														<div class="form-check form-check-inline">
-															<input class="form-check-input" type="radio"
-																name="flexRadioDefault2" id="flexRadioDefault3">
-															<label class="form-check-label" for="flexRadioDefault3">
-																즉시구매
-															</label>
-														</div>
-														<div class="form-check form-check-inline">
-															<input class="form-check-input" type="radio"
-																name="flexRadioDefault2" id="flexRadioDefault4">
-															<label class="form-check-label" for="flexRadioDefault4">
-																입찰
-															</label>
-														</div>
+														공개
 													</td>
 												</tr>
 												<tr>
 													<th>입찰단위</th>
-													<td id="bid-price-won"></td>
+													<td id="bid-price-won" th:text="${#numbers.formatInteger(item.itemBidUnit, 0, 'COMMA')} + '원'"></td>
 												</tr>
 												<tr>
 													<th>현재가</th>
-													<td id="price-won"></td>
+													<td id="price-won" th:text="${#numbers.formatInteger(item.itemStPrice, 0, 'COMMA')} + '원'"></td>
 												</tr>
 												<tr>
 													<th>입찰금액</th>
@@ -337,7 +324,7 @@
 						<div id="ask_Modal">
 							<!-- 상품문의 모달버튼 -->
 							<button type="button" class="btn btn-primary" data-bs-toggle="modal"
-								data-bs-target="#staticBackdrop">
+								data-bs-target="#staticBackdrop" sec:authorize="isAuthenticated">
 								문의하기
 							</button>
 

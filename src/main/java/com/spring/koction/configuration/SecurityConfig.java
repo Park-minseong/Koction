@@ -30,9 +30,15 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 		//authorizeHttpRequests로 요청에 대한 권한을 설정할 수 있다.
-		http.authorizeRequests().antMatchers("/**").permitAll()
+		http.authorizeRequests().antMatchers("/").permitAll()
 		                            .antMatchers("/user/**").permitAll()
 		                            .antMatchers("/item/**").access("hasAnyRole('ROLE_USER')")
+		                            .antMatchers("/item/category").permitAll()
+		                            .antMatchers("/item/searchItem/**").permitAll()
+		                            .antMatchers("/item/search/**").permitAll()
+		                            .antMatchers("/item/registerItem").access("hasAnyRole('USER')")
+		                            .antMatchers("/user/mypage").access("hasAnyRole('USER')")
+		                            .antMatchers("/upload/**").permitAll()
 		                            .antMatchers("/css/**").permitAll()
 		                            .antMatchers("/js/**").permitAll()
 		                            .antMatchers("/images/**").permitAll()

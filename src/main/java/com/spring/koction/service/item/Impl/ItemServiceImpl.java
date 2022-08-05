@@ -3,6 +3,7 @@ package com.spring.koction.service.item.Impl;
 
 
 import com.spring.koction.dto.ItemqDto;
+import com.spring.koction.dto.OrderDto;
 import com.spring.koction.entity.*;
 import com.spring.koction.mapper.ItemMapper;
 import com.spring.koction.repository.*;
@@ -149,6 +150,12 @@ public class ItemServiceImpl implements ItemService{
 //		return itemqRepository.findAll();
 		return itemMapper.selectInquryList(itemNo);
 	}
+
+
+//	@Override
+//	public void insertOrder(OrderDto orderDto) {
+//		itemMapper.insertOrder(orderDto);
+//	}
 
 //	@Override
 //	public int insertInquryList(ItemqDto itemq) {

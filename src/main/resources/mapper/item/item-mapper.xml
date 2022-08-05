@@ -54,7 +54,8 @@
 	<select id="hotProcSort" resultType="item">
 	<![CDATA[
 		SELECT *
-		FROM T_ITEM
+		FROM T_ITEM 
+		WHERE ITEM_ENDDATE > NOW()
 		ORDER BY ITEM_CNT DESC
 		LIMIT 3
 	]]>
