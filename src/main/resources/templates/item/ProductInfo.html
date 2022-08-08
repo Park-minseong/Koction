@@ -333,10 +333,11 @@
 								<!-- <td th:text="${#temporals.createDate(itemq.itemqRegdate, 'yyyy/MM/dd')}"></td> -->
 								<!-- <td><button type="button" th:if="${#authentication.name} eq 'qw'" th:onclick="'deleteTest('+ ${itemq.itemqNo} +', ' + ${itemNo} + ')'">삭제</button></td> -->
 								<td nowrap>
-									<button type="button" th:if="${itemq.userId.equals(#authentication.getName())}" 
-											th:onclick="'deleteTest('+ ${itemq.itemqNo} +', ' + ${itemNo} + ')'" 
+									<button type="button" th:if="${itemq.userId.equals(#authentication.getName())}"
+											th:onclick="'deleteTest('+ ${itemq.itemqNo} +', ' + ${itemNo} + ')'"
 											class="btn btn-light">삭제
 									</button>
+<!--									<button type="button" th:if="${#authentication.name} eq 'qw'" th:onclick="'deleteTest('+ ${itemq.itemqNo} +', ' + ${itemNo} + ')'">삭제</button>-->
 								</td>
 							
 							</tr>
