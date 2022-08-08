@@ -58,8 +58,8 @@ public interface ItemMapper {
 //	@Update("UPDATE T_ORDER SET ORDER_PRICE WHERE ORDER_PRICE > #{orderPrice} AND USER_ID = #{userId} AND ITEM_NO = #{itemNo}")
 //	void insertOrder(OrderDto order);
 
-//	@Insert("INSERT INTO t_order VALUES (( SELECT IFNULL(MAX(order_no),0) + 1 FROM t_order A),#{userId},${orderPrice},#{itemNo})")
-//	void insertOrder(OrderDto order);
+	@Insert("INSERT INTO t_order VALUES (( SELECT IFNULL(MAX(order_no),0) + 1 FROM t_order A),#{userId},${orderPrice},#{itemNo})")
+	void insertOrder(OrderDto orderDto);
 
 //	@Select(SELECT * FROM T_ITEMQ WHERE ITEMQ_YN = 'Y')
 }

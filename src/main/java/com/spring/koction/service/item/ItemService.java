@@ -65,6 +65,6 @@ public interface ItemService {
 
 	List<ItemqDto> selectInquryList(int itemNo);
 
-//	void insertOrder(OrderDto order);
-	int insertOrder(Order order);
+	void insertOrder(OrderDto orderDto);
+//	int insertOrder(Order order);
 }

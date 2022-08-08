@@ -203,10 +203,10 @@
 
 					<!--모달 영역-->
 					<form id="modalbid" name="modalbid" action="/item/modalbid" method="post">
-						<!-- <input type="hidden" name="itemNo" th:value="${itemNo}"> -->
-						<!-- <input type="hidden" name="userId" th:value="${#authentication.name}"> -->
-						<input type="hidden" name="item" th:value="${itemNo}">
-						<input type="hidden" name="user" th:value="${#authentication.name}">
+						 <input type="hidden" name="itemNo" th:value="${itemNo}">
+						 <input type="hidden" name="userId" th:value="${#authentication.name}">
+<!--						<input type="hidden" name="item" th:value="${itemNo}">-->
+<!--						<input type="hidden" name="user" th:value="${#authentication.name}">-->
 						<div class="modal fade" id="intro">
 							<div class="modal-dialog modal-dialog-centered">
 								<div class="modal-content">
@@ -333,10 +333,12 @@
 								<!-- <td th:text="${#temporals.createDate(itemq.itemqRegdate, 'yyyy/MM/dd')}"></td> -->
 								<!-- <td><button type="button" th:if="${#authentication.name} eq 'qw'" th:onclick="'deleteTest('+ ${itemq.itemqNo} +', ' + ${itemNo} + ')'">삭제</button></td> -->
 								<td nowrap>
-									<button type="button" th:if="${itemq.userId.equals(#authentication.getName())}"
+									<button type="button" th:if="${itemq.userId} == ${#authentication.name}"
 											th:onclick="'deleteTest('+ ${itemq.itemqNo} +', ' + ${itemNo} + ')'"
 											class="btn btn-light">삭제
 									</button>
+<!--									"${itemq.userId} == ${#authentication.name}"-->
+<!--									th:if="${itemq.userId.equals(#authentication.getName())}"-->
 <!--									<button type="button" th:if="${#authentication.name} eq 'qw'" th:onclick="'deleteTest('+ ${itemq.itemqNo} +', ' + ${itemNo} + ')'">삭제</button>-->
 								</td>
 							
