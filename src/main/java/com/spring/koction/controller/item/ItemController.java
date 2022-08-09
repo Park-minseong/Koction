@@ -154,12 +154,12 @@ public class ItemController {
 	}
 
 	@PostMapping("/modalbid")
-	public ModelAndView modalPost(Order order) {
+	public ModelAndView modalPost(OrderDto orderDto) {
 		ModelAndView mv = new ModelAndView();
-		OrderDto orderDto = new OrderDto();
-//		itemService.insertOrder(orderDto);
-		int orderNo = itemService.insertOrder(order);
-		mv.setViewName("redirect:/item/searchItem/" +order.getItem().getItemNo());
+//		OrderDto orderDto = new OrderDto();
+		itemService.insertOrder(orderDto);
+//		int orderNo = itemService.insertOrder(order);
+		mv.setViewName("redirect:/item/searchItem/" +orderDto.getItemNo());
 		return mv;
 	}
 
